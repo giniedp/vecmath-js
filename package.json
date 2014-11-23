@@ -1,0 +1,43 @@
+{
+  "name": "vecmath-js",
+  "version": "1.0.0",
+  "description": "Vector math library for javascript",
+  "main": "./dist/vecmath.js",
+  "directories": {
+    "doc": "doc",
+    "test": "test"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "del": "^0.1.3",
+    "gulp": "^3.8.10",
+    "gulp-clean": "^0.3.1",
+    "gulp-concat": "^2.4.1",
+    "gulp-sass": "^1.1.0",
+    "gulp-shell": "^0.2.10",
+    "gulp-uglify": "^1.0.1",
+    "gulp-util": "^3.0.1",
+    "gulp-shell": "^0.2.10",
+    "jsdoc": "^3.3.0-alpha10",
+    "karma": "^0.12.24",
+    "karma-chrome-launcher": "^0.1.5",
+    "karma-coverage": "^0.2.6",
+    "karma-firefox-launcher": "^0.1.3",
+    "karma-phantomjs-launcher": "^0.1.4",
+    "karma-qunit": "^0.1.4",
+    "qunit": "^0.7.5",
+    "qunitjs": "^1.15.0"
+  },
+  "scripts": {
+    "test": "./node_modules/karma/bin/karma start karma.conf.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@bitbucket.org/giniedp/cellarjs-math.git"
+  },
+  "keywords": [
+    "math"
+  ],
+  "author": "Alexander Graefenstein",
+  "license": "MIT"
+}

@@ -1,0 +1,4 @@
+#!/bin/bash
+
+./node_modules/.bin/jsdoc ./src/*.js -d doc -u ./src/tutorials
+gulp jsdoc-theme
