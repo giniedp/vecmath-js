@@ -1,32 +1,33 @@
-(function(){
+(function(window){
   'use strict';
 
   /**
-   * Creates a new quaternion object
-   * @global
-   * @constructor Quat
+   * Describes a quaternion.
+   * @class Quat
+   * @constructor
    * @param {number} x value for X component
    * @param {number} y value for Y component
    * @param {number} z value for Z component
    * @param {number} w value for W component
    */
-  var Quat = window.Quat = function(x, y, z, w){
-    this.x = x;
-    this.y = y;
-    this.z = z;
-    this.w = w;
+  var Quat = function(x, y, z, w){
+    this.x = 0;
+    this.y = 0;
+    this.z = 0;
+    this.w = 0;
   };
+
+  window.Quat = Quat;
 
   Quat.prototype = {
     /**
      * Initializes components of the quaternion with given values.
-     * @instance
-     * @memberof Quat
+     * @method init
      * @param {number} x value for X component
      * @param {number} y value for Y component
      * @param {number} z value for Z component
      * @param {number} w value for W component
-     * @returns {Quat} This quaternion for chaining.
+     * @return {Quat} Reference to `this` for chaining.
      */
     init: function(x, y, z, w){
       this.x = x;
@@ -37,10 +38,9 @@
     },
 
     /**
-     * Initializes the quaternion to the identity.
-     * @instance
-     * @memberof Quat
-     * @returns {Quat} This quaternion to allow chaining
+     * Initializes the quaternion with `x`, `y` and `z` components set to `0` and `w` component set to `1`.
+     * @method initIdentity
+     * @return {Quat} Reference to `this` for chaining.
      */
     initIdentity: function(){
       this.x = 0;
@@ -51,10 +51,9 @@
     },
 
     /**
-     * Initializes the quaternion to zero.
-     * @instance
-     * @memberof Quat
-     * @returns {Quat} This quaternion to allow chaining
+     * Initializes the quaternion with all components set to `0`.
+     * @method initZero
+     * @return {Quat} Reference to `this` for chaining.
      */
     initZero: function(){
       this.x = 0;
@@ -65,11 +64,10 @@
     },
 
     /**
-     * Copies the components from given quaternion
-     * @instance
-     * @memberof Quat
-     * @param {Quat} other
-     * @returns {Quat}
+     * Initializes the components of this quaternion by taking the components from the given quaternion or vector.
+     * @method initFrom
+     * @param {Quat|Vec4} other
+     * @return {Quat} Reference to `this` for chaining.
      */
     initFrom: function(other){
       this.x = other.x;
@@ -80,11 +78,12 @@
     },
 
     /**
-     * @instance
-     * @memberof Quat
-     * @param buffer
-     * @param offset
-     * @returns {Quat}
+     * Initializes the components of this quaternion by taking values from the given array in successive order.
+     * @chainable
+     * @method initFromBuffer
+     * @param {Array} buffer The array to read from
+     * @param {Number} [offset=0] The zero based index at which start reading the values
+     * @return {Quat} Reference to `this` for chaining.
      */
     initFromBuffer: function(buffer, offset){
       offset = offset || 0;
@@ -97,9 +96,10 @@
 
     /**
      * Initializes the quaternion from axis and an angle.
-     * @param {Vec3} axis
-     * @param {number} angle
-     * @returns {Quat} This quaternion to allow chaining
+     * @method initAxisAngle
+     * @param {Vec3} axis The axis as vector
+     * @param {number} angle The angle in degrees
+     * @return {Quat} Reference to `this` for chaining.
      */
     initAxisAngle: function(axis, angle){
       var halfAngle = angle * 0.5;
@@ -112,12 +112,12 @@
     },
 
     /**
-     * @instance
-     * @memberof Quat
-     * @param {number} yaw
-     * @param {number} pitch
-     * @param {number} roll
-     * @returns {Quat} This quaternion to allow chaining
+     * Initializes the quaternion from yaw pitch and roll angles.
+     * @method initYawPitchRoll
+     * @param {number} yaw The yaw angle in radians
+     * @param {number} pitch The pitch angle in radians
+     * @param {number} roll The roll angle in radians
+     * @return {Quat} Reference to `this` for chaining.
      */
     initYawPitchRoll: function(yaw, pitch, roll){
       var xHalf = pitch * 0.5;
@@ -140,21 +140,23 @@
     },
 
     /**
-     * @instance
-     * @memberof Quat
-     * @returns {Quat} a new quaternion
+     * Creates a copy of this quaternion
+     * @method clone
+     * @return {Quat} The cloned quaternion
      */
     clone: function(){
       return new Quat(this.x, this.y, this.z, this.w);
     },
 
     /**
-     * @instance
-     * @memberof Quat
-     * @param {Array|Float32Array} buffer
-     * @param {number} offset
+     * Copies the components successively into the given array.
+     * @chainable
+     * @method copy
+     * @param {Array|Float32Array} buffer The array to copy into
+     * @param {Number} [offset=0] Zero based index where to start writing in the array
+     * @return {Array|Float32Array}
      */
-    copy: function(buffer, offset){
+    copyTo: function(buffer, offset){
       offset = offset || 0;
       buffer[offset] = this.x;
       buffer[offset + 1] = this.y;
@@ -163,19 +165,28 @@
     },
 
     /**
-     * @instance
-     * @memberof Quat
-     * @param {Quat} other
-     * @returns {boolean}
+     * Returns an array filled with the values of the components of this quaternion
+     * @method dump
+     * @return {Array}
+     */
+    dump: function(){
+      return [this.x, this.y, this.z, this.w];
+    },
+
+    /**
+     * Checks for component wise equality with given quaternion
+     * @method equals
+     * @param {Quat|Vec4} other The quaternion to compare with
+     * @return {Boolean} true if components are equal, false otherwise
      */
     equals: function(other){
       return ((this.x === other.x) && (this.y === other.y) && (this.z === other.z) && (this.w === other.w));
     },
 
     /**
-     * @instance
-     * @memberof Quat
-     * @returns {number}
+     * Calculates the length of this quaternion
+     * @method length
+     * @return {Number} The length.
      */
     length: function(){
       var x = this.x;
@@ -186,9 +197,9 @@
     },
 
     /**
-     * @instance
-     * @memberof Quat
-     * @returns {number}
+     * Calculates the squared length of this quaternion
+     * @method lengthSquared
+     * @return {Number} The squared length.
      */
     lengthSquared: function(){
       var x = this.x;
@@ -199,19 +210,19 @@
     },
 
     /**
-     * @instance
-     * @memberof Quat
+     * Calculates the dot product with the given quaternion
+     * @method dot
      * @param {Quat} other
-     * @returns {number}
+     * @return {Number} The dot product.
      */
     dot: function(other){
       return this.x * other.x + this.y * other.y + this.z * other.z + this.w * other.w;
     },
 
     /**
-     * @instance
-     * @memberof Quat
-     * @returns {Quat}
+     * Negates the components of `this`
+     * @method selfNegate
+     * @return {Quat} Reference to `this` for chaining.
      */
     selfNegate: function(){
       this.x = -this.x;
@@ -222,9 +233,9 @@
     },
 
     /**
-     * @instance
-     * @memberof Quat
-     * @returns {Quat}
+     * Negates the `x`, `y` and `z` components of `this`
+     * @method selfConjugate
+     * @return {Quat} Reference to `this` for chaining.
      */
     selfConjugate: function(){
       this.x = -this.x;
@@ -234,9 +245,9 @@
     },
 
     /**
-     * @instance
-     * @memberof Quat
-     * @returns {Quat}
+     * Normalizes `this` so that `length` should be `1`
+     * @method selfNormalize
+     * @return {Quat} Reference to `this` for chaining.
      */
     selfNormalize: function(){
       var x = this.x;
@@ -252,9 +263,9 @@
     },
 
     /**
-     * @instance
-     * @memberof Quat
-     * @returns {Quat}
+     * Inverts `this` so that multiplication with the original would return the identity quaternion.
+     * @method selfInvert
+     * @return {Quat} Reference to `this` for chaining.
      */
     selfInvert: function(){
       var x = this.x;
@@ -270,10 +281,10 @@
     },
 
     /**
-     * @instance
-     * @memberof Quat
-     * @param {Quat} other
-     * @returns {Quat}
+     * Performs a component wise addition with `other`
+     * @method selfAdd
+     * @param {Quat|Vec4} other
+     * @return {Quat} Reference to `this` for chaining.
      */
     selfAdd: function(other){
       this.x += other.x;
@@ -284,10 +295,10 @@
     },
 
     /**
-     * @instance
-     * @memberof Quat
-     * @param {Quat} other
-     * @returns {Quat}
+     * Performs a component wise subtraction with `other`
+     * @method selfSubtract
+     * @param {Quat|Vec4} other
+     * @return {Quat} Reference to `this` for chaining.
      */
     selfSubtract: function(other){
       this.x -= other.x;
@@ -298,10 +309,10 @@
     },
 
     /**
-     * @instance
-     * @memberof Quat
-     * @param {Quat} other
-     * @returns {Quat}
+     * Performs a quaternion multiplication with `other`
+     * @method selfMultiply
+     * @param {Quat|Vec4} other
+     * @return {Quat} Reference to `this` for chaining.
      */
     selfMultiply: function(other){
       var x1 = this.x;
@@ -322,10 +333,10 @@
     },
 
     /**
-     * @instance
-     * @memberof Quat
+     * Performs a quaternion concatenation with `other`
+     * @method selfConcat
      * @param {Quat} other
-     * @returns {Quat}
+     * @return {Quat} Reference to `this` for chaining.
      */
     selfConcat: function(other){
       var x1 = other.x;
@@ -346,10 +357,10 @@
     },
 
     /**
-     * @instance
-     * @memberof Quat
+     * Performs a division with `other`
+     * @method selfDivide
      * @param {Quat} other
-     * @returns {Quat}
+     * @return {Quat} Reference to `this` for chaining.
      */
     selfDivide: function(other){
       var x1 = this.x;
@@ -376,6 +387,12 @@
       return this;
     },
 
+    /**
+     * Rotates the given point or vector with `this`
+     * @method transform
+     * @param vec
+     * @return {Vec3|Vec4}
+     */
     transform: function(vec){
       var x = this.x;
       var y = this.y;
@@ -402,18 +419,23 @@
       var vy = vec.y;
       var vz = vec.z;
 
-      return vec.init(
-        vx * (1 - yy2 - zz2) + vy * (xy2 - wz2) + vz * (xz2 + wy2),
-        vx * (xy2 + wz2) + vy * (1 - xx2 - zz2) + vz * (yz2 - wx2),
-        vx * (xz2 - wy2) + vy * (yz2 + wx2) + vz * (1 - xx2 - yy2)
-      );
+      vec.x = vx * (1 - yy2 - zz2) + vy * (xy2 - wz2) + vz * (xz2 + wy2);
+      vec.y = vx * (xy2 + wz2) + vy * (1 - xx2 - zz2) + vz * (yz2 - wx2);
+      vec.z = vx * (xz2 - wy2) + vy * (yz2 + wx2) + vz * (1 - xx2 - yy2);
+      return vec;
     }
   };
 
   /**
+   * Creates a new quaternion. The method should be called with four or no arguments. If less than four arguments are given
+   * then some components of the resulting quaternion are going to be `undefined`.
    * @static
-   * @memberof Quat
-   * @returns {Quat}
+   * @method create
+   * @param {Number} [x] The x component
+   * @param {Number} [y] The y component
+   * @param {Number} [z] The z component
+   * @param {Number} [w] The w component
+   * @return {Quat}
    */
   Quat.create = function(x, y, z, w){
     if (x !== undefined){
@@ -423,53 +445,57 @@
   };
 
   /**
+   * Creates a new vector with all components set to 0.
    * @static
-   * @memberof Quat
-   * @returns {Quat}
+   * @method zero
+   * @return {Quat} A new quaternion
    */
   Quat.zero = function(){
     return new Quat(0, 0, 0, 0);
   };
 
   /**
+   * Creates a new vector with `x`, `y` and `z` components set to `0` and `w` component set to `1`.
    * @static
-   * @memberof Quat
-   * @returns {Quat}
+   * @method identity
+   * @return {Quat} A new quaternion
    */
   Quat.identity = function(){
     return new Quat(0, 0, 0, 1);
   };
 
   /**
+   * Creates a new quaternion from given axis vector and an angle
    * @static
-   * @memberof Quat
-   * @param {Vec3} axis
-   * @param {number} angle
-   * @returns {Quat}
+   * @method fromAxisAngle
+   * @param {Vec3} axis The axis vector
+   * @param {number} angle The angle in degree
+   * @return {Quat} A new quaternion
    */
   Quat.fromAxisAngle = function(axis, angle){
     return Quat.identity().initAxisAngle(axis, angle);
   };
 
   /**
+   * Creates a new quaternion from given `yaw` `pitch` and `roll` angles
    * @static
-   * @memberof Quat
-   * @param {number} yaw
-   * @param {number} pitch
-   * @param {number} roll
-   * @returns {Quat}
+   * @method fromYawPitchRoll
+   * @param {number} yaw The yaw angle in radians
+   * @param {number} pitch The pitch angle in radians
+   * @param {number} roll The roll angle in radians
+   * @return {Quat}
    */
   Quat.fromYawPitchRoll = function(yaw, pitch, roll){
     return Quat.identity().initYawPitchRoll(yaw, pitch, roll);
   };
 
   /**
-   * Negates this quaternion. Applies the result to the given out quaternion.
+   * Negates the given quaternion.
    * @static
-   * @memberof Quat
-   * @param {Quat} quat
-   * @param {Quat} out The quaternion to write to.
-   * @returns {Quat} The given out quaternion.
+   * @method negate
+   * @param {Quat} quat The quaternion to negate.
+   * @param {Quat} [out] The quaternion to write to.
+   * @return {Quat} The given `out` parameter or a new quaternion.
    */
   Quat.negate = function(quat, out){
     out = out || new Quat();
@@ -481,11 +507,12 @@
   };
 
   /**
+   * Conjugates the given quaternion.
    * @static
-   * @memberof Quat
-   * @param {Quat} quat
-   * @param {Quat} out
-   * @returns {Quat}
+   * @method conjugate
+   * @param {Quat} quat The quaternion to conjugate.
+   * @param {Quat} [out] The quaternion to write to.
+   * @return {Quat} The given `out` parameter or a new quaternion.
    */
   Quat.conjugate = function(quat, out){
     out = out || new Quat();
@@ -497,11 +524,12 @@
   };
 
   /**
+   * Normalizes the given quaternion
    * @static
-   * @memberof Quat
-   * @param {Quat} quat
-   * @param {Quat} out
-   * @returns {Quat}
+   * @method normalize
+   * @param {Quat} quat The quaternion to normalize.
+   * @param {Quat} [out] The quaternion to write to.
+   * @return {Quat} The given `out` parameter or a new quaternion.
    */
   Quat.normalize = function(quat, out){
     var x = quat.x;
@@ -518,11 +546,12 @@
   };
 
   /**
+   * Inverts the given quaternion
    * @static
-   * @memberof Quat
-   * @param {Quat} quat
-   * @param {Quat} out
-   * @returns {Quat}
+   * @method invert
+   * @param {Quat} quat The quaternion to invert.
+   * @param {Quat} [out] The quaternion to write to.
+   * @return {Quat} The given `out` parameter or a new quaternion.
    */
   Quat.invert = function(quat, out){
     var x = quat.x;
@@ -539,12 +568,13 @@
   };
 
   /**
+   * Adds two quaternions
    * @static
-   * @memberof Quat
-   * @param {Quat} quatA
-   * @param {Quat} quatB
-   * @param {Quat} out
-   * @returns {Quat}
+   * @method add
+   * @param {Quat} quatA The first quaternion
+   * @param {Quat} quatB The second quaternion
+   * @param {Quat} [out] The quaternion to write to.
+   * @return {Quat} The given `out` parameter or a new quaternion.
    */
   Quat.add = function(quatA, quatB, out){
     out = out || new Quat();
@@ -556,12 +586,13 @@
   };
 
   /**
+   * Subtracts the second quaternion from the first.
    * @static
-   * @memberof Quat
-   * @param {Quat} quatA
-   * @param {Quat} quatB
-   * @param {Quat} out
-   * @returns {Quat}
+   * @method subtract
+   * @param {Quat} quatA The first quaternion
+   * @param {Quat} quatB The second quaternion
+   * @param {Quat} [out] The quaternion to write to.
+   * @return {Quat} The given `out` parameter or a new quaternion.
    */
   Quat.subtract = function(quatA, quatB, out){
     out = out || new Quat();
@@ -573,12 +604,13 @@
   };
 
   /**
+   * Multiplies two quaternions
    * @static
-   * @memberof Quat
-   * @param {Quat} quatA
-   * @param {Quat} quatB
-   * @param {Quat} out
-   * @returns {Quat}
+   * @method multiply
+   * @param {Quat} quatA The first quaternion
+   * @param {Quat} quatB The second quaternion
+   * @param {Quat} [out] The quaternion to write to.
+   * @return {Quat} The given `out` parameter or a new quaternion.
    */
   Quat.multiply = function(quatA, quatB, out){
     var x1 = quatA.x;
@@ -601,12 +633,13 @@
 
 
   /**
+   * Concatenates two quaternions
    * @static
-   * @memberof Quat
-   * @param {Quat} quatA
-   * @param {Quat} quatB
-   * @param {Quat} out
-   * @returns {Quat}
+   * @method concat
+   * @param {Quat} quatA The first quaternion
+   * @param {Quat} quatB The second quaternion
+   * @param {Quat} [out] The quaternion to write to.
+   * @return {Quat} The given `out` parameter or a new quaternion.
    */
   Quat.concat = function(quatA, quatB, out){
     var x1 = quatB.x;
@@ -628,12 +661,13 @@
   };
 
   /**
+   * Divides the first quaternion by the second
    * @static
-   * @memberof Quat
-   * @param {Quat} quatA
-   * @param {Quat} quatB
-   * @param {Quat} out
-   * @returns {Quat}
+   * @method divide
+   * @param {Quat} quatA The first quaternion
+   * @param {Quat} quatB The second quaternion
+   * @param {Quat} [out] The quaternion to write to.
+   * @return {Quat} The given `out` parameter or a new quaternion.
    */
   Quat.divide = function(quatA, quatB, out){
     var x1 = quatA.x;
@@ -662,6 +696,13 @@
     return out;
   };
 
+  /**
+   * Tries to convert the given `data` into a quaternion
+   * @static
+   * @method create
+   * @param {Array|Quat|Vec4} data
+   * @return {Quat} The created quaternion.
+   */
   Quat.convert = function(data){
     if (Array.isArray(data)){
       return new Quat(
@@ -682,6 +723,15 @@
     );
   };
 
+  /**
+   * Rotates a point or vector with given quaternion
+   * @static
+   * @method transform
+   * @param {Quat} q The rotation quaternion
+   * @param {Vec3|Vec4} v The point or vector to rotate
+   * @param {Vec3|Vec4} [out] The vector to write to
+   * @return {Vec3|Vec4} The given `out` parameter or a new vector.
+   */
   Quat.transform = function(q, v, out){
     var x = q.x;
     var y = q.y;
@@ -713,10 +763,11 @@
     out.y = vx * (xy2 + wz2) + vy * (1 - xx2 - zz2) + vz * (yz2 - wx2);
     out.z = vx * (xz2 - wy2) + vy * (yz2 + wx2) + vz * (1 - xx2 - yy2);
 
-    if (out.q !== undefined){
+    if (out.w == null){
       out.w = 1;
     }
 
     return out;
   };
-}());
+
+}(window));

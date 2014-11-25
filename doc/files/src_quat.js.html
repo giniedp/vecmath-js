@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>src/quat.js - VecmathJS</title>
+    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="stylesheet" href="../assets/css/custom.css">
+    <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.css">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+</head>
+<body class="yui3-skin-sam">
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <h1 class="brand" style="padding: 10px 16px 10px; height: 20px; line-height: 20px; margin-left: 0;">
+	    <img alt="VecmathJS" src="../assets/css/logo.png" style="max-height: 65%;" title="VecmathJS">
+            VecmathJS
+        </h1>
+	<div class="nav">
+            <li class="divider-vertical"></li>
+            <li>
+                <p class="navbar-text">
+                    API Docs for Version: <b>0.0.1</b>
+                </p>
+            </li>
+        </div>
+        <form class="navbar-form pull-right" style="line-height: 40px; height: 40px;">
+            <input style="margin-top: 0;" type="text" class="search-query" placeholder="Search for classes/modules..." data-obj='["classes/Mat4", "classes/Quat", "classes/Vec2", "classes/Vec3", "classes/Vec4"]'>
+        </form>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="span3">
+	    <div>
+	        <h3>APIs</h3>
+	        <div id="sidebar">
+	            <ul id="main-nav" class="nav nav-tabs" style="margin-bottom:0;">
+	                <li class="active"><a href="#classes" data-toggle="tab">Classes</a></li>
+	                <li><a href="#modules" data-toggle="tab">Modules</a></li>
+	            </ul>
+	    
+	            <div id="api-tabview-filter">
+	                <input type="search" placeholder="Type to filter APIs">
+	            </div>
+	    
+	            <div class="tab-content" style="border: 1px solid #DDD; border-top:0;">
+	                <div class="tab-pane active" id="classes">
+	                    <ul id="api-classes" class="nav nav-list">
+	                            <li><a href="../classes/Mat4.html">Mat4</a></li>
+	                            <li><a href="../classes/Quat.html">Quat</a></li>
+	                            <li><a href="../classes/Vec2.html">Vec2</a></li>
+	                            <li><a href="../classes/Vec3.html">Vec3</a></li>
+	                            <li><a href="../classes/Vec4.html">Vec4</a></li>
+	                    </ul>
+	                </div>
+	    
+	                <div class="tab-pane" id="modules">
+	                    <ul id="api-modules" class="nav nav-list">
+	                    </ul>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+        </div>
+        <div class="span9">
+                <form id="options-form" class="form-inline pull-right">
+                    Show:
+                    <label for="api-show-inherited" class="checkbox">
+                        <input type="checkbox" id="api-show-inherited" checked>
+                        Inherited
+                    </label>
+            
+                    <label for="api-show-protected" class="checkbox">
+                        <input type="checkbox" id="api-show-protected">
+                        Protected
+                    </label>
+            
+                    <label for="api-show-private" class="checkbox">
+                        <input type="checkbox" id="api-show-private">
+                        Private
+                    </label>
+                    <label for="api-show-deprecated" class="checkbox">
+                        <input type="checkbox" id="api-show-deprecated">
+                        Deprecated
+                    </label>
+            
+                </form>
+            
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <div class="page-header">
+                            <h1>src/quat.js <small>File</small></h1>
+                        </div>
+                        
+                        <div class="file">
+                            <pre class="prettyprint linenums">
+                        (function(window){
+                          &#x27;use strict&#x27;;
+                        
+                          /**
+                           * Describes a quaternion.
+                           * @class Quat
+                           * @constructor
+                           * @param {number} x value for X component
+                           * @param {number} y value for Y component
+                           * @param {number} z value for Z component
+                           * @param {number} w value for W component
+                           */
+                          var Quat = function(x, y, z, w){
+                            this.x = 0;
+                            this.y = 0;
+                            this.z = 0;
+                            this.w = 0;
+                          };
+                        
+                          window.Quat = Quat;
+                        
+                          Quat.prototype = {
+                            /**
+                             * Initializes components of the quaternion with given values.
+                             * @method init
+                             * @param {number} x value for X component
+                             * @param {number} y value for Y component
+                             * @param {number} z value for Z component
+                             * @param {number} w value for W component
+                             * @return {Quat} Reference to &#x60;this&#x60; for chaining.
+                             */
+                            init: function(x, y, z, w){
+                              this.x = x;
+                              this.y = y;
+                              this.z = z;
+                              this.w = w;
+                              return this;
+                            },
+                        
+                            /**
+                             * Initializes the quaternion with &#x60;x&#x60;, &#x60;y&#x60; and &#x60;z&#x60; components set to &#x60;0&#x60; and &#x60;w&#x60; component set to &#x60;1&#x60;.
+                             * @method initIdentity
+                             * @return {Quat} Reference to &#x60;this&#x60; for chaining.
+                             */
+                            initIdentity: function(){
+                              this.x = 0;
+                              this.y = 0;
+                              this.z = 0;
+                              this.w = 1;
+                              return this;
+                            },
+                        
+                            /**
+                             * Initializes the quaternion with all components set to &#x60;0&#x60;.
+                             * @method initZero
+                             * @return {Quat} Reference to &#x60;this&#x60; for chaining.
+                             */
+                            initZero: function(){
+                              this.x = 0;
+                              this.y = 0;
+                              this.z = 0;
+                              this.w = 0;
+                              return this;
+                            },
+                        
+                            /**
+                             * Initializes the components of this quaternion by taking the components from the given quaternion or vector.
+                             * @method initFrom
+                             * @param {Quat|Vec4} other
+                             * @return {Quat} Reference to &#x60;this&#x60; for chaining.
+                             */
+                            initFrom: function(other){
+                              this.x = other.x;
+                              this.y = other.y;
+                              this.z = other.z;
+                              this.w = other.w;
+                              return this;
+                            },
+                        
+                            /**
+                             * Initializes the components of this quaternion by taking values from the given array in successive order.
+                             * @chainable
+                             * @method initFromBuffer
+                             * @param {Array} buffer The array to read from
+                             * @param {Number} [offset=0] The zero based index at which start reading the values
+                             * @return {Quat} Reference to &#x60;this&#x60; for chaining.
+                             */
+                            initFromBuffer: function(buffer, offset){
+                              offset = offset || 0;
+                              this.x = buffer[offset];
+                              this.y = buffer[offset + 1];
+                              this.z = buffer[offset + 2];
+                              this.w = buffer[offset + 3];
+                              return this;
+                            },
+                        
+                            /**
+                             * Initializes the quaternion from axis and an angle.
+                             * @method initAxisAngle
+                             * @param {Vec3} axis The axis as vector
+                             * @param {number} angle The angle in degrees
+                             * @return {Quat} Reference to &#x60;this&#x60; for chaining.
+                             */
+                            initAxisAngle: function(axis, angle){
+                              var halfAngle = angle * 0.5;
+                              var scale = Math.sin(halfAngle);
+                              this.x = axis.x * scale;
+                              this.y = axis.y * scale;
+                              this.z = axis.z * scale;
+                              this.w = Math.cos(halfAngle);
+                              return this;
+                            },
+                        
+                            /**
+                             * Initializes the quaternion from yaw pitch and roll angles.
+                             * @method initYawPitchRoll
+                             * @param {number} yaw The yaw angle in radians
+                             * @param {number} pitch The pitch angle in radians
+                             * @param {number} roll The roll angle in radians
+                             * @return {Quat} Reference to &#x60;this&#x60; for chaining.
+                             */
+                            initYawPitchRoll: function(yaw, pitch, roll){
+                              var xHalf = pitch * 0.5;
+                              var xSin = Math.sin(xHalf);
+                              var xCos = Math.cos(xHalf);
+                        
+                              var yHalf = yaw * 0.5;
+                              var ySin = Math.sin(yHalf);
+                              var yCos = Math.cos(yHalf);
+                        
+                              var zHalf = roll * 0.5;
+                              var zSin = Math.sin(zHalf);
+                              var zCos = Math.cos(zHalf);
+                        
+                              this.x = yCos * xSin * zCos + ySin * xCos * zSin;
+                              this.y = ySin * xCos * zCos - yCos * xSin * zSin;
+                              this.z = yCos * xCos * zSin - ySin * xSin * zCos;
+                              this.w = yCos * xCos * zCos + ySin * xSin * zSin;
+                              return this;
+                            },
+                        
+                            /**
+                             * Creates a copy of this quaternion
+                             * @method clone
+                             * @return {Quat} The cloned quaternion
+                             */
+                            clone: function(){
+                              return new Quat(this.x, this.y, this.z, this.w);
+                            },
+                        
+                            /**
+                             * Copies the components successively into the given array.
+                             * @chainable
+                             * @method copy
+                             * @param {Array|Float32Array} buffer The array to copy into
+                             * @param {Number} [offset=0] Zero based index where to start writing in the array
+                             * @return {Array|Float32Array}
+                             */
+                            copyTo: function(buffer, offset){
+                              offset = offset || 0;
+                              buffer[offset] = this.x;
+                              buffer[offset + 1] = this.y;
+                              buffer[offset + 2] = this.z;
+                              buffer[offset + 3] = this.w;
+                            },
+                        
+                            /**
+                             * Returns an array filled with the values of the components of this quaternion
+                             * @method dump
+                             * @return {Array}
+                             */
+                            dump: function(){
+                              return [this.x, this.y, this.z, this.w];
+                            },
+                        
+                            /**
+                             * Checks for component wise equality with given quaternion
+                             * @method equals
+                             * @param {Quat|Vec4} other The quaternion to compare with
+                             * @return {Boolean} true if components are equal, false otherwise
+                             */
+                            equals: function(other){
+                              return ((this.x === other.x) &amp;&amp; (this.y === other.y) &amp;&amp; (this.z === other.z) &amp;&amp; (this.w === other.w));
+                            },
+                        
+                            /**
+                             * Calculates the length of this quaternion
+                             * @method length
+                             * @return {Number} The length.
+                             */
+                            length: function(){
+                              var x = this.x;
+                              var y = this.y;
+                              var z = this.z;
+                              var w = this.w;
+                              return Math.sqrt(x * x + y * y + z * z + w * w);
+                            },
+                        
+                            /**
+                             * Calculates the squared length of this quaternion
+                             * @method lengthSquared
+                             * @return {Number} The squared length.
+                             */
+                            lengthSquared: function(){
+                              var x = this.x;
+                              var y = this.y;
+                              var z = this.z;
+                              var w = this.w;
+                              return x * x + y * y + z * z + w * w;
+                            },
+                        
+                            /**
+                             * Calculates the dot product with the given quaternion
+                             * @method dot
+                             * @param {Quat} other
+                             * @return {Number} The dot product.
+                             */
+                            dot: function(other){
+                              return this.x * other.x + this.y * other.y + this.z * other.z + this.w * other.w;
+                            },
+                        
+                            /**
+                             * Negates the components of &#x60;this&#x60;
+                             * @method selfNegate
+                             * @return {Quat} Reference to &#x60;this&#x60; for chaining.
+                             */
+                            selfNegate: function(){
+                              this.x = -this.x;
+                              this.y = -this.y;
+                              this.z = -this.z;
+                              this.w = -this.w;
+                              return this;
+                            },
+                        
+                            /**
+                             * Negates the &#x60;x&#x60;, &#x60;y&#x60; and &#x60;z&#x60; components of &#x60;this&#x60;
+                             * @method selfConjugate
+                             * @return {Quat} Reference to &#x60;this&#x60; for chaining.
+                             */
+                            selfConjugate: function(){
+                              this.x = -this.x;
+                              this.y = -this.y;
+                              this.z = -this.z;
+                              return this;
+                            },
+                        
+                            /**
+                             * Normalizes &#x60;this&#x60; so that &#x60;length&#x60; should be &#x60;1&#x60;
+                             * @method selfNormalize
+                             * @return {Quat} Reference to &#x60;this&#x60; for chaining.
+                             */
+                            selfNormalize: function(){
+                              var x = this.x;
+                              var y = this.y;
+                              var z = this.z;
+                              var w = this.w;
+                              var d = 1.0 / Math.sqrt(x * x + y * y + z * z + w * w);
+                              this.x = x * d;
+                              this.y = y * d;
+                              this.z = z * d;
+                              this.w = w * d;
+                              return this;
+                            },
+                        
+                            /**
+                             * Inverts &#x60;this&#x60; so that multiplication with the original would return the identity quaternion.
+                             * @method selfInvert
+                             * @return {Quat} Reference to &#x60;this&#x60; for chaining.
+                             */
+                            selfInvert: function(){
+                              var x = this.x;
+                              var y = this.y;
+                              var z = this.z;
+                              var w = this.w;
+                              var d = 1.0 / Math.sqrt(x * x + y * y + z * z + w * w);
+                              this.x = -x * d;
+                              this.y = -y * d;
+                              this.z = -z * d;
+                              this.w =  w * d;
+                              return this;
+                            },
+                        
+                            /**
+                             * Performs a component wise addition with &#x60;other&#x60;
+                             * @method selfAdd
+                             * @param {Quat|Vec4} other
+                             * @return {Quat} Reference to &#x60;this&#x60; for chaining.
+                             */
+                            selfAdd: function(other){
+                              this.x += other.x;
+                              this.y += other.y;
+                              this.z += other.z;
+                              this.w += other.w;
+                              return this;
+                            },
+                        
+                            /**
+                             * Performs a component wise subtraction with &#x60;other&#x60;
+                             * @method selfSubtract
+                             * @param {Quat|Vec4} other
+                             * @return {Quat} Reference to &#x60;this&#x60; for chaining.
+                             */
+                            selfSubtract: function(other){
+                              this.x -= other.x;
+                              this.y -= other.y;
+                              this.z -= other.z;
+                              this.w -= other.w;
+                              return this;
+                            },
+                        
+                            /**
+                             * Performs a quaternion multiplication with &#x60;other&#x60;
+                             * @method selfMultiply
+                             * @param {Quat|Vec4} other
+                             * @return {Quat} Reference to &#x60;this&#x60; for chaining.
+                             */
+                            selfMultiply: function(other){
+                              var x1 = this.x;
+                              var y1 = this.y;
+                              var z1 = this.z;
+                              var w1 = this.w;
+                        
+                              var x2 = other.x;
+                              var y2 = other.y;
+                              var z2 = other.z;
+                              var w2 = other.w;
+                        
+                              this.x = x1 * w2 + x2 * w1 + y1 * z2 - z1 * y2;
+                              this.y = y1 * w2 + y2 * w1 + z1 * x2 - x1 * z2;
+                              this.z = z1 * w2 + z2 * w1 + x1 * y2 - y1 * x2;
+                              this.w = w1 * w2 - x1 * x2 - y1 * y2 - z1 * z2;
+                              return this;
+                            },
+                        
+                            /**
+                             * Performs a quaternion concatenation with &#x60;other&#x60;
+                             * @method selfConcat
+                             * @param {Quat} other
+                             * @return {Quat} Reference to &#x60;this&#x60; for chaining.
+                             */
+                            selfConcat: function(other){
+                              var x1 = other.x;
+                              var y1 = other.y;
+                              var z1 = other.z;
+                              var w1 = other.w;
+                        
+                              var x2 = this.x;
+                              var y2 = this.y;
+                              var z2 = this.z;
+                              var w2 = this.w;
+                        
+                              this.x = x1 * w2 + x2 * w1 + y1 * z2 - z1 * y2;
+                              this.y = y1 * w2 + y2 * w1 + z1 * x2 - x1 * z2;
+                              this.z = z1 * w2 + z2 * w1 + x1 * y2 - y1 * x2;
+                              this.w = w1 * w2 - x1 * x2 - y1 * y2 - z1 * z2;
+                              return this;
+                            },
+                        
+                            /**
+                             * Performs a division with &#x60;other&#x60;
+                             * @method selfDivide
+                             * @param {Quat} other
+                             * @return {Quat} Reference to &#x60;this&#x60; for chaining.
+                             */
+                            selfDivide: function(other){
+                              var x1 = this.x;
+                              var y1 = this.y;
+                              var z1 = this.z;
+                              var w1 = this.w;
+                        
+                              var x2 = other.x;
+                              var y2 = other.y;
+                              var z2 = other.z;
+                              var w2 = other.w;
+                        
+                              // invert
+                              var s = 1.0 / (x2 * x2 + y2 * y2 + z2 * z2 + w2 * w2);
+                              x2 = -x2 * s;
+                              y2 = -y2 * s;
+                              z2 = -z2 * s;
+                              w2 = w2 * s;
+                              // multiply
+                              this.x = x1 * w2 + x2 * w1 + y1 * z2 - z1 * y2;
+                              this.y = y1 * w2 + y2 * w1 + z1 * x2 - x1 * z2;
+                              this.z = z1 * w2 + z2 * w1 + x1 * y2 - y1 * x2;
+                              this.w = w1 * w2 - x1 * x2 - y1 * y2 - z1 * z2;
+                              return this;
+                            },
+                        
+                            /**
+                             * Rotates the given point or vector with &#x60;this&#x60;
+                             * @method transform
+                             * @param vec
+                             * @return {Vec3|Vec4}
+                             */
+                            transform: function(vec){
+                              var x = this.x;
+                              var y = this.y;
+                              var z = this.z;
+                              var w = this.w;
+                        
+                              var x2 = x + x;
+                              var y2 = y + y;
+                              var z2 = z + z;
+                        
+                              var wx2 = w * x2;
+                              var wy2 = w * y2;
+                              var wz2 = w * z2;
+                        
+                              var xx2 = x * x2;
+                              var xy2 = x * y2;
+                              var xz2 = x * z2;
+                        
+                              var yy2 = y * y2;
+                              var yz2 = y * z2;
+                              var zz2 = y * z2;
+                        
+                              var vx = vec.x;
+                              var vy = vec.y;
+                              var vz = vec.z;
+                        
+                              vec.x = vx * (1 - yy2 - zz2) + vy * (xy2 - wz2) + vz * (xz2 + wy2);
+                              vec.y = vx * (xy2 + wz2) + vy * (1 - xx2 - zz2) + vz * (yz2 - wx2);
+                              vec.z = vx * (xz2 - wy2) + vy * (yz2 + wx2) + vz * (1 - xx2 - yy2);
+                              return vec;
+                            }
+                          };
+                        
+                          /**
+                           * Creates a new quaternion. The method should be called with four or no arguments. If less than four arguments are given
+                           * then some components of the resulting quaternion are going to be &#x60;undefined&#x60;.
+                           * @static
+                           * @method create
+                           * @param {Number} [x] The x component
+                           * @param {Number} [y] The y component
+                           * @param {Number} [z] The z component
+                           * @param {Number} [w] The w component
+                           * @return {Quat}
+                           */
+                          Quat.create = function(x, y, z, w){
+                            if (x !== undefined){
+                              return new Quat(x, y, z, w);
+                            }
+                            return new Quat(0, 0, 0, 0);
+                          };
+                        
+                          /**
+                           * Creates a new vector with all components set to 0.
+                           * @static
+                           * @method zero
+                           * @return {Quat} A new quaternion
+                           */
+                          Quat.zero = function(){
+                            return new Quat(0, 0, 0, 0);
+                          };
+                        
+                          /**
+                           * Creates a new vector with &#x60;x&#x60;, &#x60;y&#x60; and &#x60;z&#x60; components set to &#x60;0&#x60; and &#x60;w&#x60; component set to &#x60;1&#x60;.
+                           * @static
+                           * @method identity
+                           * @return {Quat} A new quaternion
+                           */
+                          Quat.identity = function(){
+                            return new Quat(0, 0, 0, 1);
+                          };
+                        
+                          /**
+                           * Creates a new quaternion from given axis vector and an angle
+                           * @static
+                           * @method fromAxisAngle
+                           * @param {Vec3} axis The axis vector
+                           * @param {number} angle The angle in degree
+                           * @return {Quat} A new quaternion
+                           */
+                          Quat.fromAxisAngle = function(axis, angle){
+                            return Quat.identity().initAxisAngle(axis, angle);
+                          };
+                        
+                          /**
+                           * Creates a new quaternion from given &#x60;yaw&#x60; &#x60;pitch&#x60; and &#x60;roll&#x60; angles
+                           * @static
+                           * @method fromYawPitchRoll
+                           * @param {number} yaw The yaw angle in radians
+                           * @param {number} pitch The pitch angle in radians
+                           * @param {number} roll The roll angle in radians
+                           * @return {Quat}
+                           */
+                          Quat.fromYawPitchRoll = function(yaw, pitch, roll){
+                            return Quat.identity().initYawPitchRoll(yaw, pitch, roll);
+                          };
+                        
+                          /**
+                           * Negates the given quaternion.
+                           * @static
+                           * @method negate
+                           * @param {Quat} quat The quaternion to negate.
+                           * @param {Quat} [out] The quaternion to write to.
+                           * @return {Quat} The given &#x60;out&#x60; parameter or a new quaternion.
+                           */
+                          Quat.negate = function(quat, out){
+                            out = out || new Quat();
+                            out.x = -quat.x;
+                            out.y = -quat.y;
+                            out.z = -quat.z;
+                            out.w = -quat.w;
+                            return out;
+                          };
+                        
+                          /**
+                           * Conjugates the given quaternion.
+                           * @static
+                           * @method conjugate
+                           * @param {Quat} quat The quaternion to conjugate.
+                           * @param {Quat} [out] The quaternion to write to.
+                           * @return {Quat} The given &#x60;out&#x60; parameter or a new quaternion.
+                           */
+                          Quat.conjugate = function(quat, out){
+                            out = out || new Quat();
+                            out.x = -quat.x;
+                            out.y = -quat.y;
+                            out.z = -quat.z;
+                            out.w =  quat.w;
+                            return out;
+                          };
+                        
+                          /**
+                           * Normalizes the given quaternion
+                           * @static
+                           * @method normalize
+                           * @param {Quat} quat The quaternion to normalize.
+                           * @param {Quat} [out] The quaternion to write to.
+                           * @return {Quat} The given &#x60;out&#x60; parameter or a new quaternion.
+                           */
+                          Quat.normalize = function(quat, out){
+                            var x = quat.x;
+                            var y = quat.y;
+                            var z = quat.z;
+                            var w = quat.w;
+                            var d = 1.0 / Math.sqrt(x * x + y * y + z * z + w * w);
+                            out = out || new Quat();
+                            out.x = x * d;
+                            out.y = y * d;
+                            out.z = z * d;
+                            out.w = w * d;
+                            return out;
+                          };
+                        
+                          /**
+                           * Inverts the given quaternion
+                           * @static
+                           * @method invert
+                           * @param {Quat} quat The quaternion to invert.
+                           * @param {Quat} [out] The quaternion to write to.
+                           * @return {Quat} The given &#x60;out&#x60; parameter or a new quaternion.
+                           */
+                          Quat.invert = function(quat, out){
+                            var x = quat.x;
+                            var y = quat.y;
+                            var z = quat.z;
+                            var w = quat.w;
+                            var d = 1.0 / Math.sqrt(x * x + y * y + z * z + w * w);
+                            out = out || new Quat();
+                            out.x = -x * d;
+                            out.y = -y * d;
+                            out.z = -z * d;
+                            out.w =  w * d;
+                            return out;
+                          };
+                        
+                          /**
+                           * Adds two quaternions
+                           * @static
+                           * @method add
+                           * @param {Quat} quatA The first quaternion
+                           * @param {Quat} quatB The second quaternion
+                           * @param {Quat} [out] The quaternion to write to.
+                           * @return {Quat} The given &#x60;out&#x60; parameter or a new quaternion.
+                           */
+                          Quat.add = function(quatA, quatB, out){
+                            out = out || new Quat();
+                            out.x = quatA.x + quatB.x;
+                            out.y = quatA.y + quatB.y;
+                            out.z = quatA.z + quatB.z;
+                            out.w = quatA.w + quatB.w;
+                            return out;
+                          };
+                        
+                          /**
+                           * Subtracts the second quaternion from the first.
+                           * @static
+                           * @method subtract
+                           * @param {Quat} quatA The first quaternion
+                           * @param {Quat} quatB The second quaternion
+                           * @param {Quat} [out] The quaternion to write to.
+                           * @return {Quat} The given &#x60;out&#x60; parameter or a new quaternion.
+                           */
+                          Quat.subtract = function(quatA, quatB, out){
+                            out = out || new Quat();
+                            out.x = quatA.x - quatB.x;
+                            out.y = quatA.y - quatB.y;
+                            out.z = quatA.z - quatB.z;
+                            out.w = quatA.w - quatB.w;
+                            return out;
+                          };
+                        
+                          /**
+                           * Multiplies two quaternions
+                           * @static
+                           * @method multiply
+                           * @param {Quat} quatA The first quaternion
+                           * @param {Quat} quatB The second quaternion
+                           * @param {Quat} [out] The quaternion to write to.
+                           * @return {Quat} The given &#x60;out&#x60; parameter or a new quaternion.
+                           */
+                          Quat.multiply = function(quatA, quatB, out){
+                            var x1 = quatA.x;
+                            var y1 = quatA.y;
+                            var z1 = quatA.z;
+                            var w1 = quatA.w;
+                        
+                            var x2 = quatB.x;
+                            var y2 = quatB.y;
+                            var z2 = quatB.z;
+                            var w2 = quatB.w;
+                        
+                            out = out || new Quat();
+                            out.x = x1 * w2 + x2 * w1 + y1 * z2 - z1 * y2;
+                            out.y = y1 * w2 + y2 * w1 + z1 * x2 - x1 * z2;
+                            out.z = z1 * w2 + z2 * w1 + x1 * y2 - y1 * x2;
+                            out.w = w1 * w2 - x1 * x2 - y1 * y2 - z1 * z2;
+                            return out;
+                          };
+                        
+                        
+                          /**
+                           * Concatenates two quaternions
+                           * @static
+                           * @method concat
+                           * @param {Quat} quatA The first quaternion
+                           * @param {Quat} quatB The second quaternion
+                           * @param {Quat} [out] The quaternion to write to.
+                           * @return {Quat} The given &#x60;out&#x60; parameter or a new quaternion.
+                           */
+                          Quat.concat = function(quatA, quatB, out){
+                            var x1 = quatB.x;
+                            var y1 = quatB.y;
+                            var z1 = quatB.z;
+                            var w1 = quatB.w;
+                        
+                            var x2 = quatA.x;
+                            var y2 = quatA.y;
+                            var z2 = quatA.z;
+                            var w2 = quatA.w;
+                        
+                            out = out || new Quat();
+                            out.x = x1 * w2 + x2 * w1 + y1 * z2 - z1 * y2;
+                            out.y = y1 * w2 + y2 * w1 + z1 * x2 - x1 * z2;
+                            out.z = z1 * w2 + z2 * w1 + x1 * y2 - y1 * x2;
+                            out.w = w1 * w2 - x1 * x2 - y1 * y2 - z1 * z2;
+                            return out;
+                          };
+                        
+                          /**
+                           * Divides the first quaternion by the second
+                           * @static
+                           * @method divide
+                           * @param {Quat} quatA The first quaternion
+                           * @param {Quat} quatB The second quaternion
+                           * @param {Quat} [out] The quaternion to write to.
+                           * @return {Quat} The given &#x60;out&#x60; parameter or a new quaternion.
+                           */
+                          Quat.divide = function(quatA, quatB, out){
+                            var x1 = quatA.x;
+                            var y1 = quatA.y;
+                            var z1 = quatA.z;
+                            var w1 = quatA.w;
+                        
+                            var x2 = quatB.x;
+                            var y2 = quatB.y;
+                            var z2 = quatB.z;
+                            var w2 = quatB.w;
+                        
+                            // invert
+                            var s = 1.0 / (x2 * x2 + y2 * y2 + z2 * z2 + w2 * w2);
+                            x2 = -x2 * s;
+                            y2 = -y2 * s;
+                            z2 = -z2 * s;
+                            w2 = w2 * s;
+                        
+                            // multiply
+                            out = out || new Quat();
+                            out.x = x1 * w2 + x2 * w1 + y1 * z2 - z1 * y2;
+                            out.y = y1 * w2 + y2 * w1 + z1 * x2 - x1 * z2;
+                            out.z = z1 * w2 + z2 * w1 + x1 * y2 - y1 * x2;
+                            out.w = w1 * w2 - x1 * x2 - y1 * y2 - z1 * z2;
+                            return out;
+                          };
+                        
+                          /**
+                           * Tries to convert the given &#x60;data&#x60; into a quaternion
+                           * @static
+                           * @method create
+                           * @param {Array|Quat|Vec4} data
+                           * @return {Quat} The created quaternion.
+                           */
+                          Quat.convert = function(data){
+                            if (Array.isArray(data)){
+                              return new Quat(
+                                data[0] || 0,
+                                data[1] || 0,
+                                data[2] || 0,
+                                data[3] || 0
+                              );
+                            }
+                            if (typeof data === &#x27;number&#x27;) {
+                              return new Quat(data, data, data, data);
+                            }
+                            return new Quat(
+                              data.x || 0,
+                              data.y || 0,
+                              data.z || 0,
+                              data.w || 0
+                            );
+                          };
+                        
+                          /**
+                           * Rotates a point or vector with given quaternion
+                           * @static
+                           * @method transform
+                           * @param {Quat} q The rotation quaternion
+                           * @param {Vec3|Vec4} v The point or vector to rotate
+                           * @param {Vec3|Vec4} [out] The vector to write to
+                           * @return {Vec3|Vec4} The given &#x60;out&#x60; parameter or a new vector.
+                           */
+                          Quat.transform = function(q, v, out){
+                            var x = q.x;
+                            var y = q.y;
+                            var z = q.z;
+                            var w = q.w;
+                        
+                            var x2 = x + x;
+                            var y2 = y + y;
+                            var z2 = z + z;
+                        
+                            var wx2 = w * x2;
+                            var wy2 = w * y2;
+                            var wz2 = w * z2;
+                        
+                            var xx2 = x * x2;
+                            var xy2 = x * y2;
+                            var xz2 = x * z2;
+                        
+                            var yy2 = y * y2;
+                            var yz2 = y * z2;
+                            var zz2 = y * z2;
+                        
+                            var vx = v.x;
+                            var vy = v.y;
+                            var vz = v.z;
+                        
+                            out = out || new window.Vec3();
+                            out.x = vx * (1 - yy2 - zz2) + vy * (xy2 - wz2) + vz * (xz2 + wy2);
+                            out.y = vx * (xy2 + wz2) + vy * (1 - xx2 - zz2) + vz * (yz2 - wx2);
+                            out.z = vx * (xz2 - wy2) + vy * (yz2 + wx2) + vz * (1 - xx2 - yy2);
+                        
+                            if (out.w == null){
+                              out.w = 1;
+                            }
+                        
+                            return out;
+                          };
+                        
+                        }(window));
+                        
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/jquery/jquery-1.8.2.min.js"></script>
+<script src="../assets/vendor/bootstrap/js/bootstrap.js"></script>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script src="../assets/js/yuidoc-bootstrap.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

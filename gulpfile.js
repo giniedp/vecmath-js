@@ -52,22 +52,12 @@
   // JSDOC
   //
 
-  gulp.task('doc', shell.task(['./jsdoc']));
+  gulp.task('doc', shell.task(['yuidoc']));
 
-  gulp.task('jsdoc-theme', function(){
-    gulp.src("src/jsdoc-default.scss")
-      .pipe(sass())
-      .pipe(gulp.dest('./doc/styles/'));
-  });
-
-  gulp.task('jsdoc', function(){
+  gulp.task('watchdoc', function(){
     gulp.run('doc');
     gulp.watch(["src/*.js"], function(){
       gulp.run('doc');
-    });
-
-    gulp.watch(["src/jsdoc-*.scss"], function(){
-      gulp.run('jsdoc-theme');
     });
   });
 

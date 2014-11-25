@@ -1,33 +1,36 @@
-(function(){
+(function(window){
   'use strict';
 
   /**
+   * Describes a vector with four components.
    *
-   * @global
-   * @constructor Vec4
-   * @param {number} x
-   * @param {number} y
-   * @param {number} z
-   * @param {number} w
+   * @class Vec4
+   * @constructor
+   * @param {Number} x
+   * @param {Number} y
+   * @param {Number} z
+   * @param {Number} w
    */
-  var Vec4 = window.Vec4 = function(x, y, z, w){
+  var Vec4 = function(x, y, z, w){
     this.x = x;
     this.y = y;
     this.z = z;
     this.w = w;
   };
 
+  window.Vec4 = Vec4;
+
   Vec4.prototype = {
 
     /**
-     * Initializes components of the vector with given values.
-     * @instance
-     * @memberof Vec4
-     * @param {number} [x] value for X component
-     * @param {number} [y] value for Y component
-     * @param {number} [z] value for Z component
-     * @param {number} [w] value for W component
-     * @returns {Vec4} this vector for chaining
+     * Initializes the components of this vector with given values.
+     * @chainable
+     * @method init
+     * @param {Number} x value for X component
+     * @param {Number} y value for Y component
+     * @param {Number} z value for Z component
+     * @param {Number} w value for W component
+     * @return {Vec4} this vector for chaining
      */
     init: function(x, y, z, w){
       this.x = x;
@@ -38,11 +41,11 @@
     },
 
     /**
-     * Initializes this vector to the values of the given vector
-     * @instance
-     * @memberof Vec4
-     * @param other
-     * @returns {Vec4}
+     * Initializes the components of this vector by taking the components from the given vector.
+     * @chainable
+     * @method initFrom
+     * @param {Vec4} other The vector to read from
+     * @return {Vec4}
      */
     initFrom: function(other){
       this.x = other.x;
@@ -53,11 +56,12 @@
     },
 
     /**
-     * @instance
-     * @memberof Vec4
-     * @param buffer
-     * @param offset
-     * @returns {Vec4}
+     * Initializes the components of this vector by taking values from the given array in successive order.
+     * @chainable
+     * @method initFromBuffer
+     * @param {Array} buffer The array to read from
+     * @param {Number} [offset=0] The zero based index at which start reading the values
+     * @return {Vec4}
      */
     initFromBuffer: function(buffer, offset){
       offset = offset || 0;
@@ -69,10 +73,9 @@
     },
 
     /**
-     * Creates a clone of this vector
-     * @instance
-     * @memberof Vec4
-     * @returns {Vec4} the clone vector
+     * Creates a copy of this vector
+     * @method clone
+     * @return {Vec4} The cloned vector
      */
     clone: function(){
       return new Vec4(this.x, this.y, this.z, this.w);
@@ -80,25 +83,35 @@
 
     /**
      * Copies the components successively into the given array.
-     * @instance
-     * @memberof Vec4
+     * @chainable
+     * @method copy
      * @param {Array|Float32Array} buffer The array to copy into
-     * @param {number} [offset] Zero based index where to start writing in the array
+     * @param {Number} [offset=0] Zero based index where to start writing in the array
+     * @return {Array|Float32Array}
      */
-    copy: function(buffer, offset){
-      offset = +offset;
+    copyTo: function(buffer, offset){
+      offset = offset || 0;
       buffer[offset] = this.x;
       buffer[offset + 1] = this.y;
       buffer[offset + 2] = this.z;
       buffer[offset + 3] = this.w;
+      return buffer;
+    },
+
+    /**
+     * Returns an array filled with the values of the components of this vector
+     * @method dump
+     * @return {Array}
+     */
+    dump: function(){
+      return [this.x, this.y, this.z, this.w];
     },
 
     /**
      * Checks for component wise equality with given vector
-     * @instance
-     * @memberof Vec4
-     * @param {Vec4} other The vector to test with
-     * @returns {boolean} true if components are equal, false otherwise
+     * @method equals
+     * @param {Vec4} other The vector to compare with
+     * @return {Boolean} true if components are equal, false otherwise
      */
     equals: function(other){
       return ((this.x === other.x) && (this.y === other.y) && (this.z === other.z) && (this.w === other.w));
@@ -106,9 +119,8 @@
 
     /**
      * Calculates the length of this vector
-     * @instance
-     * @memberof Vec4
-     * @returns {number} The length.
+     * @method length
+     * @return {Number} The length.
      */
     length: function(){
       var x = this.x;
@@ -120,9 +132,8 @@
 
     /**
      * Calculates the squared length of this vector
-     * @instance
-     * @memberof Vec4
-     * @returns {number} The squared length.
+     * @method lengthSquared
+     * @return {Number} The squared length.
      */
     lengthSquared: function(){
       var x = this.x;
@@ -134,10 +145,9 @@
 
     /**
      * Calculates the distance to the given vector
-     * @instance
-     * @memberof Vec4
+     * @method distance
      * @param {Vec4} other The distant vector
-     * @returns {number} The distance.
+     * @return {Number} The distance between the vectors.
      */
     distance: function(other){
       var x = this.x - other.x;
@@ -149,10 +159,9 @@
 
     /**
      * Calculates the squared distance to the given vector
-     * @instance
-     * @memberof Vec4
+     * @method distanceSquared
      * @param {Vec4} other The distant vector
-     * @returns {number} The distance.
+     * @return {Number} The squared distance between the vectors.
      */
     distanceSquared: function(other){
       var x = this.x - other.x;
@@ -164,10 +173,9 @@
 
     /**
      * Calculates the dot product with the given vector
-     * @instance
-     * @memberof Vec4
+     * @method dot
      * @param {Vec4} other
-     * @returns {number} The dot product.
+     * @return {Number} The dot product.
      */
     dot: function(other){
       return this.x * other.x + this.y * other.y + this.z * other.z + this.w * other.w;
@@ -175,9 +183,9 @@
 
     /**
      * Normalizes this vector. Applies the result to this vector.
-     * @instance
-     * @memberof Vec4
-     * @returns {Vec4} This vector for chaining.
+     * @chainable
+     * @method selfNormalize
+     * @return {Vec4} Reference to `this` for chaining.
      */
     selfNormalize: function(){
       var x = this.x;
@@ -194,9 +202,9 @@
 
     /**
      * Inverts this vector.
-     * @instance
-     * @memberof Vec4
-     * @returns {Vec4} This vector for chainint
+     * @chainable
+     * @method selfInvert
+     * @return {Vec4} Reference to `this` for chaining.
      */
     selfInvert: function(){
       this.x = 1.0 / this.x;
@@ -207,10 +215,10 @@
     },
 
     /**
-     * Negates this vector. Applies the result to this vector.
-     * @instance
-     * @memberof Vec4
-     * @returns {Vec4} This vector for chaining.
+     * Negates the components of this vector.
+     * @chainable
+     * @method selfNegate
+     * @return {Vec4} Reference to `this` for chaining.
      */
     selfNegate: function(){
       this.x = -this.x;
@@ -221,11 +229,11 @@
     },
 
     /**
-     * Calculates the sum of this and the other vector. Applies the result to this vector.
-     * @instance
-     * @memberof Vec4
+     * Adds the given vector to `this`.
+     * @chainable
+     * @method selfAdd
      * @param {Vec4} other The vector to add
-     * @returns {Vec4} This vector for chaining.
+     * @return {Vec4} Reference to `this` for chaining.
      */
     selfAdd: function(other){
       this.x += other.x;
@@ -236,11 +244,11 @@
     },
 
     /**
-     * Calculates the sum of this vector and the given scalar. Applies the result to this vector.
-     * @instance
-     * @memberof Vec4
-     * @param {number} scalar The scalar to add.
-     * @returns {Vec4} This vector for chaining.
+     * Adds the given scalar to `this`
+     * @chainable
+     * @method selfAddScalar
+     * @param {Number} scalar The scalar to add.
+     * @return {Vec4} Reference to `this` for chaining.
      */
     selfAddScalar: function(scalar){
       this.x += scalar;
@@ -251,11 +259,11 @@
     },
 
     /**
-     * Subtracts the given from this vector. Applies the result to this vector.
-     * @instance
-     * @memberof Vec4
+     * Subtracts the given from this vector from `this`.
+     * @chainable
+     * @method selfSubtract
      * @param {Vec4} other The vector to subtract.
-     * @returns {Vec4} This vector for chaining.
+     * @return {Vec4} Reference to `this` for chaining.
      */
     selfSubtract: function(other){
       this.x -= other.x;
@@ -266,11 +274,11 @@
     },
 
     /**
-     * Subtracts the given scalar from this vector. Applies the result to this vector.
-     * @instance
-     * @memberof Vec4
+     * Subtracts the given scalar from `this`.
+     * @return {Vec4} Reference to `this` for chaining.
+     * @method selfSubtractScalar
      * @param {Vec4} scalar The scalar to subtract.
-     * @returns {Vec4} This vector for chaining.
+     * @return {Vec4} Reference to `this` for chaining.
      */
     selfSubtractScalar: function(scalar){
       this.x -= scalar;
@@ -281,11 +289,11 @@
     },
 
     /**
-     * Multiplies this and the other vector. Applies the result to this vector.
-     * @instance
-     * @memberof Vec4
+     * Multiplies `this` with the given vector.
+     * @chainable
+     * @method selfMultiply
      * @param {Vec4} other The vector to multiply.
-     * @returns {Vec4} This vector for chaining.
+     * @return {Vec4} Reference to `this` for chaining.
      */
     selfMultiply: function(other){
       this.x *= other.x;
@@ -296,11 +304,11 @@
     },
 
     /**
-     * Multiplies this vector and the given scalar. Applies the result to this vector.
-     * @instance
-     * @memberof Vec4
-     * @param {number} scalar The scalar to multiply.
-     * @returns {Vec4} This vector for chaining.
+     * Multiplies `this` with the given scalar.
+     * @chainable
+     * @method selfMultiplyScalar
+     * @param {Number} scalar The scalar to multiply.
+     * @return {Vec4} Reference to `this` for chaining.
      */
     selfMultiplyScalar: function(scalar){
       this.x *= scalar;
@@ -311,11 +319,11 @@
     },
 
     /**
-     * Divides this by the given vector. Applies the result to this vector.
-     * @instance
-     * @memberof Vec4
+     * Divides `this` by the given vector.
+     * @chainable
+     * @method selfDivide
      * @param {Vec4} other The vector to divide with.
-     * @returns {Vec4} This vector for chaining
+     * @return {Vec4} Reference to `this` for chaining.
      */
     selfDivide: function(other){
       this.x /= other.x;
@@ -326,27 +334,27 @@
     },
 
     /**
-     * Divides this vector by the given scalar. Applies the result to this vector.
-     * @instance
-     * @memberof Vec4
-     * @param {number} scalar The scalar to divide with.
-     * @returns {Vec4} This vector for chaining
+     * Divides `this` by the given scalar.
+     * @method selfDivideScalar
+     * @param {Number} scalar The scalar to divide with.
+     * @return {Vec4} Reference to `this` for chaining.
      */
     selfDivideScalar: function(scalar){
-      this.x /= scalar;
-      this.y /= scalar;
-      this.z /= scalar;
-      this.w /= scalar;
+      scalar = 1.0 / scalar;
+      this.x *= scalar;
+      this.y *= scalar;
+      this.z *= scalar;
+      this.w *= scalar;
       return this;
     },
 
     /**
-     * Performs a multiplication followed by a sum operation. Applies the result to this vector.
-     * @instance
-     * @memberof Vec4
+     * Multiplies `this` with the first vector and adds the second after.
+     * @chainable
+     * @method selfMultiplyAdd
      * @param {Vec4} mul The vector to multiply.
      * @param {Vec4} add The vector to add on top of the multiplication.
-     * @returns {Vec4} This vector for chaining
+     * @return {Vec4} Reference to `this` for chaining.
      */
     selfMultiplyAdd: function(mul, add){
       this.x = this.x * mul.x + add.x;
@@ -357,12 +365,12 @@
     },
 
     /**
-     * Performs a multiplication followed by a sum operation. Applies the result to this vector.
-     * @instance
-     * @memberof Vec4
-     * @param {number} mul The scalar to multiply.
+     * Multiplies `this` with the first vector and adds the second scalar after.
+     * @chainable
+     * @method selfMultiplyScalarAdd
+     * @param {Number} mul The scalar to multiply.
      * @param {Vec4} add The vector to add on top of the multiplication.
-     * @returns {Vec4} This vector for chaining
+     * @return {Vec4} Reference to `this` for chaining.
      */
     selfMultiplyScalarAdd: function(mul, add){
       this.x = this.x * mul + add.x;
@@ -370,21 +378,117 @@
       this.z = this.z * mul + add.z;
       this.w = this.w * mul + add.w;
       return this;
+    },
+
+    /**
+     * Transforms `this` with the given quaternion. The `w` component of `this` keeps untouched.
+     * @chainable
+     * @method selfTransformQuat
+     * @param {Quat} quat
+     * @return {Vec4} Reference to `this` for chaining.
+     */
+    selfTransformQuat: function(quat){
+      var x = quat.x;
+      var y = quat.y;
+      var z = quat.z;
+      var w = quat.w;
+
+      var x2 = x + x;
+      var y2 = y + y;
+      var z2 = z + z;
+
+      var wx2 = w * x2;
+      var wy2 = w * y2;
+      var wz2 = w * z2;
+
+      var xx2 = x * x2;
+      var xy2 = x * y2;
+      var xz2 = x * z2;
+
+      var yy2 = y * y2;
+      var yz2 = y * z2;
+      var zz2 = y * z2;
+
+      var vx = this.x;
+      var vy = this.y;
+      var vz = this.z;
+
+      this.x = vx * (1 - yy2 - zz2) + vy * (xy2 - wz2) + vz * (xz2 + wy2);
+      this.y = vx * (xy2 + wz2) + vy * (1 - xx2 - zz2) + vz * (yz2 - wx2);
+      this.z = vx * (xz2 - wy2) + vy * (yz2 + wx2) + vz * (1 - xx2 - yy2);
+      return this;
+    },
+
+    /**
+     * Transforms `this` with the given matrix.
+     * @chainable
+     * @method selfTransformMat4
+     * @param {Mat4} mat
+     * @return {Vec4} Reference to `this` for chaining.
+     */
+    selfTransformMat4: function(mat){
+      var x = this.x;
+      var y = this.y;
+      var z = this.z;
+      var w = this.w;
+      var d = mat.data;
+      this.x = x * d[0] + y * d[4] + z * d[8]  + w * d[12];
+      this.y = x * d[1] + y * d[5] + z * d[9]  + w * d[13];
+      this.z = x * d[2] + y * d[6] + z * d[10] + w * d[14];
+      this.w = x * d[3] + y * d[7] + z * d[11] + w * d[15];
+      return this;
+    },
+
+    /**
+     * Transforms `this` with the given matrix. The `w` component of `this` keeps untouched.
+     * @chainable
+     * @method selfTransformMat3
+     * @param {Mat3} mat
+     * @return {Vec4} Reference to `this` for chaining.
+     */
+    selfTransformMat3: function(mat){
+      var x = this.x;
+      var y = this.y;
+      var z = this.z;
+      var d = mat.data;
+      this.x = x * d[0] + y * d[3] + z * d[6];
+      this.y = x * d[1] + y * d[4] + z * d[7];
+      this.z = x * d[2] + y * d[5] + z * d[8];
+      this.w = 1;
+      return this;
+    },
+
+    /**
+     * Transforms `this` with the given matrix. The `z` and `w` components of `this` keep untouched.
+     * @chainable
+     * @method selfTransformMat2
+     * @param {Mat3} mat
+     * @return {Vec4} Reference to `this` for chaining.
+     */
+    selfTransformMat2: function(mat){
+      var x = this.x;
+      var y = this.y;
+      var d = mat.data;
+      this.x = x * d[0] + y * d[2];
+      this.y = x * d[1] + y * d[3];
+      return this;
     }
   };
 
+
   /**
-   * Creates a new vector with all components set to the specified values.
+   * Creates a new vector. The method should be called with four or no arguments. If less than four arguments are given
+   * then some components of the resulting vector are going to be `undefined`.
    * @static
-   * @memberof Vec4
-   * @param {number} [x] The x component
-   * @param {number} [y] The y component
-   * @param {number} [z] The z component
-   * @param {number} [w] The w component
-   * @returns {Vec4} A new vector.
+   * @method create
+   * @param {Number} [x] The x component
+   * @param {Number} [y] The y component
+   * @param {Number} [z] The z component
+   * @param {Number} [w] The w component
+   * @return {Vec4} A new vector.
    */
   Vec4.create = function(x, y, z, w){
-    if (x !== undefined){
+    if (x != null){
       return new Vec4(x, y, z, w);
     }
     return new Vec4(0, 0, 0, 0);
@@ -393,8 +497,8 @@
   /**
    * Creates a new vector with all components set to 0.
    * @static
-   * @memberof Vec4
-   * @returns {Vec4} A new vector.
+   * @method zero
+   * @return {Vec4} A new vector.
    */
   Vec4.zero = function(){
     return new Vec4(0, 0, 0, 0);
@@ -403,21 +507,20 @@
   /**
    * Creates a new vector with all components set to 1.
    * @static
-   * @memberof Vec4
-   * @returns {Vec4} A new vector.
+   * @method one
+   * @return {Vec4} A new vector.
    */
   Vec4.one = function(){
     return new Vec4(1, 1, 1, 1);
   };
 
-
   /**
    * Normalizes the given vector.
    * @static
-   * @memberof Vec4
+   * @method normalize
    * @param {Vec4} vec The vector to normalize.
-   * @param {Vec4} out The vector to write to.
-   * @returns {Vec4} The given out vector.
+   * @param {Vec4} [out] The vector to write to.
+   * @return {Vec4} The given `out` parameter or a new vector.
    */
   Vec4.normalize = function(vec, out){
     var x = vec.x;
@@ -436,10 +539,10 @@
   /**
    * Inverts the given vector.
    * @static
-   * @memberof Vec4
+   * @method invert
    * @param {Vec4} vec The vector to invert.
-   * @param {Vec4} out The vector to write to.
-   * @returns {Vec4} The given out vector.
+   * @param {Vec4} [out] The vector to write to.
+   * @return {Vec4} The given `out` parameter or a new vector.
    */
   Vec4.invert = function(vec, out){
     out = out || new Vec4();
@@ -453,10 +556,10 @@
   /**
    * Negates this vector.
    * @static
-   * @memberof Vec4
+   * @method negate
    * @param {Vec4} vec The vector to negate.
-   * @param {Vec4} out The vector to write to.
-   * @returns {Vec4} The given out vector.
+   * @param {Vec4} [out] The vector to write to.
+   * @return {Vec4} The given `out` parameter or a new vector.
    */
   Vec4.negate = function(vec, out){
     out = out || new Vec4();
@@ -470,11 +573,11 @@
   /**
    * Adds two vectors.
    * @static
-   * @memberof Vec4
+   * @method add
    * @param {Vec4} vecA The first vector.
    * @param {Vec4} vecB The second vector.
    * @param {Vec4} out The vector to write to.
-   * @returns {Vec4} The given out vector.
+   * @return {Vec4} The given `out` parameter or a new vector.
    */
   Vec4.add = function(vecA, vecB, out){
     out = out || new Vec4();
@@ -488,11 +591,11 @@
   /**
    * Adds a scalar to each component of a vector.
    * @static
-   * @memberof Vec4
+   * @method addScalar
    * @param {Vec4} vec The first vector.
    * @param {Vec4} scalar The scalar to add.
-   * @param {Vec4} out The vector to write to.
-   * @returns {Vec4} The given out vector.
+   * @param {Vec4} [out] The vector to write to.
+   * @return {Vec4} The given `out` parameter or a new vector.
    */
   Vec4.addScalar = function(vec, scalar, out){
     out = out || new Vec4();
@@ -504,13 +607,13 @@
   };
 
   /**
-   * Subtracts two vectors.
+   * Subtracts the second vector from the first.
    * @static
-   * @memberof Vec4
+   * @method subtract
    * @param {Vec4} vecA The first vector.
    * @param {Vec4} vecB The second vector.
-   * @param {Vec4} out The vector to write to.
-   * @returns {Vec4} The given out vector.
+   * @param {Vec4} [out] The vector to write to.
+   * @return {Vec4} The given `out` parameter or a new vector.
    */
   Vec4.subtract = function(vecA, vecB, out){
     out = out || new Vec4();
@@ -524,11 +627,11 @@
   /**
    * Subtracts a scalar from each component of a vector.
    * @static
-   * @memberof Vec4
+   * @method subtractScalar
    * @param {Vec4} vec The first vector.
    * @param {Vec4} scalar The scalar to add.
-   * @param {Vec4} out The vector to write to.
-   * @returns {Vec4} The given out vector.
+   * @param {Vec4} [out] The vector to write to.
+   * @return {Vec4} The given `out` parameter or a new vector.
    */
   Vec4.subtractScalar = function(vec, scalar, out){
     out = out || new Vec4();
@@ -542,11 +645,11 @@
   /**
    * Multiplies two vectors.
    * @static
-   * @memberof Vec4
+   * @method multiply
    * @param {Vec4} vecA The first vector.
    * @param {Vec4} vecB The second vector.
-   * @param {Vec4} out The vector to write to.
-   * @returns {Vec4} The given out vector.
+   * @param {Vec4} [out] The vector to write to.
+   * @return {Vec4} The given `out` parameter or a new vector.
    */
   Vec4.multiply = function(vecA, vecB, out){
     out = out || new Vec4();
@@ -560,11 +663,11 @@
   /**
    * Multiplies a scalar to each component of a vector.
    * @static
-   * @memberof Vec4
+   * @method multiplyScalar
    * @param {Vec4} vec The first vector.
    * @param {Vec4} scalar The scalar to add.
-   * @param {Vec4} out The vector to write to.
-   * @returns {Vec4} The given out vector.
+   * @param {Vec4} [out] The vector to write to.
+   * @return {Vec4} The given `out` parameter or a new vector.
    */
   Vec4.multiplyScalar = function(vec, scalar, out){
     out = out || new Vec4();
@@ -576,13 +679,13 @@
   };
 
   /**
-   * Divides two vectors.
+   * Divides the components of the first vector by the components of the second vector.
    * @static
-   * @memberof Vec4
+   * @method divide
    * @param {Vec4} vecA The first vector.
    * @param {Vec4} vecB The second vector.
-   * @param {Vec4} out The vector to write to.
-   * @returns {Vec4} The given out vector.
+   * @param {Vec4} [out] The vector to write to.
+   * @return {Vec4} The given `out` parameter or a new vector.
    */
   Vec4.divide = function(vecA, vecB, out){
     out = out || new Vec4();
@@ -594,32 +697,33 @@
   };
 
   /**
-   * Divides each component of the vector by given scalar.
+   * Divides the components of the first vector by the scalar.
    * @static
-   * @memberof Vec4
+   * @method divideScalar
    * @param {Vec4} vec The first vector.
-   * @param {Vec4} scalar The scalar to add.
+   * @param {Number} scalar The scalar to use for division.
    * @param {Vec4} out The vector to write to.
-   * @returns {Vec4} The given out vector.
+   * @return {Vec4} The given `out` parameter or a new vector.
    */
   Vec4.divideScalar = function(vec, scalar, out){
+    scalar = 1.0 / scalar;
     out = out || new Vec4();
-    out.x = vec.x / scalar;
-    out.y = vec.y / scalar;
-    out.z = vec.z / scalar;
-    out.w = vec.w / scalar;
+    out.x = vec.x * scalar;
+    out.y = vec.y * scalar;
+    out.z = vec.z * scalar;
+    out.w = vec.w * scalar;
     return out;
   };
 
   /**
-   * Performs a multiplication followed by a sum operation.
+   * Multiplies two vectors and adds the third vector.
    * @static
-   * @memberof Vec4
+   * @method multiplyAdd
    * @param {Vec4} vecA The vector to multiply.
    * @param {Vec4} vecB The vector to multiply.
    * @param {Vec4} add The vector to add on top of the multiplication.
-   * @param {Vec4} out The vector to write to.
-   * @returns {Vec4} The given out vector.
+   * @param {Vec4} [out] The vector to write to.
+   * @return {Vec4} The given `out` parameter or a new vector.
    */
   Vec4.multiplyAdd = function(vecA, vecB, add, out){
     out = out || new Vec4();
@@ -631,13 +735,14 @@
   };
 
   /**
+   * Multiplies a vector with a scalar and adds another vector.
    * @static
-   * @memberof Vec4
-   * @param vecA
-   * @param mul
-   * @param add
-   * @param out
-   * @returns {Vec4}
+   * @method multiplyAdd
+   * @param {Vec4} vecA The vector to multiply.
+   * @param {Number} mul The scalar to multiply.
+   * @param {Vec4} add The vector to add on top of the multiplication.
+   * @param {Vec4} [out] The vector to write to.
+   * @return {Vec4} The given `out` parameter or a new vector.
    */
   Vec4.multiplyScalarAdd = function(vecA, mul, add, out){
     out = out || new Vec4();
@@ -649,13 +754,14 @@
   };
 
   /**
-   * Performs a component wise clamp operation on the the given vector based on the min and max vectors.
+   * Performs a component wise clamp operation on the the given vector by using the given min and max vectors.
    * @static
-   * @memberof Vec4
+   * @method clamp
    * @param {Vec4} a The vector to clamp.
    * @param {Vec4} min Vector with the minimum component values.
    * @param {Vec4} max Vector with the maximum component values.
-   * @param {Vec4} out The vector to write to.
+   * @param {Vec4} [out] The vector to write to.
+   * @return {Vec4} The given `out` parameter or a new vector.
    */
   Vec4.clamp = function(a, min, max, out){
     var x = a.x;
@@ -679,13 +785,14 @@
   };
 
   /**
-   * Performs a component wise clamp operation on the the given vector based on the min and max scalars.
+   * Performs a component wise clamp operation on the the given vector by using the given min and max scalars.
    * @static
-   * @memberof Vec4
+   * @method clampScalar
    * @param {Vec4} a The vector to clamp.
-   * @param {number} min The minimum scalar value.
-   * @param {number} max The maximum scalar value.
-   * @param {Vec4} out The vector to write to.
+   * @param {Number} min The minimum scalar value.
+   * @param {Number} max The maximum scalar value.
+   * @param {Vec4} [out] The vector to write to.
+   * @return {Vec4} The given `out` parameter or a new vector.
    */
   Vec4.clampScalar = function(a, min, max, out){
     var x = a.x;
@@ -703,10 +810,11 @@
   /**
    * Performs a component wise min operation on the the given vectors.
    * @static
-   * @memberof Vec4
+   * @method min
    * @param {Vec4} a The first vector.
    * @param {Vec4} b The second vector.
-   * @param {Vec4} out The vector to write to.
+   * @param {Vec4} [out] The vector to write to.
+   * @return {Vec4} The given `out` parameter or a new vector.
    */
   Vec4.min = function(a, b, out){
     var aX = a.x;
@@ -726,12 +834,13 @@
   };
 
   /**
-   * Performs a component wise min operation on the the given vector and scalar value.
+   * Performs a component wise min operation on the the given vector and a scalar value.
    * @static
-   * @memberof Vec4
+   * @method minScalar
    * @param {Vec4} a The vector.
-   * @param {number} scalar The scalar.
-   * @param {Vec4} out The vector to write to.
+   * @param {Number} scalar The scalar.
+   * @param {Vec4} [out] The vector to write to.
+   * @return {Vec4} The given `out` parameter or a new vector.
    */
   Vec4.minScalar = function(a, scalar, out){
     var x = a.x;
@@ -749,10 +858,11 @@
   /**
    * Performs a component wise max operation on the the given vectors.
    * @static
-   * @memberof Vec4
+   * @method max
    * @param {Vec4} a The first vector.
    * @param {Vec4} b The second vector.
-   * @param {Vec4} out The vector to write to.
+   * @param {Vec4} [out] The vector to write to.
+   * @return {Vec4} The given `out` parameter or a new vector.
    */
   Vec4.max = function(a, b, out){
     var aX = a.x;
@@ -772,12 +882,13 @@
   };
 
   /**
-   * Performs a component wise max operation on the the given vector and scalar value.
+   * Performs a component wise max operation on the the given vector and a scalar value.
    * @static
-   * @memberof Vec4
+   * @method maxScalar
    * @param {Vec4} a The vector.
-   * @param {number} scalar The scalar.
-   * @param {Vec4} out The vector to write to.
+   * @param {Number} scalar The scalar.
+   * @param {Vec4} [out] The vector to write to.
+   * @return {Vec4} The given `out` parameter or a new vector.
    */
   Vec4.maxScalar = function(a, scalar, out){
     var x = a.x;
@@ -795,11 +906,12 @@
   /**
    * Performs a component wise linear interpolation between the given two vectors.
    * @static
-   * @memberof Vec4
+   * @method lerp
    * @param {Vec4} a The first vector.
    * @param {Vec4} b The second vector.
    * @param {Number} t The interpolation value. Assumed to be in range [0:1].
-   * @param {Vec4} out The vector to write to.
+   * @param {Vec4} [out] The vector to write to.
+   * @return {Vec4} The given `out` parameter or a new vector.
    */
   Vec4.lerp = function(a, b, t, out){
     var x = a.x;
@@ -817,13 +929,14 @@
   /**
    * Performs a component wise barycentric interpolation of the given vectors.
    * @static
-   * @memberof Vec4
+   * @method barycentric
    * @param {Vec4} a The first vector.
    * @param {Vec4} b The second vector.
    * @param {Vec4} c The third vector.
    * @param {Number} t1 The first interpolation value. Assumed to be in range [0:1].
    * @param {Number} t2 The second interpolation value. Assumed to be in range [0:1].
-   * @param {Vec4} out The vector to write to.
+   * @param {Vec4} [out] The vector to write to.
+   * @return {Vec4} The given `out` parameter or a new vector.
    */
   Vec4.barycentric = function(a, b, c, t1, t2, out){
     var x = a.x;
@@ -841,11 +954,12 @@
   /**
    * Performs a component wise smooth interpolation between the given two vectors.
    * @static
-   * @memberof Vec4
+   * @method smooth
    * @param {Vec4} a The first vector.
    * @param {Vec4} b The second vector.
    * @param {Number} t The interpolation value. Assumed to be in range [0:1].
-   * @param {Vec4} out The vector to write to.
+   * @param {Vec4} [out] The vector to write to.
+   * @return {Vec4} The given `out` parameter or a new vector.
    */
   Vec4.smooth = function(a, b, t, out){
     t = ((t > 1) ? 1 : ((t < 0) ? 0 : t));
@@ -863,11 +977,11 @@
   };
 
   /**
-   * Converts the given data to a vector
+   * Tries to converts the given data to a vector
    * @static
-   * @memberof Vec4
+   * @method convert
    * @param {Vec2|Vec3|Vec4|Quat|Array|number} data
-   * @returns {Vec4}
+   * @return {Vec4}
    */
   Vec4.convert = function(data){
     if (Array.isArray(data)){
@@ -888,4 +1002,4 @@
       data.w || 0
     );
   };
-}());
+}(window));

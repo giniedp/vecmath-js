@@ -17,7 +17,6 @@
     "gulp-shell": "^0.2.10",
     "gulp-uglify": "^1.0.1",
     "gulp-util": "^3.0.1",
-    "gulp-shell": "^0.2.10",
     "jsdoc": "^3.3.0-alpha10",
     "karma": "^0.12.24",
     "karma-chrome-launcher": "^0.1.5",
@@ -26,7 +25,8 @@
     "karma-phantomjs-launcher": "^0.1.4",
     "karma-qunit": "^0.1.4",
     "qunit": "^0.7.5",
-    "qunitjs": "^1.15.0"
+    "qunitjs": "^1.15.0",
+    "yuidoc-bootstrap-theme": "^1.0.4"
   },
   "scripts": {
     "test": "./node_modules/karma/bin/karma start karma.conf.js"

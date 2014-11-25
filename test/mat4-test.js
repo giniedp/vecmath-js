@@ -79,9 +79,9 @@
       ]);
   });
 
-  test('initAll', function () {
+  test('initWith', function () {
     assertComponents(
-      this.m1.initAll(1).data,
+      this.m1.initWith(1).data,
       [
         1, 1, 1, 1,
         1, 1, 1, 1,

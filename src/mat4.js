@@ -1,4 +1,4 @@
-(function(){
+(function(window){
   'use strict';
 
   // column major matrix layout
@@ -24,44 +24,53 @@
    */
 
   var Vec3 = window.Vec3;
-  var Vec4 = window.Vec4;
+  var Float32Array = window.Float32Array;
 
   /**
-   * Creates a new Mat4 object
-   * @global
-   * @constructor Mat4
+   * Describes a 4x4 matrix.
+   * @class Mat4
+   * @constructor
+   * @main Mat4
+   * @param {Float32Array} [data] The data array that holds all matrix values.
    */
-  var Mat4 = window.Mat4 = function(data){
-    this.data = data || new window.Float32Array(16);
+  var Mat4 = function(data){
+    /** @type {Float32Array} */
+    this.data = data || new Float32Array(16);
+    /** @type {Float32Array} */
     this.right = this.data.subarray(0, 3);
+    /** @type {Float32Array} */
     this.up = this.data.subarray(4, 7);
+    /** @type {Float32Array} */
     this.backward = this.data.subarray(8, 11);
+    /** @type {Float32Array} */
     this.translation = this.data.subarray(12, 15);
   };
+
+  window.Mat4 = Mat4;
 
   Mat4.prototype = {
 
     /**
-     * Initializes the elements of this matrix. The given elements are expected in column major order.
-     * @instance
-     * @memberof Mat4
-     * @param {number} m0
-     * @param {number} m1
-     * @param {number} m2
-     * @param {number} m3
-     * @param {number} m4
-     * @param {number} m5
-     * @param {number} m6
-     * @param {number} m7
-     * @param {number} m8
-     * @param {number} m9
-     * @param {number} m10
-     * @param {number} m11
-     * @param {number} m12
-     * @param {number} m13
-     * @param {number} m14
-     * @param {number} m15
-     * @returns {Mat4} This matrix to for chaining.
+     * Initializes the matrix with the given values in given order.
+     * @method init
+     * @chainable
+     * @param {Number} m0
+     * @param {Number} m1
+     * @param {Number} m2
+     * @param {Number} m3
+     * @param {Number} m4
+     * @param {Number} m5
+     * @param {Number} m6
+     * @param {Number} m7
+     * @param {Number} m8
+     * @param {Number} m9
+     * @param {Number} m10
+     * @param {Number} m11
+     * @param {Number} m12
+     * @param {Number} m13
+     * @param {Number} m14
+     * @param {Number} m15
+     * @return {Mat4} Reference to `this` for chaining.
      */
     init: function(m0, m1, m2, m3, m4, m5, m6, m7, m8, m9, m10, m11, m12, m13, m14, m15){
       var d = this.data;
@@ -85,26 +94,26 @@
     },
 
     /**
-     * Initializes the elements of this matrix. The given elements are expected in row major order.
-     * @instance
-     * @memberof Mat4
-     * @param {number} m0
-     * @param {number} m4
-     * @param {number} m8
-     * @param {number} m12
-     * @param {number} m1
-     * @param {number} m5
-     * @param {number} m9
-     * @param {number} m13
-     * @param {number} m2
-     * @param {number} m6
-     * @param {number} m10
-     * @param {number} m14
-     * @param {number} m3
-     * @param {number} m7
-     * @param {number} m11
-     * @param {number} m15
-     * @returns {Mat4} This matrix for chaining.
+     * Initializes the matrix with the given values. The values are read in row major order.
+     * @method initRowMajor
+     * @chainable
+     * @param {Number} m0
+     * @param {Number} m4
+     * @param {Number} m8
+     * @param {Number} m12
+     * @param {Number} m1
+     * @param {Number} m5
+     * @param {Number} m9
+     * @param {Number} m13
+     * @param {Number} m2
+     * @param {Number} m6
+     * @param {Number} m10
+     * @param {Number} m14
+     * @param {Number} m3
+     * @param {Number} m7
+     * @param {Number} m11
+     * @param {Number} m15
+     * @return {Mat4} Reference to `this` for chaining.
      */
     initRowMajor: function(m0, m4, m8, m12, m1, m5, m9, m13, m2, m6, m10, m14,m3, m7, m11, m15){
       var d = this.data;
@@ -128,23 +137,23 @@
     },
 
     /**
-     * Initializes all components of this matrix to the given number.
-     * @instance
-     * @memberof Mat4
-     * @param {number} number
-     * @returns {Mat4} This matrix for chaining.
+     * Initializes all components of this matrix with the given number.
+     * @method initWith
+     * @chainable
+     * @param {Number} number The number to set all matrix components to.
+     * @return {Mat4} Reference to `this` for chaining.
      */
-    initAll: function(number){
+    initWith: function(number) {
       var d = this.data;
       d[0] = d[1] = d[2] = d[3] = d[4] = d[5] = d[6] = d[7] = d[8] = d[9] = d[10] = d[11] = d[12] = d[13] = d[14] = d[15] = number;
       return this;
     },
 
     /**
-     * Initializes the elements of this matrix to the identity.
-     * @instance
-     * @memberof Mat4
-     * @returns {Mat4} This matrix for chaining.
+     * Initializes the components of this matrix to the identity.
+     * @method initIdentity
+     * @chainable
+     * @return {Mat4} Reference to `this` for chaining.
      */
     initIdentity: function(){
       var d = this.data;
@@ -155,8 +164,10 @@
 
     /**
      * Initializes this matrix from another matrix.
+     * @method initFrom
+     * @chainable
      * @param {Mat4} other
-     * @returns {Mat4} This matrix for chaining.
+     * @return {Mat4} Reference to `this` for chaining.
      */
     initFrom: function(other){
       var a = this.data;
@@ -184,9 +195,11 @@
      * Reads a buffer starting at given offset and initializes the elements of this matrix.
      * The given buffer must have at least 16 elements starting at given offset.
      * The elements are expected to be in column major layout.
+     * @method initFromBuffer
+     * @chainable
      * @param {Array|Float32Array} buffer
-     * @param {number} [offset]
-     * @returns {Mat4} This matrix for chaining.
+     * @param {Number} [offset]
+     * @return {Mat4} Reference to `this` for chaining.
      */
     initFromBuffer: function(buffer, offset){
       offset = offset || 0;
@@ -212,10 +225,10 @@
 
     /**
      * Initializes this matrix from given quaternion.
-     * @instance
-     * @memberof Mat4
+     * @method initFromQuaternion
+     * @chainable
      * @param {Quat} q
-     * @returns {Mat4} This matrix for chaining.
+     * @return {Mat4} Reference to `this` for chaining.
      */
     initFromQuaternion: function (q) {
       var x = q.x;
@@ -241,11 +254,11 @@
 
     /**
      * Initializes this matrix to a rotation matrix defined by given axis vector and angle.
-     * @instance
-     * @memberof Mat4
+     * @method initAxisAngle
+     * @chainable
      * @param {Vec3} axis The axis vector. This is expected to be normalized.
-     * @param {number} angle The angle in radians.
-     * @returns {Mat4} This matrix for chaining.
+     * @param {Number} angle The angle in radians.
+     * @return {Mat4} Reference to `this` for chaining.
      */
     initAxisAngle: function(axis, angle){
       // create quaternion
@@ -277,12 +290,12 @@
 
     /**
      * Initializes this matrix to a rotation matrix defined by given yaw pitch and roll values.
-     * @instance
-     * @memberof Mat4
-     * @param {number} yaw Angle in radians around the Y axis
-     * @param {number} pitch Angle in radians around the X axis
-     * @param {number} roll Angle in radians around the Z axis
-     * @returns {Mat4} This matrix for chaining.
+     * @method initYawPitchRoll
+     * @chainable
+     * @param {Number} yaw Angle in radians around the Y axis
+     * @param {Number} pitch Angle in radians around the X axis
+     * @param {Number} roll Angle in radians around the Z axis
+     * @return {Mat4} Reference to `this` for chaining.
      */
     initYawPitchRoll: function (yaw, pitch, roll) {
       // create quaternion
@@ -323,10 +336,10 @@
 
     /**
      * Initializes this matrix with a rotation around the X axis.
-     * @instance
-     * @memberof Mat4
-     * @param {number} rad The angle in radians.
-     * @returns {Mat4} This matrix for chaining.
+     * @method initRotationX
+     * @chainable
+     * @param {Number} rad The angle in radians.
+     * @return {Mat4} Reference to `this` for chaining.
      */
     initRotationX: function (rad) {
       var cos = Math.cos(rad);
@@ -341,10 +354,10 @@
 
     /**
      * Initializes this matrix with a rotation around the Y axis.
-     * @instance
-     * @memberof Mat4
+     * @method initRotationY
+     * @chainable
      * @param rad The angle in radians.
-     * @returns {Mat4} This matrix for chaining.
+     * @return {Mat4} Reference to `this` for chaining.
      */
     initRotationY: function (rad) {
       var cos = Math.cos(rad);
@@ -360,10 +373,10 @@
 
     /**
      * Initializes this matrix with a rotation around the Z axis.
-     * @instance
-     * @memberof Mat4
+     * @method initRotationZ
+     * @chainable
      * @param rad The angle in radians.
-     * @returns {Mat4} This matrix for chaining.
+     * @return {Mat4} Reference to `this` for chaining.* @return {Mat4} This matrix for chaining.
      */
     initRotationZ: function (rad) {
       var cos = Math.cos(rad);
@@ -379,12 +392,12 @@
 
     /**
      * Initializes a translation matrix.
-     * @instance
-     * @memberof Mat4
-     * @param {number} x
-     * @param {number} y
-     * @param {number} z
-     * @returns {Mat4} This matrix for chaining.
+     * @method initTranslation
+     * @chainable
+     * @param {Number} x Translation along the x-axis
+     * @param {Number} y Translation along the y-axis
+     * @param {Number} z Translation along the z-axis
+     * @return {Mat4} Reference to `this` for chaining.
      */
     initTranslation: function (x, y, z) {
       return this.initRowMajor(
@@ -397,12 +410,12 @@
 
     /**
      * Initializes a scale matrix.
-     * @instance
-     * @memberof Mat4
-     * @param {number} x
-     * @param {number} y
-     * @param {number} z
-     * @returns {Mat4} This matrix for chaining.
+     * @method initScale
+     * @chainable
+     * @param {Number} x Scale along x-axis
+     * @param {Number} y Scale along y-axis
+     * @param {Number} z Scale along z-axis
+     * @return {Mat4} Reference to `this` for chaining.
      */
     initScale: function (x, y, z) {
       return this.initRowMajor(
@@ -413,15 +426,14 @@
       );
     },
 
-
-
     /**
-     * @instance
-     * @memberof Mat4
-     * @param pos
-     * @param lookAt
-     * @param up
-     * @returns {Mat4} This matrix for chaining.
+     * Initializes a rotation matrix by using a position and a lookat point.
+     * @method initLookAt
+     * @chainable
+     * @param {Vec3|Vec4} pos The position where the viewer stands
+     * @param {Vec3|Vec4} lookAt The position where the viewer is looking to
+     * @param {Vec3|Vec4} up The up vector of the viewer
+     * @return {Mat4} Reference to `this` for chaining.
      */
     initLookAt: function (pos, lookAt, up) {
       // back = position - lookAt
@@ -460,13 +472,13 @@
     },
 
     /**
-     *
-     * @instance
-     * @memberof Mat4
-     * @param position
-     * @param forward
-     * @param up
-     * @returns {Mat4} This matrix for chaining.
+     * Initializes a matrix from a position point and a forward and up vectors
+     * @method initWorld
+     * @chainable
+     * @param {Vec3|Vec4} position The translation part
+     * @param {Vec3|Vec4} forward The facing direction
+     * @param {Vec3|Vec4} up The up vector
+     * @return {Mat4} Reference to `this` for chaining.
      */
     initWorld: function (position, forward, up) {
       // backward = negate(normalize(forward))
@@ -502,15 +514,15 @@
       );
     },
 
-
     /**
-     * @instance
-     * @memberof Mat4
-     * @param fov
-     * @param aspect
-     * @param near
-     * @param far
-     * @returns {Mat4} This matrix for chaining.
+     * Initializes a perspective matrix with given field of view angle
+     * @method initPerspectiveFieldOfView
+     * @chainable
+     * @param {Number} fov The field of view angle in radians
+     * @param {Number} aspect The aspect ratio
+     * @param {Number} near The near plane distance
+     * @param {Number} far The far plane distance
+     * @return {Mat4} Reference to `this` for chaining.
      */
     initPerspectiveFieldOfView: function (fov, aspect, near, far) {
       var s = 1.0 / Math.tan(fov * 0.5);
@@ -524,13 +536,14 @@
     },
 
     /**
-     * @instance
-     * @memberof Mat4
-     * @param width
-     * @param height
-     * @param near
-     * @param far
-     * @returns {Mat4} This matrix for chaining.
+     * Initializes a perspective matrix
+     * @method initPerspective
+     * @chainable
+     * @param {Number} width
+     * @param {Number} height
+     * @param {Number} near The near plane distance
+     * @param {Number} far The far plane distance
+     * @return {Mat4} Reference to `this` for chaining.
      */
     initPerspective: function(width, height, near, far){
       return this.initRowMajor(
@@ -542,15 +555,16 @@
     },
 
     /**
-     * @instance
-     * @memberof Mat4
-     * @param left
-     * @param right
-     * @param bottom
-     * @param top
-     * @param near
-     * @param far
-     * @returns {Mat4} This matrix for chaining.
+     * Initializes a perspective matrix
+     * @method initPerspectiveOffCenter
+     * @chainable
+     * @param {Number} left
+     * @param {Number} right
+     * @param {Number} bottom
+     * @param {Number} top
+     * @param {Number} near The near plane distance
+     * @param {Number} far The far plane distance
+     * @return {Mat4} Reference to `this` for chaining.
      */
     initPerspectiveOffCenter: function(left, right, bottom, top, near, far){
       return this.initRowMajor(
@@ -562,13 +576,14 @@
     },
 
     /**
-     * @instance
-     * @memberof Mat4
+     * Initializes an orthographic matrix
+     * @method initOrthographic
+     * @chainable
      * @param width
      * @param height
-     * @param near
-     * @param far
-     * @returns {Mat4} This matrix for chaining.
+     * @param {Number} near The near plane distance
+     * @param {Number} far The far plane distance
+     * @return {Mat4} Reference to `this` for chaining.
      */
     initOrthographic: function(width, height, near, far){
       return this.initRowMajor(
@@ -580,16 +595,16 @@
     },
 
     /**
-     *
-     * @instance
-     * @memberof Mat4
+     * Initializes an orthographic matrix
+     * @method initOrthographicOffCenter
+     * @chainable
      * @param left
      * @param right
      * @param bottom
      * @param top
-     * @param near
-     * @param far
-     * @returns {Mat4} This matrix for chaining.
+     * @param {Number} near The near plane distance
+     * @param {Number} far The far plane distance
+     * @return {Mat4} Reference to `this` for chaining.
      */
     initOrthographicOffCenter: function(left, right, bottom, top, near, far){
       return this.initRowMajor(
@@ -602,9 +617,9 @@
 
 
     /**
-     * @instance
-     * @memberof Mat4
-     * @returns {Mat4} The clone matrix.
+     * Creates a copy of this matrix
+     * @method clone
+     * @return {Mat4} The cloned matrix.
      */
     clone: function(){
       var d = this.data;
@@ -612,14 +627,16 @@
     },
 
     /**
-     * @instance
-     * @memberof Mat4
-     * @param buffer
-     * @param [offset]
+     * Copies the components successively into the given array.
+     * @chainable
+     * @method copy
+     * @param {Array|Float32Array} buffer The array to copy into
+     * @param {Number} [offset=0] Zero based index where to start writing in the array
+     * @return {Array|Float32Array}
      */
-    copy: function(buffer, offset){
+    copyTo: function(buffer, offset){
       offset = offset || 0;
-      var i, d = this.data;
+      var d = this.data;
       buffer[offset] = d[0];
       buffer[offset +  1] = d[ 1];
       buffer[offset +  2] = d[ 2];
@@ -636,13 +653,25 @@
       buffer[offset + 13] = d[13];
       buffer[offset + 14] = d[14];
       buffer[offset + 15] = d[15];
+      return buffer;
     },
 
     /**
-     * @instance
-     * @memberof Mat4
-     * @param other
-     * @returns {boolean}
+     * Returns an array filled with the values of the components of this vector
+     * @method dump
+     * @return {Array}
+     */
+    dump: function(){
+      var result = [];
+      this.copyTo(result);
+      return result;
+    },
+
+    /**
+     * Checks for component wise equality with given matrix
+     * @method equals
+     * @param {Mat4} other The vector to compare with
+     * @return {Boolean} true if components are equal, false otherwise
      */
     equals: function(other){
       var a = this.data;
@@ -666,9 +695,8 @@
     },
 
     /**
-     * @instance
-     * @memberof Mat4
-     * @returns {Vec3}
+     * @method getForward
+     * @return {Vec3}
      */
     getForward: function(out){
       return (out || new Vec3()).init(
@@ -679,9 +707,8 @@
     },
 
     /**
-     * @instance
-     * @memberof Mat4
-     * @returns {Vec3}
+     * @method getBackward
+     * @return {Vec3}
      */
     getBackward: function(out){
       return (out || new Vec3()).init(
@@ -692,9 +719,8 @@
     },
 
     /**
-     * @instance
-     * @memberof Mat4
-     * @returns {Vec3}
+     * @method getRight
+     * @return {Vec3}
      */
     getRight: function(out){
       return (out || new Vec3()).init(
@@ -705,9 +731,8 @@
     },
 
     /**
-     * @instance
-     * @memberof Mat4
-     * @returns {Vec3}
+     * @method getLeft
+     * @return {Vec3}
      */
     getLeft: function(out){
       return (out || new Vec3()).init(
@@ -718,9 +743,8 @@
     },
 
     /**
-     * @instance
-     * @memberof Mat4
-     * @returns {Vec3}
+     * @method getUp
+     * @return {Vec3}
      */
     getUp: function(out){
       return (out || new Vec3()).init(
@@ -730,9 +754,8 @@
     },
 
     /**
-     * @instance
-     * @memberof Mat4
-     * @returns {Vec3}
+     * @method getDown
+     * @return {Vec3}
      */
     getDown: function(out){
       return (out || new Vec3()).init(
@@ -743,9 +766,8 @@
     },
 
     /**
-     * @instance
-     * @memberof Mat4
-     * @returns {Vec3}
+     * @method getTranslation
+     * @return {Vec3}
      */
     getTranslation: function(out){
       return (out || new Vec3()).init(
@@ -756,9 +778,8 @@
     },
 
     /**
-     * @instance
-     * @memberof Mat4
-     * @returns {Vec3}
+     * @method getScale
+     * @return {Vec3}
      */
     getScale: function(out){
       return (out || new Vec3()).init(
@@ -825,10 +846,10 @@
     },
 
     /**
-     * @instance
-     * @memberof Mat4
+     * @method setForward
+     * @chainable
      * @param vec
-     * @returns {Mat4}
+     * @return {Mat4}
      */
     setForward: function(vec){
       this.backward[0] = -vec.x;
@@ -838,10 +859,10 @@
     },
 
     /**
-     * @instance
-     * @memberof Mat4
+     * @method setBackward
+     * @chainable
      * @param vec
-     * @returns {Mat4}
+     * @return {Mat4}
      */
     setBackward: function(vec){
       this.backward[0] = vec.x;
@@ -851,10 +872,10 @@
     },
 
     /**
-     * @instance
-     * @memberof Mat4
+     * @method setRight
+     * @chainable
      * @param vec
-     * @returns {Mat4}
+     * @return {Mat4}
      */
     setRight: function(vec){
       this.right[0] = vec.x;
@@ -864,10 +885,10 @@
     },
 
     /**
-     * @instance
-     * @memberof Mat4
+     * @method setLeft
+     * @chainable
      * @param vec
-     * @returns {Mat4}
+     * @return {Mat4}
      */
     setLeft: function(vec){
       this.right[0] = -vec.x;
@@ -877,10 +898,10 @@
     },
 
     /**
-     * @instance
-     * @memberof Mat4
+     * @method setUp
+     * @chainable
      * @param vec
-     * @returns {Mat4}
+     * @return {Mat4}
      */
     setUp: function(vec){
       this.up[0] = vec.x;
@@ -890,10 +911,10 @@
     },
 
     /**
-     * @instance
-     * @memberof Mat4
+     * @method setDown
+     * @chainable
      * @param vec
-     * @returns {Mat4}
+     * @return {Mat4}
      */
     setDown: function(vec){
       this.up[0] = -vec.x;
@@ -903,10 +924,10 @@
     },
 
     /**
-     * @instance
-     * @memberof Mat4
+     * @method setTranslation
+     * @chainable
      * @param vec
-     * @returns {Mat4}
+     * @return {Mat4}
      */
     setTranslation: function(vec){
       this.translation[0] = vec.x;
@@ -916,10 +937,10 @@
     },
 
     /**
-     * @instance
-     * @memberof Mat4
+     * @method setScale
+     * @chainable
      * @param vec
-     * @returns {Mat4}
+     * @return {Mat4}
      */
     setScale: function(vec){
       this.data[0] = vec.x;
@@ -929,9 +950,8 @@
     },
 
     /**
-     * @instance
-     * @memberof Mat4
-     * @returns {number}
+     * @method determinant
+     * @return {Number}
      */
     determinant: function(){
       var a = this.data;
@@ -974,9 +994,9 @@
     },
 
     /**
-     * @instance
-     * @memberof Mat4
-     * @returns {Mat4}
+     * @method selfTranspose
+     * @chainable
+     * @return {Mat4}
      */
     selfTranspose: function () {
       var d = this.data;
@@ -1007,9 +1027,9 @@
     },
 
     /**
-     * @instance
-     * @memberof Mat4
-     * @returns {Mat4}
+     * @method selfInvert
+     * @chainable
+     * @return {Mat4}
      */
     selfInvert: function(){
       var a = this.data;
@@ -1085,9 +1105,9 @@
     },
 
     /**
-     * @instance
-     * @memberof Mat4
-     * @returns {Mat4}
+     * @method selfNegate
+     * @chainable
+     * @return {Mat4}
      */
     selfNegate: function(){
       var d = this.data;
@@ -1111,10 +1131,10 @@
     },
 
     /**
-     * @instance
-     * @memberof Mat4
+     * @method selfAdd
+     * @chainable
      * @param {Mat4} other
-     * @returns {Mat4}
+     * @return {Mat4}
      */
     selfAdd: function(other){
       var a = this.data;
@@ -1140,10 +1160,10 @@
 
 
     /**
-     * @instance
-     * @memberof Mat4
-     * @param {number} scalar
-     * @returns {Mat4}
+     * @method selfAddScalar
+     * @chainable
+     * @param {Number} scalar
+     * @return {Mat4}
      */
     selfAddScalar: function(scalar){
       var a = this.data;
@@ -1167,10 +1187,10 @@
     },
 
     /**
-     * @instance
-     * @memberof Mat4
+     * @method selfSubtract
+     * @chainable
      * @param {Mat4} other
-     * @returns {Mat4}
+     * @return {Mat4}
      */
     selfSubtract: function(other){
       var a = this.data;
@@ -1197,10 +1217,10 @@
 
 
     /**
-     * @instance
-     * @memberof Mat4
-     * @param {number} scalar
-     * @returns {Mat4}
+     * @method selfSubtractScalar
+     * @chainable
+     * @param {Number} scalar
+     * @return {Mat4}
      */
     selfSubtractScalar: function(scalar){
       var a = this.data;
@@ -1225,10 +1245,10 @@
 
 
     /**
-     * @instance
-     * @memberof Mat4
+     * @method selfMultiply
+     * @chainable
      * @param {Mat4} other
-     * @returns {Mat4}
+     * @return {Mat4}
      */
     selfMultiply: function(other){
       var a = other.data;
@@ -1290,10 +1310,10 @@
 
 
     /**
-     * @instance
-     * @memberof Mat4
+     * @method selfConcat
+     * @chainable
      * @param {Mat4} other
-     * @returns {Mat4}
+     * @return {Mat4}
      */
     selfConcat: function(other){
       var a = this.data;
@@ -1355,10 +1375,10 @@
 
 
     /**
-     * @instance
-     * @memberof Mat4
-     * @param {number} scalar
-     * @returns {Mat4}
+     * @method selfMultiplyScalar
+     * @chainable
+     * @param {Number} scalar
+     * @return {Mat4}
      */
     selfMultiplyScalar: function(scalar){
       var a = this.data;
@@ -1383,10 +1403,10 @@
 
 
     /**
-     * @instance
-     * @memberof Mat4
+     * @method selfDivide
+     * @chainable
      * @param {Mat4} other
-     * @returns {Mat4}
+     * @return {Mat4}
      */
     selfDivide: function(other){
       var a = this.data;
@@ -1411,10 +1431,10 @@
     },
 
     /**
-     * @instance
-     * @memberof Mat4
-     * @param {number} scalar
-     * @returns {Mat4}
+     * @method selfDivideScalar
+     * @chainable
+     * @param {Number} scalar
+     * @return {Mat4}
      */
     selfDivideScalar: function(scalar){
       scalar = 1.0 / scalar;
@@ -1440,52 +1460,53 @@
 
     /**
      * Transform the given vector with this matrix.
-     * @instance
-     * @memberof Mat4
+     * @method transform
      * @param {Vec2|Vec3|Vec4} vec
-     * @returns {Vec4}
+     * @return {Vec2|Vec3|Vec4} the given vector
      */
     transform: function(vec){
       var x = vec.x || 0;
       var y = vec.y || 0;
       var z = vec.z || 0;
-      var w = vec.w !== undefined ? vec.w : 1;
+      var w = vec.w != null ? vec.w : 1;
       var d = this.data;
-      return vec.init(
-        x * d[0] + y * d[4] + z * d[8]  + w * d[12],
-        x * d[1] + y * d[5] + z * d[9]  + w * d[13],
-        x * d[2] + y * d[6] + z * d[10] + w * d[14],
-        x * d[3] + y * d[7] + z * d[11] + w * d[15]
-      );
+      vec.x = x * d[0] + y * d[4] + z * d[8]  + w * d[12];
+      vec.y = x * d[1] + y * d[5] + z * d[9]  + w * d[13];
+      if (vec.z != null){
+        vec.z = x * d[2] + y * d[6] + z * d[10] + w * d[14];
+        if (vec.w != null) {
+          vec.w = x * d[3] + y * d[7] + z * d[11] + w * d[15];
+        }
+      }
+      return vec;
     },
 
 
     /**
      * Rotates and scales the given vector with this matrix.
-     * @instance
-     * @memberof Mat4
+     * @method transformNormal
      * @param {Vec2|Vec3|Vec4} vec
-     * @returns {Vec3}
+     * @return {Vec2|Vec3|Vec4} the given vector
      */
     transformNormal: function(vec){
       var x = vec.x || 0;
       var y = vec.y || 0;
       var z = vec.z || 0;
       var d = this.data;
-      return vec.init(
-        x * d[0] + y * d[4] + z * d[8],
-        x * d[1] + y * d[5] + z * d[9],
-        x * d[2] + y * d[6] + z * d[10]
-      );
+      vec.x = x * d[0] + y * d[4] + z * d[8];
+      vec.y = x * d[1] + y * d[5] + z * d[9];
+      if (vec.z != null) {
+        vec.z = x * d[2] + y * d[6] + z * d[10];
+      }
+      return vec;
     },
 
     /**
-     * @instance
-     * @memberof Mat4
+     * @method transformV2Buffer
      * @param {Array|Float32Array} buffer
-     * @param {number} [offset]
-     * @param {number} [stride]
-     * @param {number} [count]
+     * @param {Number} [offset]
+     * @param {Number} [stride]
+     * @param {Number} [count]
      */
     transformV2Buffer: function(buffer, offset, stride, count){
       var x, y, d = this.data;
@@ -1503,12 +1524,11 @@
     },
 
     /**
-     * @instance
-     * @memberof Mat4
+     * @method transformV3Buffer
      * @param {Array|Float32Array} buffer
-     * @param {number} [offset]
-     * @param {number} [stride]
-     * @param {number} [count]
+     * @param {Number} [offset]
+     * @param {Number} [stride]
+     * @param {Number} [count]
      */
     transformV3Buffer: function(buffer, offset, stride, count){
       var x, y, z, d = this.data;
@@ -1528,12 +1548,11 @@
     },
 
     /**
-     * @instance
-     * @memberof Mat4
+     * @method transformV4Buffer
      * @param {Array|Float32Array} buffer
-     * @param {number} [offset]
-     * @param {number} [stride]
-     * @param {number} [count]
+     * @param {Number} [offset]
+     * @param {Number} [stride]
+     * @param {Number} [count]
      */
     transformV4Buffer: function(buffer, offset, stride, count){
       var x, y, z, w, d = this.data;
@@ -1555,12 +1574,11 @@
     },
 
     /**
-     * @instance
-     * @memberof Mat4
+     * @method transformNormalBuffer
      * @param {Array|Float32Array} buffer
-     * @param {number} [offset]
-     * @param {number} [stride]
-     * @param {number} [count]
+     * @param {Number} [offset]
+     * @param {Number} [stride]
+     * @param {Number} [count]
      */
     transformNormalBuffer: function(buffer, offset, stride, count){
       var x, y, z, d = this.data;
@@ -1582,10 +1600,10 @@
 
   /**
    * @static
-   * @memberof Mat4
+   * @method transpose
    * @param {Mat4} mat
    * @param {Mat4} out
-   * @returns {Mat4}
+   * @return {Mat4}
    */
   Mat4.transpose = function (mat, out) {
     var d = mat.data;
@@ -1597,13 +1615,12 @@
     );
   };
 
-
   /**
    * @static
-   * @memberof Mat4
+   * @method invert
    * @param {Mat4} mat
    * @param {Mat4} out
-   * @returns {Mat4}
+   * @return {Mat4}
    */
   Mat4.invert = function (mat, out) {
     out = out || new Mat4();
@@ -1683,10 +1700,10 @@
 
   /**
    * @static
-   * @memberof Mat4
+   * @method negate
    * @param {Mat4} mat
    * @param {Mat4} out
-   * @returns {Mat4}
+   * @return {Mat4}
    */
   Mat4.negate = function(mat, out){
     out = out || new Mat4();
@@ -1714,11 +1731,11 @@
 
   /**
    * @static
-   * @memberof Mat4
+   * @method add
    * @param {Mat4} matA
    * @param {Mat4} matB
    * @param {Mat4} out
-   * @returns {Mat4}
+   * @return {Mat4}
    */
   Mat4.add = function(matA, matB, out){
     out = out || new Mat4();
@@ -1747,11 +1764,11 @@
 
   /**
    * @static
-   * @memberof Mat4
+   * @method addScalar
    * @param {Mat4} mat
-   * @param {number} scalar
+   * @param {Number} scalar
    * @param {Mat4} out
-   * @returns {Mat4}
+   * @return {Mat4}
    */
   Mat4.addScalar = function(mat, scalar, out){
     out = out || new Mat4();
@@ -1779,11 +1796,11 @@
 
   /**
    * @static
-   * @memberof Mat4
+   * @method subtract
    * @param {Mat4} matA
    * @param {Mat4} matB
    * @param {Mat4} out
-   * @returns {Mat4}
+   * @return {Mat4}
    */
   Mat4.subtract = function(matA, matB, out){
     out = out || new Mat4();
@@ -1812,11 +1829,11 @@
 
   /**
    * @static
-   * @memberof Mat4
+   * @method subtractScalar
    * @param {Mat4} mat
-   * @param {number} scalar
+   * @param {Number} scalar
    * @param {Mat4} out
-   * @returns {Mat4}
+   * @return {Mat4}
    */
   Mat4.subtractScalar = function(mat, scalar, out){
     out = out || new Mat4();
@@ -1844,11 +1861,11 @@
 
   /**
    * @static
-   * @memberof Mat4
+   * @method multiply
    * @param {Mat4} matA
    * @param {Mat4} matB
    * @param {Mat4} out
-   * @returns {Mat4}
+   * @return {Mat4}
    */
   Mat4.multiply = function(matA, matB, out){
     out = out || new Mat4();
@@ -1913,11 +1930,11 @@
   /**
    *
    * @static
-   * @memberof Mat4
+   * @method concat
    * @param {Mat4} matA
    * @param {Mat4} matB
    * @param {Mat4} out
-   * @returns {Mat4}
+   * @return {Mat4}
    */
   Mat4.concat = function(matA, matB, out){
     out = out || new Mat4();
@@ -1978,14 +1995,39 @@
     return this;
   };
 
+  /**
+   * @static
+   * @method concatChain
+   * @return {Mat4}
+   */
+  Mat4.concatChain = function(){
+    var i, result = arguments[0].clone();
+    for (i = 1; i < arguments.length; i += 1){
+      Mat4.concat(arguments[i], result, result);
+    }
+    return result;
+  };
 
   /**
    * @static
-   * @memberof Mat4
+   * @method multiplyChain
+   * @return {Mat4}
+   */
+  Mat4.multiplyChain = function(){
+    var i, result = arguments[0].clone();
+    for (i = 1; i < arguments.length; i += 1){
+      Mat4.multiply(arguments[i], result, result);
+    }
+    return result;
+  };
+
+  /**
+   * @static
+   * @method multiplyScalar
    * @param {Mat4} matA
-   * @param {number} scalar
+   * @param {Number} scalar
    * @param {Mat4} out
-   * @returns {Mat4}
+   * @return {Mat4}
    */
   Mat4.multiplyScalar = function(matA, scalar, out){
     out = out || new Mat4();
@@ -2013,11 +2055,11 @@
 
   /**
    * @static
-   * @memberof Mat4
+   * @method divide
    * @param {Mat4} matA
    * @param {Mat4} matB
    * @param {Mat4} out
-   * @returns {Mat4}
+   * @return {Mat4}
    */
   Mat4.divide = function(matA, matB, out){
     out = out || new Mat4();
@@ -2045,11 +2087,11 @@
 
   /**
    * @static
-   * @memberof Mat4
+   * @method divideScalar
    * @param {Mat4} matA
-   * @param {number} scalar
+   * @param {Number} scalar
    * @param {Mat4} out
-   * @returns {Mat4}
+   * @return {Mat4}
    */
   Mat4.divideScalar = function(matA, scalar, out){
     out = out || new Mat4();
@@ -2077,12 +2119,12 @@
 
   /**
    * @static
-   * @memberof Mat4
+   * @method lerp
    * @param {Mat4} matA
    * @param {Mat4} matB
-   * @param {number} t
+   * @param {Number} t
    * @param {Mat4} out
-   * @returns {Mat4}
+   * @return {Mat4}
    */
   Mat4.lerp = function (matA, matB, t, out) {
     out = out || new Mat4();
@@ -2111,8 +2153,8 @@
   /**
    *
    * @static
-   * @memberof Mat4
-   * @returns {Mat4}
+   * @method zero
+   * @return {Mat4}
    */
   Mat4.zero = function(){
     return new Mat4();
@@ -2120,8 +2162,8 @@
 
   /**
    * @static
-   * @memberof Mat4
-   * @returns {Mat4}
+   * @method identity
+   * @return {Mat4}
    */
   Mat4.identity = function(){
     var out = new Mat4();
@@ -2133,7 +2175,7 @@
   /**
    *
    * @static
-   * @memberof Mat4
+   * @method create
    * @param [m0]
    * @param [m1]
    * @param [m2]
@@ -2150,7 +2192,7 @@
    * @param [m13]
    * @param [m14]
    * @param [m15]
-   * @returns {Mat4}
+   * @return {Mat4}
    */
   Mat4.create = function(m0, m1, m2, m3, m4, m5, m6, m7, m8, m9, m10, m11, m12, m13, m14, m15){
     var out = new Mat4();
@@ -2179,7 +2221,7 @@
   /**
    *
    * @static
-   * @memberof Mat4
+   * @method createRowMajor
    * @param m0
    * @param m4
    * @param m8
@@ -2196,7 +2238,7 @@
    * @param m7
    * @param m11
    * @param m15
-   * @returns {Mat4}
+   * @return {Mat4}
    */
   Mat4.createRowMajor = function(m0, m4, m8, m12, m1, m5, m9, m13, m2, m6, m10, m14,m3, m7, m11, m15){
     var out = new Mat4();
@@ -2224,7 +2266,7 @@
     return new Mat4().initScale(x, y, z);
   };
 
-  Mat4.createTranlsation = function(x, y, z){
+  Mat4.createTranslation = function(x, y, z){
     return new Mat4().initTranslation(x, y, z);
   };
 
@@ -2256,6 +2298,26 @@
     return new Mat4().initOrthographicOffCenter(left, right, bottom, top, near, far);
   };
 
+  Mat4.createRotationX = function(rad){
+    return new Mat4().initRotationX(rad);
+  };
+
+  Mat4.createRotationY = function(rad){
+    return new Mat4().initRotationY(rad);
+  };
+
+  Mat4.createRotationZ = function(rad){
+    return new Mat4().initRotationZ(rad);
+  };
+
+  Mat4.createAxisAngle = function(axis, angle){
+    return new Mat4().initAxisAngle(axis, angle);
+  };
+
+  Mat4.createYawPitchRoll = function(yaw, pitch, roll){
+    return new Mat4().initYawPitchRoll(yaw, pitch, roll);
+  };
+
   Mat4.prettyString = function(mat){
     var m = mat.data;
     return [
@@ -2265,4 +2327,4 @@
       [m[3].toFixed(3), m[7].toFixed(3), m[11].toFixed(3), m[15].toFixed(3)].join(', ')
     ].join('\n');
   };
-}());
+}(window));
