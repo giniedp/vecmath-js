@@ -1,3 +1,6 @@
+/**
+ * Some content here
+ */
 (function(window){
   'use strict';
 
@@ -34,15 +37,30 @@
    * @param {Float32Array} [data] The data array that holds all matrix values.
    */
   var Mat4 = function(data){
-    /** @type {Float32Array} */
+    /**
+     * @attribute data
+     * @type {Float32Array}
+     */
     this.data = data || new Float32Array(16);
-    /** @type {Float32Array} */
+    /**
+     * @attribute right
+     * @type {Float32Array}
+     */
     this.right = this.data.subarray(0, 3);
-    /** @type {Float32Array} */
+    /**
+     * @attribute up
+     * @type {Float32Array}
+     */
     this.up = this.data.subarray(4, 7);
-    /** @type {Float32Array} */
+    /**
+     * @attribute backward
+     * @type {Float32Array}
+     */
     this.backward = this.data.subarray(8, 11);
-    /** @type {Float32Array} */
+    /**
+     * @attribute translation
+     * @type {Float32Array}
+     */
     this.translation = this.data.subarray(12, 15);
   };
 
@@ -227,7 +245,7 @@
      * Initializes this matrix from given quaternion.
      * @method initFromQuaternion
      * @chainable
-     * @param {Quat} q
+     * @param {Quat} q The quaternion
      * @return {Mat4} Reference to `this` for chaining.
      */
     initFromQuaternion: function (q) {
@@ -376,7 +394,7 @@
      * @method initRotationZ
      * @chainable
      * @param rad The angle in radians.
-     * @return {Mat4} Reference to `this` for chaining.* @return {Mat4} This matrix for chaining.
+     * @return {Mat4} Reference to `this` for chaining.
      */
     initRotationZ: function (rad) {
       var cos = Math.cos(rad);
@@ -670,7 +688,7 @@
     /**
      * Checks for component wise equality with given matrix
      * @method equals
-     * @param {Mat4} other The vector to compare with
+     * @param {Mat4} other The matrix to compare with
      * @return {Boolean} true if components are equal, false otherwise
      */
     equals: function(other){
@@ -695,8 +713,10 @@
     },
 
     /**
+     * Gets the forward vector
      * @method getForward
-     * @return {Vec3}
+     * @param {Vec3|Vec4} [out] The vector to write to
+     * @return {Vec3|Vec4} the given `out` parameter or a new vector
      */
     getForward: function(out){
       return (out || new Vec3()).init(
@@ -707,8 +727,10 @@
     },
 
     /**
+     * Gets the backward vector
      * @method getBackward
-     * @return {Vec3}
+     * @param {Vec3|Vec4} [out] The vector to write to
+     * @return {Vec3|Vec4} the given `out` parameter or a new vector
      */
     getBackward: function(out){
       return (out || new Vec3()).init(
@@ -719,8 +741,10 @@
     },
 
     /**
+     * Gets the right vector
      * @method getRight
-     * @return {Vec3}
+     * @param {Vec3|Vec4} [out] The vector to write to
+     * @return {Vec3|Vec4} the given `out` parameter or a new vector
      */
     getRight: function(out){
       return (out || new Vec3()).init(
@@ -731,8 +755,10 @@
     },
 
     /**
+     * Gets the left vector
      * @method getLeft
-     * @return {Vec3}
+     * @param {Vec3|Vec4} [out] The vector to write to
+     * @return {Vec3|Vec4} the given `out` parameter or a new vector
      */
     getLeft: function(out){
       return (out || new Vec3()).init(
@@ -743,8 +769,10 @@
     },
 
     /**
+     * Gets the up vector
      * @method getUp
-     * @return {Vec3}
+     * @param {Vec3|Vec4} [out] The vector to write to
+     * @return {Vec3|Vec4} the given `out` parameter or a new vector
      */
     getUp: function(out){
       return (out || new Vec3()).init(
@@ -754,8 +782,10 @@
     },
 
     /**
+     * Gets the down vector
      * @method getDown
-     * @return {Vec3}
+     * @param {Vec3|Vec4} [out] The vector to write to
+     * @return {Vec3|Vec4} the given `out` parameter or a new vector
      */
     getDown: function(out){
       return (out || new Vec3()).init(
@@ -766,8 +796,10 @@
     },
 
     /**
+     * Gets the translation part as vector
      * @method getTranslation
-     * @return {Vec3}
+     * @param {Vec3|Vec4} [out] The vector to write to
+     * @return {Vec3|Vec4} the given `out` parameter or a new vector
      */
     getTranslation: function(out){
       return (out || new Vec3()).init(
@@ -778,8 +810,10 @@
     },
 
     /**
+     * Gets the scale part as vector
      * @method getScale
-     * @return {Vec3}
+     * @param {Vec3|Vec4} [out] The vector to write to
+     * @return {Vec3|Vec4} the given `out` parameter or a new vector
      */
     getScale: function(out){
       return (out || new Vec3()).init(
@@ -789,6 +823,12 @@
       );
     },
 
+    /**
+     * Writes the values of the forward vector into an array
+     * @method copyForward
+     * @param {Array|Float32Array} buffer The array to write to
+     * @return {Array|Float32Array} the given `buffer` parameter
+     */
     copyForward: function(buffer){
       buffer[0] = -this.backward[0];
       buffer[1] = -this.backward[1];
@@ -796,6 +836,12 @@
       return buffer;
     },
 
+    /**
+     * Writes the values of the backward vector into an array
+     * @method copyBackward
+     * @param {Array|Float32Array} buffer The array to write to
+     * @return {Array|Float32Array} the given `buffer` parameter
+     */
     copyBackward: function(buffer){
       buffer[0] = this.backward[0];
       buffer[1] = this.backward[1];
@@ -803,6 +849,12 @@
       return buffer;
     },
 
+    /**
+     * Writes the values of the right vector into an array
+     * @method copyRight
+     * @param {Array|Float32Array} buffer The array to write to
+     * @return {Array|Float32Array} the given `buffer` parameter
+     */
     copyRight: function(buffer){
       buffer[0] = this.right[0];
       buffer[1] = this.right[1];
@@ -810,6 +862,12 @@
       return buffer;
     },
 
+    /**
+     * Writes the values of the left vector into an array
+     * @method copyLeft
+     * @param {Array|Float32Array} buffer The array to write to
+     * @return {Array|Float32Array} the given `buffer` parameter
+     */
     copyLeft: function(buffer){
       buffer[0] = -this.right[0];
       buffer[1] = -this.right[1];
@@ -817,6 +875,12 @@
       return buffer;
     },
 
+    /**
+     * Writes the values of the up vector into an array
+     * @method copyUp
+     * @param {Array|Float32Array} buffer The array to write to
+     * @return {Array|Float32Array} the given `buffer` parameter
+     */
     copyUp: function(buffer){
       buffer[0] = this.up[0];
       buffer[1] = this.up[1];
@@ -824,6 +888,12 @@
       return buffer;
     },
 
+    /**
+     * Writes the values of the down vector into an array
+     * @method copyDown
+     * @param {Array|Float32Array} buffer The array to write to
+     * @return {Array|Float32Array} the given `buffer` parameter
+     */
     copyDown: function(buffer){
       buffer[0] = -this.up[0];
       buffer[1] = -this.up[1];
@@ -831,6 +901,12 @@
       return buffer;
     },
 
+    /**
+     * Writes the values of the translation part into an array
+     * @method copyTranslation
+     * @param {Array|Float32Array} buffer The array to write to
+     * @return {Array|Float32Array} the given `buffer` parameter
+     */
     copyTranslation: function(buffer){
       buffer[0] = this.translation[0];
       buffer[1] = this.translation[1];
@@ -838,6 +914,12 @@
       return buffer;
     },
 
+    /**
+     * Writes the values of the scale vector into an array
+     * @method copyScale
+     * @param {Array|Float32Array} buffer The array to write to
+     * @return {Array|Float32Array} the given `buffer` parameter
+     */
     copyScale: function(buffer){
       buffer[0] = this.data[0];
       buffer[1] = this.data[5];
@@ -846,10 +928,11 @@
     },
 
     /**
+     * Sets the forward vector
      * @method setForward
      * @chainable
-     * @param vec
-     * @return {Mat4}
+     * @param {Vec3|Vec4} vec The vector to take values from
+     * @return {Mat4} Reference to `this` for chaining.
      */
     setForward: function(vec){
       this.backward[0] = -vec.x;
@@ -859,10 +942,11 @@
     },
 
     /**
+     * Sets the backward vector
      * @method setBackward
      * @chainable
-     * @param vec
-     * @return {Mat4}
+     * @param {Vec3|Vec4} vec The vector to take values from
+     * @return {Mat4} Reference to `this` for chaining.
      */
     setBackward: function(vec){
       this.backward[0] = vec.x;
@@ -872,10 +956,11 @@
     },
 
     /**
+     * Sets the right vector
      * @method setRight
      * @chainable
-     * @param vec
-     * @return {Mat4}
+     * @param {Vec3|Vec4} vec The vector to take values from
+     * @return {Mat4} Reference to `this` for chaining.
      */
     setRight: function(vec){
       this.right[0] = vec.x;
@@ -885,10 +970,11 @@
     },
 
     /**
+     * Sets the left vector
      * @method setLeft
      * @chainable
-     * @param vec
-     * @return {Mat4}
+     * @param {Vec3|Vec4} vec The vector to take values from
+     * @return {Mat4} Reference to `this` for chaining.
      */
     setLeft: function(vec){
       this.right[0] = -vec.x;
@@ -898,10 +984,11 @@
     },
 
     /**
+     * Sets the up vector
      * @method setUp
      * @chainable
-     * @param vec
-     * @return {Mat4}
+     * @param {Vec3|Vec4} vec The vector to take values from
+     * @return {Mat4} Reference to `this` for chaining.
      */
     setUp: function(vec){
       this.up[0] = vec.x;
@@ -911,10 +998,11 @@
     },
 
     /**
+     * Sets the down vector
      * @method setDown
      * @chainable
-     * @param vec
-     * @return {Mat4}
+     * @param {Vec3|Vec4} vec The vector to take values from
+     * @return {Mat4} Reference to `this` for chaining.
      */
     setDown: function(vec){
       this.up[0] = -vec.x;
@@ -924,10 +1012,11 @@
     },
 
     /**
+     * Sets the translation part
      * @method setTranslation
      * @chainable
-     * @param vec
-     * @return {Mat4}
+     * @param {Vec3|Vec4} vec The vector to take values from
+     * @return {Mat4} Reference to `this` for chaining.
      */
     setTranslation: function(vec){
       this.translation[0] = vec.x;
@@ -937,10 +1026,11 @@
     },
 
     /**
+     * Sets the scale part
      * @method setScale
      * @chainable
-     * @param vec
-     * @return {Mat4}
+     * @param {Vec3|Vec4} vec The vector to take values from
+     * @return {Mat4} Reference to `this` for chaining.
      */
     setScale: function(vec){
       this.data[0] = vec.x;
@@ -950,6 +1040,7 @@
     },
 
     /**
+     * Calculates the determinant of this matrix
      * @method determinant
      * @return {Number}
      */
@@ -994,9 +1085,10 @@
     },
 
     /**
+     * Transposes this matrix
      * @method selfTranspose
      * @chainable
-     * @return {Mat4}
+     * @return {Mat4} Reference to `this` for chaining.
      */
     selfTranspose: function () {
       var d = this.data;
@@ -1027,9 +1119,10 @@
     },
 
     /**
+     * Inverts this matrix
      * @method selfInvert
      * @chainable
-     * @return {Mat4}
+     * @return {Mat4} Reference to `this` for chaining.
      */
     selfInvert: function(){
       var a = this.data;
@@ -1105,9 +1198,10 @@
     },
 
     /**
+     * Negates all components of this matrix
      * @method selfNegate
      * @chainable
-     * @return {Mat4}
+     * @return {Mat4} Reference to `this` for chaining.
      */
     selfNegate: function(){
       var d = this.data;
@@ -1131,10 +1225,11 @@
     },
 
     /**
+     * Adds the given matrix to `this`
      * @method selfAdd
      * @chainable
-     * @param {Mat4} other
-     * @return {Mat4}
+     * @param {Mat4} other The matrix to add
+     * @return {Mat4} Reference to `this` for chaining.
      */
     selfAdd: function(other){
       var a = this.data;
@@ -1160,10 +1255,11 @@
 
 
     /**
+     * Adds the given scalar to each component of `this`
      * @method selfAddScalar
      * @chainable
-     * @param {Number} scalar
-     * @return {Mat4}
+     * @param {Number} scalar The scalar to add
+     * @return {Mat4} Reference to `this` for chaining.
      */
     selfAddScalar: function(scalar){
       var a = this.data;
@@ -1187,10 +1283,11 @@
     },
 
     /**
+     * Subtracts the given matrix from `this`
      * @method selfSubtract
      * @chainable
-     * @param {Mat4} other
-     * @return {Mat4}
+     * @param {Mat4} other The matrix to subtract
+     * @return {Mat4} Reference to `this` for chaining.
      */
     selfSubtract: function(other){
       var a = this.data;
@@ -1217,10 +1314,11 @@
 
 
     /**
+     * Subtracts the given scalar from each component of `this`
      * @method selfSubtractScalar
      * @chainable
-     * @param {Number} scalar
-     * @return {Mat4}
+     * @param {Number} scalar The scalar to subtract
+     * @return {Mat4} Reference to `this` for chaining.
      */
     selfSubtractScalar: function(scalar){
       var a = this.data;
@@ -1245,10 +1343,11 @@
 
 
     /**
+     * Multiplies the given matrix with this
      * @method selfMultiply
      * @chainable
-     * @param {Mat4} other
-     * @return {Mat4}
+     * @param {Mat4} other The matrix to multiply
+     * @return {Mat4} Reference to `this` for chaining.
      */
     selfMultiply: function(other){
       var a = other.data;
@@ -1310,10 +1409,11 @@
 
 
     /**
+     * Concatenates the given matrix to this
      * @method selfConcat
      * @chainable
-     * @param {Mat4} other
-     * @return {Mat4}
+     * @param {Mat4} other The matrix to concatenate
+     * @return {Mat4} Reference to `this` for chaining.
      */
     selfConcat: function(other){
       var a = this.data;
@@ -1375,10 +1475,11 @@
 
 
     /**
+     * Multiplies each component of `this` with given scalar
      * @method selfMultiplyScalar
      * @chainable
-     * @param {Number} scalar
-     * @return {Mat4}
+     * @param {Number} scalar The scalar to multiply
+     * @return {Mat4} Reference to `this` for chaining.
      */
     selfMultiplyScalar: function(scalar){
       var a = this.data;
@@ -1403,10 +1504,11 @@
 
 
     /**
+     * Divides each matching component pair
      * @method selfDivide
      * @chainable
-     * @param {Mat4} other
-     * @return {Mat4}
+     * @param {Mat4} other The matrix by which to divide
+     * @return {Mat4} Reference to `this` for chaining.
      */
     selfDivide: function(other){
       var a = this.data;
@@ -1431,10 +1533,11 @@
     },
 
     /**
+     * Divides each component of `this` by given scalar
      * @method selfDivideScalar
      * @chainable
-     * @param {Number} scalar
-     * @return {Mat4}
+     * @param {Number} scalar The scalar by which to divide
+     * @return {Mat4} Reference to `this` for chaining.
      */
     selfDivideScalar: function(scalar){
       scalar = 1.0 / scalar;
@@ -1502,11 +1605,12 @@
     },
 
     /**
+     * Transforms the given buffer with `this` matrix.
      * @method transformV2Buffer
      * @param {Array|Float32Array} buffer
-     * @param {Number} [offset]
-     * @param {Number} [stride]
-     * @param {Number} [count]
+     * @param {Number} [offset=0]
+     * @param {Number} [stride=2]
+     * @param {Number} [count=buffer.length]
      */
     transformV2Buffer: function(buffer, offset, stride, count){
       var x, y, d = this.data;
@@ -1524,11 +1628,12 @@
     },
 
     /**
+     * Transforms the given buffer with `this` matrix.
      * @method transformV3Buffer
      * @param {Array|Float32Array} buffer
-     * @param {Number} [offset]
-     * @param {Number} [stride]
-     * @param {Number} [count]
+     * @param {Number} [offset=0]
+     * @param {Number} [stride=3]
+     * @param {Number} [count=buffer.length]
      */
     transformV3Buffer: function(buffer, offset, stride, count){
       var x, y, z, d = this.data;
@@ -1548,11 +1653,12 @@
     },
 
     /**
+     * Transforms the given buffer with `this` matrix.
      * @method transformV4Buffer
      * @param {Array|Float32Array} buffer
-     * @param {Number} [offset]
-     * @param {Number} [stride]
-     * @param {Number} [count]
+     * @param {Number} [offset=0]
+     * @param {Number} [stride=4]
+     * @param {Number} [count=buffer.length]
      */
     transformV4Buffer: function(buffer, offset, stride, count){
       var x, y, z, w, d = this.data;
@@ -1574,16 +1680,17 @@
     },
 
     /**
+     * Transforms the given buffer with the rotation and scale part of `this` matrix.
      * @method transformNormalBuffer
      * @param {Array|Float32Array} buffer
-     * @param {Number} [offset]
-     * @param {Number} [stride]
-     * @param {Number} [count]
+     * @param {Number} [offset=0]
+     * @param {Number} [stride=3]
+     * @param {Number} [count=buffer.length]
      */
     transformNormalBuffer: function(buffer, offset, stride, count){
       var x, y, z, d = this.data;
       offset = offset || 0;
-      stride = stride === undefined ? 2 : stride;
+      stride = stride === undefined ? 3 : stride;
       count = count === undefined ? buffer.length / stride : count;
 
       while(count > 0){
@@ -1599,11 +1706,12 @@
   };
 
   /**
+   * Transpose the given matrix
    * @static
    * @method transpose
-   * @param {Mat4} mat
-   * @param {Mat4} out
-   * @return {Mat4}
+   * @param {Mat4} mat The matrix to transpose
+   * @param {Mat4} [out] The matrix to write to
+   * @return {Mat4} The given `out` parameter or a new matrix
    */
   Mat4.transpose = function (mat, out) {
     var d = mat.data;
@@ -1616,11 +1724,12 @@
   };
 
   /**
+   * Invert the given matrix
    * @static
    * @method invert
-   * @param {Mat4} mat
-   * @param {Mat4} out
-   * @return {Mat4}
+   * @param {Mat4} mat The matrix to transpose
+   * @param {Mat4} [out] The matrix to write to
+   * @return {Mat4} The given `out` parameter or a new matrix
    */
   Mat4.invert = function (mat, out) {
     out = out || new Mat4();
@@ -1699,11 +1808,12 @@
 
 
   /**
+   * Negate the components of the given matrix
    * @static
    * @method negate
-   * @param {Mat4} mat
-   * @param {Mat4} out
-   * @return {Mat4}
+   * @param {Mat4} mat The matrix to transpose
+   * @param {Mat4} [out] The matrix to write to
+   * @return {Mat4} The given `out` parameter or a new matrix
    */
   Mat4.negate = function(mat, out){
     out = out || new Mat4();
@@ -1730,12 +1840,13 @@
 
 
   /**
+   * Adds a matrix to another
    * @static
    * @method add
-   * @param {Mat4} matA
-   * @param {Mat4} matB
-   * @param {Mat4} out
-   * @return {Mat4}
+   * @param {Mat4} matA The first matrix
+   * @param {Mat4} matB The second matrix
+   * @param {Mat4} [out] The matrix to write to
+   * @return {Mat4} The given `out` parameter or a new matrix
    */
   Mat4.add = function(matA, matB, out){
     out = out || new Mat4();
@@ -1763,12 +1874,13 @@
 
 
   /**
+   * Adds a scalar to each component of a matrix
    * @static
    * @method addScalar
-   * @param {Mat4} mat
-   * @param {Number} scalar
-   * @param {Mat4} out
-   * @return {Mat4}
+   * @param {Mat4} mat The matrix
+   * @param {Number} scalar The scalar to add
+   * @param {Mat4} [out] The matrix to write to
+   * @return {Mat4} The given `out` parameter or a new matrix
    */
   Mat4.addScalar = function(mat, scalar, out){
     out = out || new Mat4();
@@ -1795,12 +1907,13 @@
 
 
   /**
+   * Subtracts the second matrix from the first
    * @static
    * @method subtract
-   * @param {Mat4} matA
-   * @param {Mat4} matB
-   * @param {Mat4} out
-   * @return {Mat4}
+   * @param {Mat4} matA The first matrix
+   * @param {Mat4} matB The second matrix
+   * @param {Mat4} [out] The matrix to write to
+   * @return {Mat4} The given `out` parameter or a new matrix
    */
   Mat4.subtract = function(matA, matB, out){
     out = out || new Mat4();
@@ -1828,12 +1941,13 @@
 
 
   /**
+   * Subtracts a scalar from each somponent of a matrix
    * @static
    * @method subtractScalar
-   * @param {Mat4} mat
-   * @param {Number} scalar
-   * @param {Mat4} out
-   * @return {Mat4}
+   * @param {Mat4} mat The matrix to subtract from
+   * @param {Number} scalar The scalar to subtract
+   * @param {Mat4} [out] The matrix to write to
+   * @return {Mat4} The given `out` parameter or a new matrix
    */
   Mat4.subtractScalar = function(mat, scalar, out){
     out = out || new Mat4();
@@ -1860,12 +1974,13 @@
 
 
   /**
+   * Multiplies a matrix by another matrix
    * @static
    * @method multiply
-   * @param {Mat4} matA
-   * @param {Mat4} matB
-   * @param {Mat4} out
-   * @return {Mat4}
+   * @param {Mat4} matA The first matrix
+   * @param {Mat4} matB The second matrix
+   * @param {Mat4} [out] The matrix to write to
+   * @return {Mat4} The given `out` parameter or a new matrix
    */
   Mat4.multiply = function(matA, matB, out){
     out = out || new Mat4();
@@ -1928,13 +2043,13 @@
 
 
   /**
-   *
+   * Multiplies a matrix by another matrix
    * @static
    * @method concat
-   * @param {Mat4} matA
-   * @param {Mat4} matB
-   * @param {Mat4} out
-   * @return {Mat4}
+   * @param {Mat4} matA The first matrix
+   * @param {Mat4} matB The second matrix
+   * @param {Mat4} [out] The matrix to write to
+   * @return {Mat4} The given `out` parameter or a new matrix
    */
   Mat4.concat = function(matA, matB, out){
     out = out || new Mat4();
@@ -1996,9 +2111,10 @@
   };
 
   /**
+   * Multiplies a chain of matrices
    * @static
    * @method concatChain
-   * @return {Mat4}
+   * @return {Mat4} The result of the multiplication
    */
   Mat4.concatChain = function(){
     var i, result = arguments[0].clone();
@@ -2009,9 +2125,10 @@
   };
 
   /**
+   * Multiplies a chain of matrices
    * @static
    * @method multiplyChain
-   * @return {Mat4}
+   * @return {Mat4} The result of the multiplication
    */
   Mat4.multiplyChain = function(){
     var i, result = arguments[0].clone();
@@ -2022,12 +2139,13 @@
   };
 
   /**
+   * Multiplies a matrix with a scalar value
    * @static
    * @method multiplyScalar
-   * @param {Mat4} matA
-   * @param {Number} scalar
-   * @param {Mat4} out
-   * @return {Mat4}
+   * @param {Mat4} matA The matrix
+   * @param {Number} scalar The scalar to multiply
+   * @param {Mat4} [out] The matrix to write to
+   * @return {Mat4} The given `out` parameter or a new matrix
    */
   Mat4.multiplyScalar = function(matA, scalar, out){
     out = out || new Mat4();
@@ -2054,44 +2172,46 @@
 
 
   /**
+   * Divides the components of the first matrix by the components of the second matrix
    * @static
    * @method divide
-   * @param {Mat4} matA
-   * @param {Mat4} matB
-   * @param {Mat4} out
-   * @return {Mat4}
+   * @param {Mat4} matA The first matrix
+   * @param {Mat4} matB The second matrix
+   * @param {Mat4} [out] The matrix to write to
+   * @return {Mat4} The given `out` parameter or a new matrix
    */
   Mat4.divide = function(matA, matB, out){
     out = out || new Mat4();
     var a = matA.data;
     var b = matB.data;
     var c = out.data;
-    c[ 0] = a[ 0] * b[ 0];
-    c[ 1] = a[ 1] * b[ 1];
-    c[ 2] = a[ 2] * b[ 2];
-    c[ 3] = a[ 3] * b[ 3];
-    c[ 4] = a[ 4] * b[ 4];
-    c[ 5] = a[ 5] * b[ 5];
-    c[ 6] = a[ 6] * b[ 6];
-    c[ 7] = a[ 7] * b[ 7];
-    c[ 8] = a[ 8] * b[ 8];
-    c[ 9] = a[ 9] * b[ 9];
-    c[10] = a[10] * b[10];
-    c[11] = a[11] * b[11];
-    c[12] = a[12] * b[12];
-    c[13] = a[13] * b[13];
-    c[14] = a[14] * b[14];
-    c[15] = a[15] * b[15];
+    c[ 0] = a[ 0] / b[ 0];
+    c[ 1] = a[ 1] / b[ 1];
+    c[ 2] = a[ 2] / b[ 2];
+    c[ 3] = a[ 3] / b[ 3];
+    c[ 4] = a[ 4] / b[ 4];
+    c[ 5] = a[ 5] / b[ 5];
+    c[ 6] = a[ 6] / b[ 6];
+    c[ 7] = a[ 7] / b[ 7];
+    c[ 8] = a[ 8] / b[ 8];
+    c[ 9] = a[ 9] / b[ 9];
+    c[10] = a[10] / b[10];
+    c[11] = a[11] / b[11];
+    c[12] = a[12] / b[12];
+    c[13] = a[13] / b[13];
+    c[14] = a[14] / b[14];
+    c[15] = a[15] / b[15];
     return out;
   };
 
   /**
+   * Divides the components of a matrix by a scalar
    * @static
    * @method divideScalar
-   * @param {Mat4} matA
-   * @param {Number} scalar
-   * @param {Mat4} out
-   * @return {Mat4}
+   * @param {Mat4} matA The matrix
+   * @param {Number} scalar The scalar by which to divide
+   * @param {Mat4} [out] The matrix to write to
+   * @return {Mat4} The given `out` parameter or a new matrix
    */
   Mat4.divideScalar = function(matA, scalar, out){
     out = out || new Mat4();
@@ -2118,13 +2238,14 @@
   };
 
   /**
+   * Performs a linear interpolation between two matrices
    * @static
    * @method lerp
-   * @param {Mat4} matA
-   * @param {Mat4} matB
-   * @param {Number} t
-   * @param {Mat4} out
-   * @return {Mat4}
+   * @param {Mat4} matA The first matrix
+   * @param {Mat4} matB The second matrix
+   * @param {Number} t The interpolation value. This is assumed to be in [0:1] range
+   * @param {Mat4} [out] The matrix to write to
+   * @return {Mat4} The given `out` parameter or a new matrix
    */
   Mat4.lerp = function (matA, matB, t, out) {
     out = out || new Mat4();
@@ -2151,19 +2272,20 @@
   };
 
   /**
-   *
+   * Creates a new matrix with all components set to 0
    * @static
    * @method zero
-   * @return {Mat4}
+   * @return {Mat4} a new matrix
    */
   Mat4.zero = function(){
     return new Mat4();
   };
 
   /**
+   * Creates a new matrix that is initialized to identity
    * @static
    * @method identity
-   * @return {Mat4}
+   * @return {Mat4} a new matrix
    */
   Mat4.identity = function(){
     var out = new Mat4();
@@ -2173,7 +2295,8 @@
   };
 
   /**
-   *
+   * Creates a new matrix. This method should be called with 16 or 0 arguments. If less than 16 but more than 0 arguments
+   * are given some components are going to be undefined. The arguments are expected to be in column major order.
    * @static
    * @method create
    * @param [m0]
@@ -2192,7 +2315,7 @@
    * @param [m13]
    * @param [m14]
    * @param [m15]
-   * @return {Mat4}
+   * @return {Mat4} a new matrix
    */
   Mat4.create = function(m0, m1, m2, m3, m4, m5, m6, m7, m8, m9, m10, m11, m12, m13, m14, m15){
     var out = new Mat4();
@@ -2219,7 +2342,7 @@
   };
 
   /**
-   *
+   * Creates a new matrix. The arguments are expected to be in row major order.
    * @static
    * @method createRowMajor
    * @param m0
@@ -2238,7 +2361,7 @@
    * @param m7
    * @param m11
    * @param m15
-   * @return {Mat4}
+   * @return {Mat4} a new matrix
    */
   Mat4.createRowMajor = function(m0, m4, m8, m12, m1, m5, m9, m13, m2, m6, m10, m14,m3, m7, m11, m15){
     var out = new Mat4();
@@ -2262,62 +2385,182 @@
     return out;
   };
 
+  /**
+   * @static
+   * @method createScale
+   * @param x
+   * @param y
+   * @param z
+   * @return {Mat4} a new matrix
+   */
   Mat4.createScale = function(x, y, z){
     return new Mat4().initScale(x, y, z);
   };
 
+  /**
+   * @static
+   * @method createTranslation
+   * @param x
+   * @param y
+   * @param z
+   * @return {Mat4} a new matrix
+   */
   Mat4.createTranslation = function(x, y, z){
     return new Mat4().initTranslation(x, y, z);
   };
 
+  /**
+   * @static
+   * @method createLookAt
+   * @param pos
+   * @param lookAt
+   * @param up
+   * @return {Mat4} a new matrix
+   */
   Mat4.createLookAt = function(pos, lookAt, up){
     return new Mat4().initLookAt(pos, lookAt, up);
   };
 
+  /**
+   * @static
+   * @method createWorld
+   * @param position
+   * @param forward
+   * @param up
+   * @return {Mat4} a new matrix
+   */
   Mat4.createWorld = function(position, forward, up){
     return new Mat4().initWorld(position, forward, up);
   };
 
+  /**
+   * @static
+   * @method createPerspectiveFieldOfView
+   * @param fov
+   * @param aspec
+   * @param near
+   * @param far
+   * @return {Mat4} a new matrix
+   */
   Mat4.createPerspectiveFieldOfView = function(fov, aspec, near, far){
     return new Mat4().initPerspectiveFieldOfView(fov, aspec, near, far);
   };
 
+  /**
+   * @static
+   * @method createPerspective
+   * @param width
+   * @param height
+   * @param near
+   * @param far
+   * @return {Mat4} a new matrix
+   */
   Mat4.createPerspective = function(width, height, near, far){
     return new Mat4().initPerspective(width, height, near, far);
   };
 
+  /**
+   * @static
+   * @method createPerspectiveOffCenter
+   * @param left
+   * @param right
+   * @param bottom
+   * @param top
+   * @param near
+   * @param far
+   * @return {Mat4} a new matrix
+   */
   Mat4.createPerspectiveOffCenter = function(left, right, bottom, top, near, far){
     return new Mat4().initPerspectiveOffCenter(left, right, bottom, top, near, far);
   };
 
+  /**
+   * @static
+   * @method createOrthographic
+   * @param width
+   * @param height
+   * @param near
+   * @param far
+   * @return {Mat4} a new matrix
+   */
   Mat4.createOrthographic = function(width, height, near, far){
     return new Mat4().initOrthographic(width, height, near, far);
   };
 
+  /**
+   * @static
+   * @method createOrthographicOffCenter
+   * @param left
+   * @param right
+   * @param bottom
+   * @param top
+   * @param near
+   * @param far
+   * @return {Mat4} a new matrix
+   */
   Mat4.createOrthographicOffCenter = function(left, right, bottom, top, near, far){
     return new Mat4().initOrthographicOffCenter(left, right, bottom, top, near, far);
   };
 
+  /**
+   * @static
+   * @method createRotationX
+   * @param rad
+   * @return {Mat4} a new matrix
+   */
   Mat4.createRotationX = function(rad){
     return new Mat4().initRotationX(rad);
   };
 
+  /**
+   * @static
+   * @method createRotationY
+   * @param rad
+   * @return {Mat4} a new matrix
+   */
   Mat4.createRotationY = function(rad){
     return new Mat4().initRotationY(rad);
   };
 
+  /**
+   * @static
+   * @method createRotationZ
+   * @param rad
+   * @return {Mat4} a new matrix
+   */
   Mat4.createRotationZ = function(rad){
     return new Mat4().initRotationZ(rad);
   };
 
+  /**
+   * @static
+   * @method createAxisAngle
+   * @param axis
+   * @param angle
+   * @return {Mat4} a new matrix
+   */
   Mat4.createAxisAngle = function(axis, angle){
     return new Mat4().initAxisAngle(axis, angle);
   };
 
+  /**
+   * @static
+   * @method createYawPitchRoll
+   * @param yaw
+   * @param pitch
+   * @param roll
+   * @return {Mat4} a new matrix
+   */
   Mat4.createYawPitchRoll = function(yaw, pitch, roll){
     return new Mat4().initYawPitchRoll(yaw, pitch, roll);
   };
 
+  /**
+   * @static
+   * @method prettyString
+   * @param mat
+   * @returns {string}
+   */
   Mat4.prettyString = function(mat){
     var m = mat.data;
     return [

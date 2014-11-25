@@ -2,7 +2,7 @@
     "project": {
         "name": "VecmathJS",
         "description": "Vector math library for javascript",
-        "version": "0.0.1"
+        "version": "1.0.0"
     },
     "files": {
         "src/mat4.js": {
@@ -62,7 +62,7 @@
             "plugin_for": [],
             "extension_for": [],
             "file": "src/mat4.js",
-            "line": 29,
+            "line": 32,
             "description": "Describes a 4x4 matrix.",
             "is_constructor": 1,
             "mainName": "Mat4",
@@ -207,32 +207,53 @@
     "classitems": [
         {
             "file": "src/mat4.js",
-            "line": 37,
+            "line": 1,
+            "description": "Some content here",
             "class": "Mat4"
         },
         {
             "file": "src/mat4.js",
-            "line": 39,
-            "class": "Mat4"
-        },
-        {
-            "file": "src/mat4.js",
-            "line": 41,
-            "class": "Mat4"
-        },
-        {
-            "file": "src/mat4.js",
-            "line": 43,
+            "line": 40,
+            "itemtype": "attribute",
+            "name": "data",
+            "type": "{Float32Array}",
             "class": "Mat4"
         },
         {
             "file": "src/mat4.js",
             "line": 45,
+            "itemtype": "attribute",
+            "name": "right",
+            "type": "{Float32Array}",
             "class": "Mat4"
         },
         {
             "file": "src/mat4.js",
-            "line": 53,
+            "line": 50,
+            "itemtype": "attribute",
+            "name": "up",
+            "type": "{Float32Array}",
+            "class": "Mat4"
+        },
+        {
+            "file": "src/mat4.js",
+            "line": 55,
+            "itemtype": "attribute",
+            "name": "backward",
+            "type": "{Float32Array}",
+            "class": "Mat4"
+        },
+        {
+            "file": "src/mat4.js",
+            "line": 60,
+            "itemtype": "attribute",
+            "name": "translation",
+            "type": "{Float32Array}",
+            "class": "Mat4"
+        },
+        {
+            "file": "src/mat4.js",
+            "line": 71,
             "description": "Initializes the matrix with the given values in given order.",
             "itemtype": "method",
             "name": "init",
@@ -327,7 +348,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 96,
+            "line": 114,
             "description": "Initializes the matrix with the given values. The values are read in row major order.",
             "itemtype": "method",
             "name": "initRowMajor",
@@ -422,7 +443,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 139,
+            "line": 157,
             "description": "Initializes all components of this matrix with the given number.",
             "itemtype": "method",
             "name": "initWith",
@@ -442,7 +463,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 152,
+            "line": 170,
             "description": "Initializes the components of this matrix to the identity.",
             "itemtype": "method",
             "name": "initIdentity",
@@ -455,7 +476,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 165,
+            "line": 183,
             "description": "Initializes this matrix from another matrix.",
             "itemtype": "method",
             "name": "initFrom",
@@ -475,7 +496,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 194,
+            "line": 212,
             "description": "Reads a buffer starting at given offset and initializes the elements of this matrix.\nThe given buffer must have at least 16 elements starting at given offset.\nThe elements are expected to be in column major layout.",
             "itemtype": "method",
             "name": "initFromBuffer",
@@ -501,7 +522,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 226,
+            "line": 244,
             "description": "Initializes this matrix from given quaternion.",
             "itemtype": "method",
             "name": "initFromQuaternion",
@@ -509,7 +530,7 @@
             "params": [
                 {
                     "name": "q",
-                    "description": "",
+                    "description": "The quaternion",
                     "type": "Quat"
                 }
             ],
@@ -521,7 +542,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 255,
+            "line": 273,
             "description": "Initializes this matrix to a rotation matrix defined by given axis vector and angle.",
             "itemtype": "method",
             "name": "initAxisAngle",
@@ -546,7 +567,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 291,
+            "line": 309,
             "description": "Initializes this matrix to a rotation matrix defined by given yaw pitch and roll values.",
             "itemtype": "method",
             "name": "initYawPitchRoll",
@@ -576,7 +597,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 337,
+            "line": 355,
             "description": "Initializes this matrix with a rotation around the X axis.",
             "itemtype": "method",
             "name": "initRotationX",
@@ -596,7 +617,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 355,
+            "line": 373,
             "description": "Initializes this matrix with a rotation around the Y axis.",
             "itemtype": "method",
             "name": "initRotationY",
@@ -615,7 +636,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 374,
+            "line": 392,
             "description": "Initializes this matrix with a rotation around the Z axis.",
             "itemtype": "method",
             "name": "initRotationZ",
@@ -627,14 +648,14 @@
                 }
             ],
             "return": {
-                "description": "Reference to `this` for chaining.* @return {Mat4} This matrix for chaining.",
+                "description": "Reference to `this` for chaining.",
                 "type": "Mat4"
             },
             "class": "Mat4"
         },
         {
             "file": "src/mat4.js",
-            "line": 393,
+            "line": 411,
             "description": "Initializes a translation matrix.",
             "itemtype": "method",
             "name": "initTranslation",
@@ -664,7 +685,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 411,
+            "line": 429,
             "description": "Initializes a scale matrix.",
             "itemtype": "method",
             "name": "initScale",
@@ -694,7 +715,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 429,
+            "line": 447,
             "description": "Initializes a rotation matrix by using a position and a lookat point.",
             "itemtype": "method",
             "name": "initLookAt",
@@ -724,7 +745,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 474,
+            "line": 492,
             "description": "Initializes a matrix from a position point and a forward and up vectors",
             "itemtype": "method",
             "name": "initWorld",
@@ -754,7 +775,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 517,
+            "line": 535,
             "description": "Initializes a perspective matrix with given field of view angle",
             "itemtype": "method",
             "name": "initPerspectiveFieldOfView",
@@ -789,7 +810,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 538,
+            "line": 556,
             "description": "Initializes a perspective matrix",
             "itemtype": "method",
             "name": "initPerspective",
@@ -824,7 +845,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 557,
+            "line": 575,
             "description": "Initializes a perspective matrix",
             "itemtype": "method",
             "name": "initPerspectiveOffCenter",
@@ -869,7 +890,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 578,
+            "line": 596,
             "description": "Initializes an orthographic matrix",
             "itemtype": "method",
             "name": "initOrthographic",
@@ -902,7 +923,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 597,
+            "line": 615,
             "description": "Initializes an orthographic matrix",
             "itemtype": "method",
             "name": "initOrthographicOffCenter",
@@ -943,7 +964,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 619,
+            "line": 637,
             "description": "Creates a copy of this matrix",
             "itemtype": "method",
             "name": "clone",
@@ -955,7 +976,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 629,
+            "line": 647,
             "description": "Copies the components successively into the given array.",
             "chainable": 1,
             "itemtype": "method",
@@ -982,7 +1003,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 659,
+            "line": 677,
             "description": "Returns an array filled with the values of the components of this vector",
             "itemtype": "method",
             "name": "dump",
@@ -994,14 +1015,14 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 670,
+            "line": 688,
             "description": "Checks for component wise equality with given matrix",
             "itemtype": "method",
             "name": "equals",
             "params": [
                 {
                     "name": "other",
-                    "description": "The vector to compare with",
+                    "description": "The matrix to compare with",
                     "type": "Mat4"
                 }
             ],
@@ -1013,239 +1034,480 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 697,
+            "line": 715,
+            "description": "Gets the forward vector",
             "itemtype": "method",
             "name": "getForward",
+            "params": [
+                {
+                    "name": "out",
+                    "description": "The vector to write to",
+                    "type": "Vec3|Vec4",
+                    "optional": true
+                }
+            ],
             "return": {
-                "description": "",
-                "type": "Vec3"
+                "description": "the given `out` parameter or a new vector",
+                "type": "Vec3|Vec4"
             },
             "class": "Mat4"
         },
         {
             "file": "src/mat4.js",
-            "line": 709,
+            "line": 729,
+            "description": "Gets the backward vector",
             "itemtype": "method",
             "name": "getBackward",
+            "params": [
+                {
+                    "name": "out",
+                    "description": "The vector to write to",
+                    "type": "Vec3|Vec4",
+                    "optional": true
+                }
+            ],
             "return": {
-                "description": "",
-                "type": "Vec3"
+                "description": "the given `out` parameter or a new vector",
+                "type": "Vec3|Vec4"
             },
             "class": "Mat4"
         },
         {
             "file": "src/mat4.js",
-            "line": 721,
+            "line": 743,
+            "description": "Gets the right vector",
             "itemtype": "method",
             "name": "getRight",
+            "params": [
+                {
+                    "name": "out",
+                    "description": "The vector to write to",
+                    "type": "Vec3|Vec4",
+                    "optional": true
+                }
+            ],
             "return": {
-                "description": "",
-                "type": "Vec3"
+                "description": "the given `out` parameter or a new vector",
+                "type": "Vec3|Vec4"
             },
             "class": "Mat4"
         },
         {
             "file": "src/mat4.js",
-            "line": 733,
+            "line": 757,
+            "description": "Gets the left vector",
             "itemtype": "method",
             "name": "getLeft",
+            "params": [
+                {
+                    "name": "out",
+                    "description": "The vector to write to",
+                    "type": "Vec3|Vec4",
+                    "optional": true
+                }
+            ],
             "return": {
-                "description": "",
-                "type": "Vec3"
+                "description": "the given `out` parameter or a new vector",
+                "type": "Vec3|Vec4"
             },
             "class": "Mat4"
         },
         {
             "file": "src/mat4.js",
-            "line": 745,
+            "line": 771,
+            "description": "Gets the up vector",
             "itemtype": "method",
             "name": "getUp",
+            "params": [
+                {
+                    "name": "out",
+                    "description": "The vector to write to",
+                    "type": "Vec3|Vec4",
+                    "optional": true
+                }
+            ],
             "return": {
-                "description": "",
-                "type": "Vec3"
+                "description": "the given `out` parameter or a new vector",
+                "type": "Vec3|Vec4"
             },
             "class": "Mat4"
         },
         {
             "file": "src/mat4.js",
-            "line": 756,
+            "line": 784,
+            "description": "Gets the down vector",
             "itemtype": "method",
             "name": "getDown",
+            "params": [
+                {
+                    "name": "out",
+                    "description": "The vector to write to",
+                    "type": "Vec3|Vec4",
+                    "optional": true
+                }
+            ],
             "return": {
-                "description": "",
-                "type": "Vec3"
+                "description": "the given `out` parameter or a new vector",
+                "type": "Vec3|Vec4"
             },
             "class": "Mat4"
         },
         {
             "file": "src/mat4.js",
-            "line": 768,
+            "line": 798,
+            "description": "Gets the translation part as vector",
             "itemtype": "method",
             "name": "getTranslation",
+            "params": [
+                {
+                    "name": "out",
+                    "description": "The vector to write to",
+                    "type": "Vec3|Vec4",
+                    "optional": true
+                }
+            ],
             "return": {
-                "description": "",
-                "type": "Vec3"
+                "description": "the given `out` parameter or a new vector",
+                "type": "Vec3|Vec4"
             },
             "class": "Mat4"
         },
         {
             "file": "src/mat4.js",
-            "line": 780,
+            "line": 812,
+            "description": "Gets the scale part as vector",
             "itemtype": "method",
             "name": "getScale",
+            "params": [
+                {
+                    "name": "out",
+                    "description": "The vector to write to",
+                    "type": "Vec3|Vec4",
+                    "optional": true
+                }
+            ],
             "return": {
-                "description": "",
-                "type": "Vec3"
+                "description": "the given `out` parameter or a new vector",
+                "type": "Vec3|Vec4"
             },
             "class": "Mat4"
         },
         {
             "file": "src/mat4.js",
-            "line": 848,
+            "line": 826,
+            "description": "Writes the values of the forward vector into an array",
+            "itemtype": "method",
+            "name": "copyForward",
+            "params": [
+                {
+                    "name": "buffer",
+                    "description": "The array to write to",
+                    "type": "Array|Float32Array"
+                }
+            ],
+            "return": {
+                "description": "the given `buffer` parameter",
+                "type": "Array|Float32Array"
+            },
+            "class": "Mat4"
+        },
+        {
+            "file": "src/mat4.js",
+            "line": 839,
+            "description": "Writes the values of the backward vector into an array",
+            "itemtype": "method",
+            "name": "copyBackward",
+            "params": [
+                {
+                    "name": "buffer",
+                    "description": "The array to write to",
+                    "type": "Array|Float32Array"
+                }
+            ],
+            "return": {
+                "description": "the given `buffer` parameter",
+                "type": "Array|Float32Array"
+            },
+            "class": "Mat4"
+        },
+        {
+            "file": "src/mat4.js",
+            "line": 852,
+            "description": "Writes the values of the right vector into an array",
+            "itemtype": "method",
+            "name": "copyRight",
+            "params": [
+                {
+                    "name": "buffer",
+                    "description": "The array to write to",
+                    "type": "Array|Float32Array"
+                }
+            ],
+            "return": {
+                "description": "the given `buffer` parameter",
+                "type": "Array|Float32Array"
+            },
+            "class": "Mat4"
+        },
+        {
+            "file": "src/mat4.js",
+            "line": 865,
+            "description": "Writes the values of the left vector into an array",
+            "itemtype": "method",
+            "name": "copyLeft",
+            "params": [
+                {
+                    "name": "buffer",
+                    "description": "The array to write to",
+                    "type": "Array|Float32Array"
+                }
+            ],
+            "return": {
+                "description": "the given `buffer` parameter",
+                "type": "Array|Float32Array"
+            },
+            "class": "Mat4"
+        },
+        {
+            "file": "src/mat4.js",
+            "line": 878,
+            "description": "Writes the values of the up vector into an array",
+            "itemtype": "method",
+            "name": "copyUp",
+            "params": [
+                {
+                    "name": "buffer",
+                    "description": "The array to write to",
+                    "type": "Array|Float32Array"
+                }
+            ],
+            "return": {
+                "description": "the given `buffer` parameter",
+                "type": "Array|Float32Array"
+            },
+            "class": "Mat4"
+        },
+        {
+            "file": "src/mat4.js",
+            "line": 891,
+            "description": "Writes the values of the down vector into an array",
+            "itemtype": "method",
+            "name": "copyDown",
+            "params": [
+                {
+                    "name": "buffer",
+                    "description": "The array to write to",
+                    "type": "Array|Float32Array"
+                }
+            ],
+            "return": {
+                "description": "the given `buffer` parameter",
+                "type": "Array|Float32Array"
+            },
+            "class": "Mat4"
+        },
+        {
+            "file": "src/mat4.js",
+            "line": 904,
+            "description": "Writes the values of the translation part into an array",
+            "itemtype": "method",
+            "name": "copyTranslation",
+            "params": [
+                {
+                    "name": "buffer",
+                    "description": "The array to write to",
+                    "type": "Array|Float32Array"
+                }
+            ],
+            "return": {
+                "description": "the given `buffer` parameter",
+                "type": "Array|Float32Array"
+            },
+            "class": "Mat4"
+        },
+        {
+            "file": "src/mat4.js",
+            "line": 917,
+            "description": "Writes the values of the scale vector into an array",
+            "itemtype": "method",
+            "name": "copyScale",
+            "params": [
+                {
+                    "name": "buffer",
+                    "description": "The array to write to",
+                    "type": "Array|Float32Array"
+                }
+            ],
+            "return": {
+                "description": "the given `buffer` parameter",
+                "type": "Array|Float32Array"
+            },
+            "class": "Mat4"
+        },
+        {
+            "file": "src/mat4.js",
+            "line": 930,
+            "description": "Sets the forward vector",
             "itemtype": "method",
             "name": "setForward",
             "chainable": 1,
             "params": [
                 {
                     "name": "vec",
-                    "description": ""
+                    "description": "The vector to take values from",
+                    "type": "Vec3|Vec4"
                 }
             ],
             "return": {
-                "description": "",
+                "description": "Reference to `this` for chaining.",
                 "type": "Mat4"
             },
             "class": "Mat4"
         },
         {
             "file": "src/mat4.js",
-            "line": 861,
+            "line": 944,
+            "description": "Sets the backward vector",
             "itemtype": "method",
             "name": "setBackward",
             "chainable": 1,
             "params": [
                 {
                     "name": "vec",
-                    "description": ""
+                    "description": "The vector to take values from",
+                    "type": "Vec3|Vec4"
                 }
             ],
             "return": {
-                "description": "",
+                "description": "Reference to `this` for chaining.",
                 "type": "Mat4"
             },
             "class": "Mat4"
         },
         {
             "file": "src/mat4.js",
-            "line": 874,
+            "line": 958,
+            "description": "Sets the right vector",
             "itemtype": "method",
             "name": "setRight",
             "chainable": 1,
             "params": [
                 {
                     "name": "vec",
-                    "description": ""
+                    "description": "The vector to take values from",
+                    "type": "Vec3|Vec4"
                 }
             ],
             "return": {
-                "description": "",
+                "description": "Reference to `this` for chaining.",
                 "type": "Mat4"
             },
             "class": "Mat4"
         },
         {
             "file": "src/mat4.js",
-            "line": 887,
+            "line": 972,
+            "description": "Sets the left vector",
             "itemtype": "method",
             "name": "setLeft",
             "chainable": 1,
             "params": [
                 {
                     "name": "vec",
-                    "description": ""
+                    "description": "The vector to take values from",
+                    "type": "Vec3|Vec4"
                 }
             ],
             "return": {
-                "description": "",
+                "description": "Reference to `this` for chaining.",
                 "type": "Mat4"
             },
             "class": "Mat4"
         },
         {
             "file": "src/mat4.js",
-            "line": 900,
+            "line": 986,
+            "description": "Sets the up vector",
             "itemtype": "method",
             "name": "setUp",
             "chainable": 1,
             "params": [
                 {
                     "name": "vec",
-                    "description": ""
+                    "description": "The vector to take values from",
+                    "type": "Vec3|Vec4"
                 }
             ],
             "return": {
-                "description": "",
+                "description": "Reference to `this` for chaining.",
                 "type": "Mat4"
             },
             "class": "Mat4"
         },
         {
             "file": "src/mat4.js",
-            "line": 913,
+            "line": 1000,
+            "description": "Sets the down vector",
             "itemtype": "method",
             "name": "setDown",
             "chainable": 1,
             "params": [
                 {
                     "name": "vec",
-                    "description": ""
+                    "description": "The vector to take values from",
+                    "type": "Vec3|Vec4"
                 }
             ],
             "return": {
-                "description": "",
+                "description": "Reference to `this` for chaining.",
                 "type": "Mat4"
             },
             "class": "Mat4"
         },
         {
             "file": "src/mat4.js",
-            "line": 926,
+            "line": 1014,
+            "description": "Sets the translation part",
             "itemtype": "method",
             "name": "setTranslation",
             "chainable": 1,
             "params": [
                 {
                     "name": "vec",
-                    "description": ""
+                    "description": "The vector to take values from",
+                    "type": "Vec3|Vec4"
                 }
             ],
             "return": {
-                "description": "",
+                "description": "Reference to `this` for chaining.",
                 "type": "Mat4"
             },
             "class": "Mat4"
         },
         {
             "file": "src/mat4.js",
-            "line": 939,
+            "line": 1028,
+            "description": "Sets the scale part",
             "itemtype": "method",
             "name": "setScale",
             "chainable": 1,
             "params": [
                 {
                     "name": "vec",
-                    "description": ""
+                    "description": "The vector to take values from",
+                    "type": "Vec3|Vec4"
                 }
             ],
             "return": {
-                "description": "",
+                "description": "Reference to `this` for chaining.",
                 "type": "Mat4"
             },
             "class": "Mat4"
         },
         {
             "file": "src/mat4.js",
-            "line": 952,
+            "line": 1042,
+            "description": "Calculates the determinant of this matrix",
             "itemtype": "method",
             "name": "determinant",
             "return": {
@@ -1256,214 +1518,226 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 996,
+            "line": 1087,
+            "description": "Transposes this matrix",
             "itemtype": "method",
             "name": "selfTranspose",
             "chainable": 1,
             "return": {
-                "description": "",
+                "description": "Reference to `this` for chaining.",
                 "type": "Mat4"
             },
             "class": "Mat4"
         },
         {
             "file": "src/mat4.js",
-            "line": 1029,
+            "line": 1121,
+            "description": "Inverts this matrix",
             "itemtype": "method",
             "name": "selfInvert",
             "chainable": 1,
             "return": {
-                "description": "",
+                "description": "Reference to `this` for chaining.",
                 "type": "Mat4"
             },
             "class": "Mat4"
         },
         {
             "file": "src/mat4.js",
-            "line": 1107,
+            "line": 1200,
+            "description": "Negates all components of this matrix",
             "itemtype": "method",
             "name": "selfNegate",
             "chainable": 1,
             "return": {
-                "description": "",
+                "description": "Reference to `this` for chaining.",
                 "type": "Mat4"
             },
             "class": "Mat4"
         },
         {
             "file": "src/mat4.js",
-            "line": 1133,
+            "line": 1227,
+            "description": "Adds the given matrix to `this`",
             "itemtype": "method",
             "name": "selfAdd",
             "chainable": 1,
             "params": [
                 {
                     "name": "other",
-                    "description": "",
+                    "description": "The matrix to add",
                     "type": "Mat4"
                 }
             ],
             "return": {
-                "description": "",
+                "description": "Reference to `this` for chaining.",
                 "type": "Mat4"
             },
             "class": "Mat4"
         },
         {
             "file": "src/mat4.js",
-            "line": 1162,
+            "line": 1257,
+            "description": "Adds the given scalar to each component of `this`",
             "itemtype": "method",
             "name": "selfAddScalar",
             "chainable": 1,
             "params": [
                 {
                     "name": "scalar",
-                    "description": "",
+                    "description": "The scalar to add",
                     "type": "Number"
                 }
             ],
             "return": {
-                "description": "",
+                "description": "Reference to `this` for chaining.",
                 "type": "Mat4"
             },
             "class": "Mat4"
         },
         {
             "file": "src/mat4.js",
-            "line": 1189,
+            "line": 1285,
+            "description": "Subtracts the given matrix from `this`",
             "itemtype": "method",
             "name": "selfSubtract",
             "chainable": 1,
             "params": [
                 {
                     "name": "other",
-                    "description": "",
+                    "description": "The matrix to subtract",
                     "type": "Mat4"
                 }
             ],
             "return": {
-                "description": "",
+                "description": "Reference to `this` for chaining.",
                 "type": "Mat4"
             },
             "class": "Mat4"
         },
         {
             "file": "src/mat4.js",
-            "line": 1219,
+            "line": 1316,
+            "description": "Subtracts the given scalar from each component of `this`",
             "itemtype": "method",
             "name": "selfSubtractScalar",
             "chainable": 1,
             "params": [
                 {
                     "name": "scalar",
-                    "description": "",
+                    "description": "The scalar to subtract",
                     "type": "Number"
                 }
             ],
             "return": {
-                "description": "",
+                "description": "Reference to `this` for chaining.",
                 "type": "Mat4"
             },
             "class": "Mat4"
         },
         {
             "file": "src/mat4.js",
-            "line": 1247,
+            "line": 1345,
+            "description": "Multiplies the given matrix with this",
             "itemtype": "method",
             "name": "selfMultiply",
             "chainable": 1,
             "params": [
                 {
                     "name": "other",
-                    "description": "",
+                    "description": "The matrix to multiply",
                     "type": "Mat4"
                 }
             ],
             "return": {
-                "description": "",
+                "description": "Reference to `this` for chaining.",
                 "type": "Mat4"
             },
             "class": "Mat4"
         },
         {
             "file": "src/mat4.js",
-            "line": 1312,
+            "line": 1411,
+            "description": "Concatenates the given matrix to this",
             "itemtype": "method",
             "name": "selfConcat",
             "chainable": 1,
             "params": [
                 {
                     "name": "other",
-                    "description": "",
+                    "description": "The matrix to concatenate",
                     "type": "Mat4"
                 }
             ],
             "return": {
-                "description": "",
+                "description": "Reference to `this` for chaining.",
                 "type": "Mat4"
             },
             "class": "Mat4"
         },
         {
             "file": "src/mat4.js",
-            "line": 1377,
+            "line": 1477,
+            "description": "Multiplies each component of `this` with given scalar",
             "itemtype": "method",
             "name": "selfMultiplyScalar",
             "chainable": 1,
             "params": [
                 {
                     "name": "scalar",
-                    "description": "",
+                    "description": "The scalar to multiply",
                     "type": "Number"
                 }
             ],
             "return": {
-                "description": "",
+                "description": "Reference to `this` for chaining.",
                 "type": "Mat4"
             },
             "class": "Mat4"
         },
         {
             "file": "src/mat4.js",
-            "line": 1405,
+            "line": 1506,
+            "description": "Divides each matching component pair",
             "itemtype": "method",
             "name": "selfDivide",
             "chainable": 1,
             "params": [
                 {
                     "name": "other",
-                    "description": "",
+                    "description": "The matrix by which to divide",
                     "type": "Mat4"
                 }
             ],
             "return": {
-                "description": "",
+                "description": "Reference to `this` for chaining.",
                 "type": "Mat4"
             },
             "class": "Mat4"
         },
         {
             "file": "src/mat4.js",
-            "line": 1433,
+            "line": 1535,
+            "description": "Divides each component of `this` by given scalar",
             "itemtype": "method",
             "name": "selfDivideScalar",
             "chainable": 1,
             "params": [
                 {
                     "name": "scalar",
-                    "description": "",
+                    "description": "The scalar by which to divide",
                     "type": "Number"
                 }
             ],
             "return": {
-                "description": "",
+                "description": "Reference to `this` for chaining.",
                 "type": "Mat4"
             },
             "class": "Mat4"
         },
         {
             "file": "src/mat4.js",
-            "line": 1461,
+            "line": 1564,
             "description": "Transform the given vector with this matrix.",
             "itemtype": "method",
             "name": "transform",
@@ -1482,7 +1756,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 1485,
+            "line": 1588,
             "description": "Rotates and scales the given vector with this matrix.",
             "itemtype": "method",
             "name": "transformNormal",
@@ -1501,7 +1775,8 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 1504,
+            "line": 1607,
+            "description": "Transforms the given buffer with `this` matrix.",
             "itemtype": "method",
             "name": "transformV2Buffer",
             "params": [
@@ -1514,26 +1789,30 @@
                     "name": "offset",
                     "description": "",
                     "type": "Number",
-                    "optional": true
+                    "optional": true,
+                    "optdefault": "0"
                 },
                 {
                     "name": "stride",
                     "description": "",
                     "type": "Number",
-                    "optional": true
+                    "optional": true,
+                    "optdefault": "2"
                 },
                 {
                     "name": "count",
                     "description": "",
                     "type": "Number",
-                    "optional": true
+                    "optional": true,
+                    "optdefault": "buffer.length"
                 }
             ],
             "class": "Mat4"
         },
         {
             "file": "src/mat4.js",
-            "line": 1526,
+            "line": 1630,
+            "description": "Transforms the given buffer with `this` matrix.",
             "itemtype": "method",
             "name": "transformV3Buffer",
             "params": [
@@ -1546,26 +1825,30 @@
                     "name": "offset",
                     "description": "",
                     "type": "Number",
-                    "optional": true
+                    "optional": true,
+                    "optdefault": "0"
                 },
                 {
                     "name": "stride",
                     "description": "",
                     "type": "Number",
-                    "optional": true
+                    "optional": true,
+                    "optdefault": "3"
                 },
                 {
                     "name": "count",
                     "description": "",
                     "type": "Number",
-                    "optional": true
+                    "optional": true,
+                    "optdefault": "buffer.length"
                 }
             ],
             "class": "Mat4"
         },
         {
             "file": "src/mat4.js",
-            "line": 1550,
+            "line": 1655,
+            "description": "Transforms the given buffer with `this` matrix.",
             "itemtype": "method",
             "name": "transformV4Buffer",
             "params": [
@@ -1578,26 +1861,30 @@
                     "name": "offset",
                     "description": "",
                     "type": "Number",
-                    "optional": true
+                    "optional": true,
+                    "optdefault": "0"
                 },
                 {
                     "name": "stride",
                     "description": "",
                     "type": "Number",
-                    "optional": true
+                    "optional": true,
+                    "optdefault": "4"
                 },
                 {
                     "name": "count",
                     "description": "",
                     "type": "Number",
-                    "optional": true
+                    "optional": true,
+                    "optdefault": "buffer.length"
                 }
             ],
             "class": "Mat4"
         },
         {
             "file": "src/mat4.js",
-            "line": 1576,
+            "line": 1682,
+            "description": "Transforms the given buffer with the rotation and scale part of `this` matrix.",
             "itemtype": "method",
             "name": "transformNormalBuffer",
             "params": [
@@ -1610,441 +1897,475 @@
                     "name": "offset",
                     "description": "",
                     "type": "Number",
-                    "optional": true
+                    "optional": true,
+                    "optdefault": "0"
                 },
                 {
                     "name": "stride",
                     "description": "",
                     "type": "Number",
-                    "optional": true
+                    "optional": true,
+                    "optdefault": "3"
                 },
                 {
                     "name": "count",
                     "description": "",
                     "type": "Number",
-                    "optional": true
+                    "optional": true,
+                    "optdefault": "buffer.length"
                 }
             ],
             "class": "Mat4"
         },
         {
             "file": "src/mat4.js",
-            "line": 1601,
+            "line": 1708,
+            "description": "Transpose the given matrix",
             "static": 1,
             "itemtype": "method",
             "name": "transpose",
             "params": [
                 {
                     "name": "mat",
-                    "description": "",
+                    "description": "The matrix to transpose",
                     "type": "Mat4"
                 },
                 {
                     "name": "out",
-                    "description": "",
-                    "type": "Mat4"
+                    "description": "The matrix to write to",
+                    "type": "Mat4",
+                    "optional": true
                 }
             ],
             "return": {
-                "description": "",
+                "description": "The given `out` parameter or a new matrix",
                 "type": "Mat4"
             },
             "class": "Mat4"
         },
         {
             "file": "src/mat4.js",
-            "line": 1618,
+            "line": 1726,
+            "description": "Invert the given matrix",
             "static": 1,
             "itemtype": "method",
             "name": "invert",
             "params": [
                 {
                     "name": "mat",
-                    "description": "",
+                    "description": "The matrix to transpose",
                     "type": "Mat4"
                 },
                 {
                     "name": "out",
-                    "description": "",
-                    "type": "Mat4"
+                    "description": "The matrix to write to",
+                    "type": "Mat4",
+                    "optional": true
                 }
             ],
             "return": {
-                "description": "",
+                "description": "The given `out` parameter or a new matrix",
                 "type": "Mat4"
             },
             "class": "Mat4"
         },
         {
             "file": "src/mat4.js",
-            "line": 1701,
+            "line": 1810,
+            "description": "Negate the components of the given matrix",
             "static": 1,
             "itemtype": "method",
             "name": "negate",
             "params": [
                 {
                     "name": "mat",
-                    "description": "",
+                    "description": "The matrix to transpose",
                     "type": "Mat4"
                 },
                 {
                     "name": "out",
-                    "description": "",
-                    "type": "Mat4"
+                    "description": "The matrix to write to",
+                    "type": "Mat4",
+                    "optional": true
                 }
             ],
             "return": {
-                "description": "",
+                "description": "The given `out` parameter or a new matrix",
                 "type": "Mat4"
             },
             "class": "Mat4"
         },
         {
             "file": "src/mat4.js",
-            "line": 1732,
+            "line": 1842,
+            "description": "Adds a matrix to another",
             "static": 1,
             "itemtype": "method",
             "name": "add",
             "params": [
                 {
                     "name": "matA",
-                    "description": "",
+                    "description": "The first matrix",
                     "type": "Mat4"
                 },
                 {
                     "name": "matB",
-                    "description": "",
+                    "description": "The second matrix",
                     "type": "Mat4"
                 },
                 {
                     "name": "out",
-                    "description": "",
-                    "type": "Mat4"
+                    "description": "The matrix to write to",
+                    "type": "Mat4",
+                    "optional": true
                 }
             ],
             "return": {
-                "description": "",
+                "description": "The given `out` parameter or a new matrix",
                 "type": "Mat4"
             },
             "class": "Mat4"
         },
         {
             "file": "src/mat4.js",
-            "line": 1765,
+            "line": 1876,
+            "description": "Adds a scalar to each component of a matrix",
             "static": 1,
             "itemtype": "method",
             "name": "addScalar",
             "params": [
                 {
                     "name": "mat",
-                    "description": "",
+                    "description": "The matrix",
                     "type": "Mat4"
                 },
                 {
                     "name": "scalar",
-                    "description": "",
+                    "description": "The scalar to add",
                     "type": "Number"
                 },
                 {
                     "name": "out",
-                    "description": "",
-                    "type": "Mat4"
+                    "description": "The matrix to write to",
+                    "type": "Mat4",
+                    "optional": true
                 }
             ],
             "return": {
-                "description": "",
+                "description": "The given `out` parameter or a new matrix",
                 "type": "Mat4"
             },
             "class": "Mat4"
         },
         {
             "file": "src/mat4.js",
-            "line": 1797,
+            "line": 1909,
+            "description": "Subtracts the second matrix from the first",
             "static": 1,
             "itemtype": "method",
             "name": "subtract",
             "params": [
                 {
                     "name": "matA",
-                    "description": "",
+                    "description": "The first matrix",
                     "type": "Mat4"
                 },
                 {
                     "name": "matB",
-                    "description": "",
+                    "description": "The second matrix",
                     "type": "Mat4"
                 },
                 {
                     "name": "out",
-                    "description": "",
-                    "type": "Mat4"
+                    "description": "The matrix to write to",
+                    "type": "Mat4",
+                    "optional": true
                 }
             ],
             "return": {
-                "description": "",
+                "description": "The given `out` parameter or a new matrix",
                 "type": "Mat4"
             },
             "class": "Mat4"
         },
         {
             "file": "src/mat4.js",
-            "line": 1830,
+            "line": 1943,
+            "description": "Subtracts a scalar from each somponent of a matrix",
             "static": 1,
             "itemtype": "method",
             "name": "subtractScalar",
             "params": [
                 {
                     "name": "mat",
-                    "description": "",
+                    "description": "The matrix to subtract from",
                     "type": "Mat4"
                 },
                 {
                     "name": "scalar",
-                    "description": "",
+                    "description": "The scalar to subtract",
                     "type": "Number"
                 },
                 {
                     "name": "out",
-                    "description": "",
-                    "type": "Mat4"
+                    "description": "The matrix to write to",
+                    "type": "Mat4",
+                    "optional": true
                 }
             ],
             "return": {
-                "description": "",
+                "description": "The given `out` parameter or a new matrix",
                 "type": "Mat4"
             },
             "class": "Mat4"
         },
         {
             "file": "src/mat4.js",
-            "line": 1862,
+            "line": 1976,
+            "description": "Multiplies a matrix by another matrix",
             "static": 1,
             "itemtype": "method",
             "name": "multiply",
             "params": [
                 {
                     "name": "matA",
-                    "description": "",
+                    "description": "The first matrix",
                     "type": "Mat4"
                 },
                 {
                     "name": "matB",
-                    "description": "",
+                    "description": "The second matrix",
                     "type": "Mat4"
                 },
                 {
                     "name": "out",
-                    "description": "",
-                    "type": "Mat4"
+                    "description": "The matrix to write to",
+                    "type": "Mat4",
+                    "optional": true
                 }
             ],
             "return": {
-                "description": "",
+                "description": "The given `out` parameter or a new matrix",
                 "type": "Mat4"
             },
             "class": "Mat4"
         },
         {
             "file": "src/mat4.js",
-            "line": 1930,
+            "line": 2045,
+            "description": "Multiplies a matrix by another matrix",
             "static": 1,
             "itemtype": "method",
             "name": "concat",
             "params": [
                 {
                     "name": "matA",
-                    "description": "",
+                    "description": "The first matrix",
                     "type": "Mat4"
                 },
                 {
                     "name": "matB",
-                    "description": "",
+                    "description": "The second matrix",
                     "type": "Mat4"
                 },
                 {
                     "name": "out",
-                    "description": "",
-                    "type": "Mat4"
+                    "description": "The matrix to write to",
+                    "type": "Mat4",
+                    "optional": true
                 }
             ],
             "return": {
-                "description": "",
+                "description": "The given `out` parameter or a new matrix",
                 "type": "Mat4"
             },
             "class": "Mat4"
         },
         {
             "file": "src/mat4.js",
-            "line": 1998,
+            "line": 2113,
+            "description": "Multiplies a chain of matrices",
             "static": 1,
             "itemtype": "method",
             "name": "concatChain",
             "return": {
-                "description": "",
+                "description": "The result of the multiplication",
                 "type": "Mat4"
             },
             "class": "Mat4"
         },
         {
             "file": "src/mat4.js",
-            "line": 2011,
+            "line": 2127,
+            "description": "Multiplies a chain of matrices",
             "static": 1,
             "itemtype": "method",
             "name": "multiplyChain",
             "return": {
-                "description": "",
+                "description": "The result of the multiplication",
                 "type": "Mat4"
             },
             "class": "Mat4"
         },
         {
             "file": "src/mat4.js",
-            "line": 2024,
+            "line": 2141,
+            "description": "Multiplies a matrix with a scalar value",
             "static": 1,
             "itemtype": "method",
             "name": "multiplyScalar",
             "params": [
                 {
                     "name": "matA",
-                    "description": "",
+                    "description": "The matrix",
                     "type": "Mat4"
                 },
                 {
                     "name": "scalar",
-                    "description": "",
+                    "description": "The scalar to multiply",
                     "type": "Number"
                 },
                 {
                     "name": "out",
-                    "description": "",
-                    "type": "Mat4"
+                    "description": "The matrix to write to",
+                    "type": "Mat4",
+                    "optional": true
                 }
             ],
             "return": {
-                "description": "",
+                "description": "The given `out` parameter or a new matrix",
                 "type": "Mat4"
             },
             "class": "Mat4"
         },
         {
             "file": "src/mat4.js",
-            "line": 2056,
+            "line": 2174,
+            "description": "Divides the components of the first matrix by the components of the second matrix",
             "static": 1,
             "itemtype": "method",
             "name": "divide",
             "params": [
                 {
                     "name": "matA",
-                    "description": "",
+                    "description": "The first matrix",
                     "type": "Mat4"
                 },
                 {
                     "name": "matB",
-                    "description": "",
+                    "description": "The second matrix",
                     "type": "Mat4"
                 },
                 {
                     "name": "out",
-                    "description": "",
-                    "type": "Mat4"
+                    "description": "The matrix to write to",
+                    "type": "Mat4",
+                    "optional": true
                 }
             ],
             "return": {
-                "description": "",
+                "description": "The given `out` parameter or a new matrix",
                 "type": "Mat4"
             },
             "class": "Mat4"
         },
         {
             "file": "src/mat4.js",
-            "line": 2088,
+            "line": 2207,
+            "description": "Divides the components of a matrix by a scalar",
             "static": 1,
             "itemtype": "method",
             "name": "divideScalar",
             "params": [
                 {
                     "name": "matA",
-                    "description": "",
+                    "description": "The matrix",
                     "type": "Mat4"
                 },
                 {
                     "name": "scalar",
-                    "description": "",
+                    "description": "The scalar by which to divide",
                     "type": "Number"
                 },
                 {
                     "name": "out",
-                    "description": "",
-                    "type": "Mat4"
+                    "description": "The matrix to write to",
+                    "type": "Mat4",
+                    "optional": true
                 }
             ],
             "return": {
-                "description": "",
+                "description": "The given `out` parameter or a new matrix",
                 "type": "Mat4"
             },
             "class": "Mat4"
         },
         {
             "file": "src/mat4.js",
-            "line": 2120,
+            "line": 2240,
+            "description": "Performs a linear interpolation between two matrices",
             "static": 1,
             "itemtype": "method",
             "name": "lerp",
             "params": [
                 {
                     "name": "matA",
-                    "description": "",
+                    "description": "The first matrix",
                     "type": "Mat4"
                 },
                 {
                     "name": "matB",
-                    "description": "",
+                    "description": "The second matrix",
                     "type": "Mat4"
                 },
                 {
                     "name": "t",
-                    "description": "",
+                    "description": "The interpolation value. This is assumed to be in [0:1] range",
                     "type": "Number"
                 },
                 {
                     "name": "out",
-                    "description": "",
-                    "type": "Mat4"
+                    "description": "The matrix to write to",
+                    "type": "Mat4",
+                    "optional": true
                 }
             ],
             "return": {
-                "description": "",
+                "description": "The given `out` parameter or a new matrix",
                 "type": "Mat4"
             },
             "class": "Mat4"
         },
         {
             "file": "src/mat4.js",
-            "line": 2153,
+            "line": 2274,
+            "description": "Creates a new matrix with all components set to 0",
             "static": 1,
             "itemtype": "method",
             "name": "zero",
             "return": {
-                "description": "",
+                "description": "a new matrix",
                 "type": "Mat4"
             },
             "class": "Mat4"
         },
         {
             "file": "src/mat4.js",
-            "line": 2163,
+            "line": 2284,
+            "description": "Creates a new matrix that is initialized to identity",
             "static": 1,
             "itemtype": "method",
             "name": "identity",
             "return": {
-                "description": "",
+                "description": "a new matrix",
                 "type": "Mat4"
             },
             "class": "Mat4"
         },
         {
             "file": "src/mat4.js",
-            "line": 2175,
+            "line": 2297,
+            "description": "Creates a new matrix. This method should be called with 16 or 0 arguments. If less than 16 but more than 0 arguments\nare given some components are going to be undefined. The arguments are expected to be in column major order.",
             "static": 1,
             "itemtype": "method",
             "name": "create",
@@ -2131,14 +2452,15 @@
                 }
             ],
             "return": {
-                "description": "",
+                "description": "a new matrix",
                 "type": "Mat4"
             },
             "class": "Mat4"
         },
         {
             "file": "src/mat4.js",
-            "line": 2221,
+            "line": 2344,
+            "description": "Creates a new matrix. The arguments are expected to be in row major order.",
             "static": 1,
             "itemtype": "method",
             "name": "createRowMajor",
@@ -2209,8 +2531,398 @@
                 }
             ],
             "return": {
-                "description": "",
+                "description": "a new matrix",
                 "type": "Mat4"
+            },
+            "class": "Mat4"
+        },
+        {
+            "file": "src/mat4.js",
+            "line": 2388,
+            "static": 1,
+            "itemtype": "method",
+            "name": "createScale",
+            "params": [
+                {
+                    "name": "x",
+                    "description": ""
+                },
+                {
+                    "name": "y",
+                    "description": ""
+                },
+                {
+                    "name": "z",
+                    "description": ""
+                }
+            ],
+            "return": {
+                "description": "a new matrix",
+                "type": "Mat4"
+            },
+            "class": "Mat4"
+        },
+        {
+            "file": "src/mat4.js",
+            "line": 2400,
+            "static": 1,
+            "itemtype": "method",
+            "name": "createTranslation",
+            "params": [
+                {
+                    "name": "x",
+                    "description": ""
+                },
+                {
+                    "name": "y",
+                    "description": ""
+                },
+                {
+                    "name": "z",
+                    "description": ""
+                }
+            ],
+            "return": {
+                "description": "a new matrix",
+                "type": "Mat4"
+            },
+            "class": "Mat4"
+        },
+        {
+            "file": "src/mat4.js",
+            "line": 2412,
+            "static": 1,
+            "itemtype": "method",
+            "name": "createLookAt",
+            "params": [
+                {
+                    "name": "pos",
+                    "description": ""
+                },
+                {
+                    "name": "lookAt",
+                    "description": ""
+                },
+                {
+                    "name": "up",
+                    "description": ""
+                }
+            ],
+            "return": {
+                "description": "a new matrix",
+                "type": "Mat4"
+            },
+            "class": "Mat4"
+        },
+        {
+            "file": "src/mat4.js",
+            "line": 2424,
+            "static": 1,
+            "itemtype": "method",
+            "name": "createWorld",
+            "params": [
+                {
+                    "name": "position",
+                    "description": ""
+                },
+                {
+                    "name": "forward",
+                    "description": ""
+                },
+                {
+                    "name": "up",
+                    "description": ""
+                }
+            ],
+            "return": {
+                "description": "a new matrix",
+                "type": "Mat4"
+            },
+            "class": "Mat4"
+        },
+        {
+            "file": "src/mat4.js",
+            "line": 2436,
+            "static": 1,
+            "itemtype": "method",
+            "name": "createPerspectiveFieldOfView",
+            "params": [
+                {
+                    "name": "fov",
+                    "description": ""
+                },
+                {
+                    "name": "aspec",
+                    "description": ""
+                },
+                {
+                    "name": "near",
+                    "description": ""
+                },
+                {
+                    "name": "far",
+                    "description": ""
+                }
+            ],
+            "return": {
+                "description": "a new matrix",
+                "type": "Mat4"
+            },
+            "class": "Mat4"
+        },
+        {
+            "file": "src/mat4.js",
+            "line": 2449,
+            "static": 1,
+            "itemtype": "method",
+            "name": "createPerspective",
+            "params": [
+                {
+                    "name": "width",
+                    "description": ""
+                },
+                {
+                    "name": "height",
+                    "description": ""
+                },
+                {
+                    "name": "near",
+                    "description": ""
+                },
+                {
+                    "name": "far",
+                    "description": ""
+                }
+            ],
+            "return": {
+                "description": "a new matrix",
+                "type": "Mat4"
+            },
+            "class": "Mat4"
+        },
+        {
+            "file": "src/mat4.js",
+            "line": 2462,
+            "static": 1,
+            "itemtype": "method",
+            "name": "createPerspectiveOffCenter",
+            "params": [
+                {
+                    "name": "left",
+                    "description": ""
+                },
+                {
+                    "name": "right",
+                    "description": ""
+                },
+                {
+                    "name": "bottom",
+                    "description": ""
+                },
+                {
+                    "name": "top",
+                    "description": ""
+                },
+                {
+                    "name": "near",
+                    "description": ""
+                },
+                {
+                    "name": "far",
+                    "description": ""
+                }
+            ],
+            "return": {
+                "description": "a new matrix",
+                "type": "Mat4"
+            },
+            "class": "Mat4"
+        },
+        {
+            "file": "src/mat4.js",
+            "line": 2477,
+            "static": 1,
+            "itemtype": "method",
+            "name": "createOrthographic",
+            "params": [
+                {
+                    "name": "width",
+                    "description": ""
+                },
+                {
+                    "name": "height",
+                    "description": ""
+                },
+                {
+                    "name": "near",
+                    "description": ""
+                },
+                {
+                    "name": "far",
+                    "description": ""
+                }
+            ],
+            "return": {
+                "description": "a new matrix",
+                "type": "Mat4"
+            },
+            "class": "Mat4"
+        },
+        {
+            "file": "src/mat4.js",
+            "line": 2490,
+            "static": 1,
+            "itemtype": "method",
+            "name": "createOrthographicOffCenter",
+            "params": [
+                {
+                    "name": "left",
+                    "description": ""
+                },
+                {
+                    "name": "right",
+                    "description": ""
+                },
+                {
+                    "name": "bottom",
+                    "description": ""
+                },
+                {
+                    "name": "top",
+                    "description": ""
+                },
+                {
+                    "name": "near",
+                    "description": ""
+                },
+                {
+                    "name": "far",
+                    "description": ""
+                }
+            ],
+            "return": {
+                "description": "a new matrix",
+                "type": "Mat4"
+            },
+            "class": "Mat4"
+        },
+        {
+            "file": "src/mat4.js",
+            "line": 2505,
+            "static": 1,
+            "itemtype": "method",
+            "name": "createRotationX",
+            "params": [
+                {
+                    "name": "rad",
+                    "description": ""
+                }
+            ],
+            "return": {
+                "description": "a new matrix",
+                "type": "Mat4"
+            },
+            "class": "Mat4"
+        },
+        {
+            "file": "src/mat4.js",
+            "line": 2515,
+            "static": 1,
+            "itemtype": "method",
+            "name": "createRotationY",
+            "params": [
+                {
+                    "name": "rad",
+                    "description": ""
+                }
+            ],
+            "return": {
+                "description": "a new matrix",
+                "type": "Mat4"
+            },
+            "class": "Mat4"
+        },
+        {
+            "file": "src/mat4.js",
+            "line": 2525,
+            "static": 1,
+            "itemtype": "method",
+            "name": "createRotationZ",
+            "params": [
+                {
+                    "name": "rad",
+                    "description": ""
+                }
+            ],
+            "return": {
+                "description": "a new matrix",
+                "type": "Mat4"
+            },
+            "class": "Mat4"
+        },
+        {
+            "file": "src/mat4.js",
+            "line": 2535,
+            "static": 1,
+            "itemtype": "method",
+            "name": "createAxisAngle",
+            "params": [
+                {
+                    "name": "axis",
+                    "description": ""
+                },
+                {
+                    "name": "angle",
+                    "description": ""
+                }
+            ],
+            "return": {
+                "description": "a new matrix",
+                "type": "Mat4"
+            },
+            "class": "Mat4"
+        },
+        {
+            "file": "src/mat4.js",
+            "line": 2546,
+            "static": 1,
+            "itemtype": "method",
+            "name": "createYawPitchRoll",
+            "params": [
+                {
+                    "name": "yaw",
+                    "description": ""
+                },
+                {
+                    "name": "pitch",
+                    "description": ""
+                },
+                {
+                    "name": "roll",
+                    "description": ""
+                }
+            ],
+            "return": {
+                "description": "a new matrix",
+                "type": "Mat4"
+            },
+            "class": "Mat4"
+        },
+        {
+            "file": "src/mat4.js",
+            "line": 2558,
+            "static": 1,
+            "itemtype": "method",
+            "name": "prettyString",
+            "params": [
+                {
+                    "name": "mat",
+                    "description": ""
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "String"
             },
             "class": "Mat4"
         },
@@ -7167,24 +7879,12 @@
     ],
     "warnings": [
         {
-            "message": "Missing item type",
-            "line": " src/mat4.js:37"
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src/mat4.js:2558"
         },
         {
-            "message": "Missing item type",
-            "line": " src/mat4.js:39"
-        },
-        {
-            "message": "Missing item type",
-            "line": " src/mat4.js:41"
-        },
-        {
-            "message": "Missing item type",
-            "line": " src/mat4.js:43"
-        },
-        {
-            "message": "Missing item type",
-            "line": " src/mat4.js:45"
+            "message": "Missing item type\nSome content here",
+            "line": " src/mat4.js:1"
         }
     ]
 }

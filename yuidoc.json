@@ -1,10 +1,10 @@
 {
   "name": "VecmathJS",
   "description": "Vector math library for javascript",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "options": {
     "linkNatives": "true",
-    "attributesEmit": "false",
+    "attributesEmit": false,
     "paths": "src",
     "outdir": "doc",
     "themedir" : "node_modules/yuidoc-bootstrap-theme",
