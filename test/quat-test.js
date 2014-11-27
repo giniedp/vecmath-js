@@ -98,9 +98,9 @@
     componentEqual(this.q1.clone(), [1, 2, 3, 4]);
   });
 
-  test('copy', function () {
+  test('copyTo', function () {
     var buffer = [6, 4, 3, 2, 1, 0];
-    this.q1.init(1, 2, 3, 4).copy(buffer, 1);
+    this.q1.init(1, 2, 3, 4).copyTo(buffer, 1);
     equal(buffer[0], 6);
     equal(buffer[1], 1);
     equal(buffer[2], 2);

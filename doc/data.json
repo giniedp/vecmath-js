@@ -72,7 +72,7 @@
             "params": [
                 {
                     "name": "data",
-                    "description": "The data array that holds all matrix values.",
+                    "description": "The data array that holds all matrix values. Assumed to have a length of 16.",
                     "type": "Float32Array",
                     "optional": true
                 }
@@ -225,36 +225,40 @@
             "itemtype": "attribute",
             "name": "right",
             "type": "{Float32Array}",
+            "description": "This is a subarray of the `data` attribute",
             "class": "Mat4"
         },
         {
             "file": "src/mat4.js",
-            "line": 50,
+            "line": 51,
             "itemtype": "attribute",
             "name": "up",
             "type": "{Float32Array}",
+            "description": "This is a subarray of the `data` attribute",
             "class": "Mat4"
         },
         {
             "file": "src/mat4.js",
-            "line": 55,
+            "line": 57,
             "itemtype": "attribute",
             "name": "backward",
             "type": "{Float32Array}",
+            "description": "This is a subarray of the `data` attribute",
             "class": "Mat4"
         },
         {
             "file": "src/mat4.js",
-            "line": 60,
+            "line": 63,
             "itemtype": "attribute",
             "name": "translation",
             "type": "{Float32Array}",
+            "description": "This is a subarray of the `data` attribute",
             "class": "Mat4"
         },
         {
             "file": "src/mat4.js",
-            "line": 71,
-            "description": "Initializes the matrix with the given values in given order.",
+            "line": 75,
+            "description": "Initializes the matrix with the given values in given order. The values are applied in column major order",
             "itemtype": "method",
             "name": "init",
             "chainable": 1,
@@ -344,11 +348,14 @@
                 "description": "Reference to `this` for chaining.",
                 "type": "Mat4"
             },
+            "example": [
+                "\n\n    mat.init(\n      0, 0, 0, 0,\n      0, 0, 0, 0,\n      0, 0, 0, 0,\n      x, y, z, 0)"
+            ],
             "class": "Mat4"
         },
         {
             "file": "src/mat4.js",
-            "line": 114,
+            "line": 125,
             "description": "Initializes the matrix with the given values. The values are read in row major order.",
             "itemtype": "method",
             "name": "initRowMajor",
@@ -443,7 +450,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 157,
+            "line": 168,
             "description": "Initializes all components of this matrix with the given number.",
             "itemtype": "method",
             "name": "initWith",
@@ -463,7 +470,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 170,
+            "line": 181,
             "description": "Initializes the components of this matrix to the identity.",
             "itemtype": "method",
             "name": "initIdentity",
@@ -476,7 +483,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 183,
+            "line": 194,
             "description": "Initializes this matrix from another matrix.",
             "itemtype": "method",
             "name": "initFrom",
@@ -496,7 +503,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 212,
+            "line": 223,
             "description": "Reads a buffer starting at given offset and initializes the elements of this matrix.\nThe given buffer must have at least 16 elements starting at given offset.\nThe elements are expected to be in column major layout.",
             "itemtype": "method",
             "name": "initFromBuffer",
@@ -522,7 +529,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 244,
+            "line": 255,
             "description": "Initializes this matrix from given quaternion.",
             "itemtype": "method",
             "name": "initFromQuaternion",
@@ -542,7 +549,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 273,
+            "line": 284,
             "description": "Initializes this matrix to a rotation matrix defined by given axis vector and angle.",
             "itemtype": "method",
             "name": "initAxisAngle",
@@ -567,7 +574,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 309,
+            "line": 320,
             "description": "Initializes this matrix to a rotation matrix defined by given yaw pitch and roll values.",
             "itemtype": "method",
             "name": "initYawPitchRoll",
@@ -597,7 +604,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 355,
+            "line": 366,
             "description": "Initializes this matrix with a rotation around the X axis.",
             "itemtype": "method",
             "name": "initRotationX",
@@ -617,7 +624,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 373,
+            "line": 384,
             "description": "Initializes this matrix with a rotation around the Y axis.",
             "itemtype": "method",
             "name": "initRotationY",
@@ -636,7 +643,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 392,
+            "line": 403,
             "description": "Initializes this matrix with a rotation around the Z axis.",
             "itemtype": "method",
             "name": "initRotationZ",
@@ -655,7 +662,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 411,
+            "line": 422,
             "description": "Initializes a translation matrix.",
             "itemtype": "method",
             "name": "initTranslation",
@@ -685,7 +692,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 429,
+            "line": 440,
             "description": "Initializes a scale matrix.",
             "itemtype": "method",
             "name": "initScale",
@@ -715,7 +722,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 447,
+            "line": 458,
             "description": "Initializes a rotation matrix by using a position and a lookat point.",
             "itemtype": "method",
             "name": "initLookAt",
@@ -724,17 +731,17 @@
                 {
                     "name": "pos",
                     "description": "The position where the viewer stands",
-                    "type": "Vec3|Vec4"
+                    "type": "Vec3"
                 },
                 {
                     "name": "lookAt",
                     "description": "The position where the viewer is looking to",
-                    "type": "Vec3|Vec4"
+                    "type": "Vec3"
                 },
                 {
                     "name": "up",
                     "description": "The up vector of the viewer",
-                    "type": "Vec3|Vec4"
+                    "type": "Vec3"
                 }
             ],
             "return": {
@@ -745,7 +752,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 492,
+            "line": 503,
             "description": "Initializes a matrix from a position point and a forward and up vectors",
             "itemtype": "method",
             "name": "initWorld",
@@ -775,7 +782,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 535,
+            "line": 546,
             "description": "Initializes a perspective matrix with given field of view angle",
             "itemtype": "method",
             "name": "initPerspectiveFieldOfView",
@@ -810,7 +817,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 556,
+            "line": 567,
             "description": "Initializes a perspective matrix",
             "itemtype": "method",
             "name": "initPerspective",
@@ -845,7 +852,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 575,
+            "line": 586,
             "description": "Initializes a perspective matrix",
             "itemtype": "method",
             "name": "initPerspectiveOffCenter",
@@ -890,7 +897,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 596,
+            "line": 607,
             "description": "Initializes an orthographic matrix",
             "itemtype": "method",
             "name": "initOrthographic",
@@ -923,7 +930,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 615,
+            "line": 626,
             "description": "Initializes an orthographic matrix",
             "itemtype": "method",
             "name": "initOrthographicOffCenter",
@@ -964,7 +971,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 637,
+            "line": 648,
             "description": "Creates a copy of this matrix",
             "itemtype": "method",
             "name": "clone",
@@ -976,7 +983,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 647,
+            "line": 658,
             "description": "Copies the components successively into the given array.",
             "chainable": 1,
             "itemtype": "method",
@@ -1003,7 +1010,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 677,
+            "line": 688,
             "description": "Returns an array filled with the values of the components of this vector",
             "itemtype": "method",
             "name": "dump",
@@ -1015,7 +1022,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 688,
+            "line": 699,
             "description": "Checks for component wise equality with given matrix",
             "itemtype": "method",
             "name": "equals",
@@ -1034,7 +1041,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 715,
+            "line": 726,
             "description": "Gets the forward vector",
             "itemtype": "method",
             "name": "getForward",
@@ -1054,7 +1061,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 729,
+            "line": 740,
             "description": "Gets the backward vector",
             "itemtype": "method",
             "name": "getBackward",
@@ -1074,7 +1081,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 743,
+            "line": 754,
             "description": "Gets the right vector",
             "itemtype": "method",
             "name": "getRight",
@@ -1094,7 +1101,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 757,
+            "line": 768,
             "description": "Gets the left vector",
             "itemtype": "method",
             "name": "getLeft",
@@ -1114,7 +1121,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 771,
+            "line": 782,
             "description": "Gets the up vector",
             "itemtype": "method",
             "name": "getUp",
@@ -1134,7 +1141,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 784,
+            "line": 795,
             "description": "Gets the down vector",
             "itemtype": "method",
             "name": "getDown",
@@ -1154,7 +1161,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 798,
+            "line": 809,
             "description": "Gets the translation part as vector",
             "itemtype": "method",
             "name": "getTranslation",
@@ -1174,7 +1181,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 812,
+            "line": 823,
             "description": "Gets the scale part as vector",
             "itemtype": "method",
             "name": "getScale",
@@ -1194,7 +1201,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 826,
+            "line": 837,
             "description": "Writes the values of the forward vector into an array",
             "itemtype": "method",
             "name": "copyForward",
@@ -1213,7 +1220,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 839,
+            "line": 850,
             "description": "Writes the values of the backward vector into an array",
             "itemtype": "method",
             "name": "copyBackward",
@@ -1232,7 +1239,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 852,
+            "line": 863,
             "description": "Writes the values of the right vector into an array",
             "itemtype": "method",
             "name": "copyRight",
@@ -1251,7 +1258,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 865,
+            "line": 876,
             "description": "Writes the values of the left vector into an array",
             "itemtype": "method",
             "name": "copyLeft",
@@ -1270,7 +1277,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 878,
+            "line": 889,
             "description": "Writes the values of the up vector into an array",
             "itemtype": "method",
             "name": "copyUp",
@@ -1289,7 +1296,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 891,
+            "line": 902,
             "description": "Writes the values of the down vector into an array",
             "itemtype": "method",
             "name": "copyDown",
@@ -1308,7 +1315,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 904,
+            "line": 915,
             "description": "Writes the values of the translation part into an array",
             "itemtype": "method",
             "name": "copyTranslation",
@@ -1327,7 +1334,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 917,
+            "line": 928,
             "description": "Writes the values of the scale vector into an array",
             "itemtype": "method",
             "name": "copyScale",
@@ -1346,7 +1353,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 930,
+            "line": 941,
             "description": "Sets the forward vector",
             "itemtype": "method",
             "name": "setForward",
@@ -1366,7 +1373,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 944,
+            "line": 955,
             "description": "Sets the backward vector",
             "itemtype": "method",
             "name": "setBackward",
@@ -1386,7 +1393,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 958,
+            "line": 969,
             "description": "Sets the right vector",
             "itemtype": "method",
             "name": "setRight",
@@ -1406,7 +1413,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 972,
+            "line": 983,
             "description": "Sets the left vector",
             "itemtype": "method",
             "name": "setLeft",
@@ -1426,7 +1433,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 986,
+            "line": 997,
             "description": "Sets the up vector",
             "itemtype": "method",
             "name": "setUp",
@@ -1446,7 +1453,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 1000,
+            "line": 1011,
             "description": "Sets the down vector",
             "itemtype": "method",
             "name": "setDown",
@@ -1466,7 +1473,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 1014,
+            "line": 1025,
             "description": "Sets the translation part",
             "itemtype": "method",
             "name": "setTranslation",
@@ -1486,7 +1493,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 1028,
+            "line": 1039,
             "description": "Sets the scale part",
             "itemtype": "method",
             "name": "setScale",
@@ -1506,7 +1513,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 1042,
+            "line": 1053,
             "description": "Calculates the determinant of this matrix",
             "itemtype": "method",
             "name": "determinant",
@@ -1518,7 +1525,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 1087,
+            "line": 1098,
             "description": "Transposes this matrix",
             "itemtype": "method",
             "name": "selfTranspose",
@@ -1531,7 +1538,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 1121,
+            "line": 1132,
             "description": "Inverts this matrix",
             "itemtype": "method",
             "name": "selfInvert",
@@ -1544,7 +1551,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 1200,
+            "line": 1211,
             "description": "Negates all components of this matrix",
             "itemtype": "method",
             "name": "selfNegate",
@@ -1557,7 +1564,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 1227,
+            "line": 1238,
             "description": "Adds the given matrix to `this`",
             "itemtype": "method",
             "name": "selfAdd",
@@ -1577,7 +1584,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 1257,
+            "line": 1268,
             "description": "Adds the given scalar to each component of `this`",
             "itemtype": "method",
             "name": "selfAddScalar",
@@ -1597,7 +1604,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 1285,
+            "line": 1296,
             "description": "Subtracts the given matrix from `this`",
             "itemtype": "method",
             "name": "selfSubtract",
@@ -1617,7 +1624,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 1316,
+            "line": 1327,
             "description": "Subtracts the given scalar from each component of `this`",
             "itemtype": "method",
             "name": "selfSubtractScalar",
@@ -1637,7 +1644,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 1345,
+            "line": 1356,
             "description": "Multiplies the given matrix with this",
             "itemtype": "method",
             "name": "selfMultiply",
@@ -1657,7 +1664,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 1411,
+            "line": 1422,
             "description": "Concatenates the given matrix to this",
             "itemtype": "method",
             "name": "selfConcat",
@@ -1677,7 +1684,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 1477,
+            "line": 1488,
             "description": "Multiplies each component of `this` with given scalar",
             "itemtype": "method",
             "name": "selfMultiplyScalar",
@@ -1697,7 +1704,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 1506,
+            "line": 1517,
             "description": "Divides each matching component pair",
             "itemtype": "method",
             "name": "selfDivide",
@@ -1717,7 +1724,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 1535,
+            "line": 1546,
             "description": "Divides each component of `this` by given scalar",
             "itemtype": "method",
             "name": "selfDivideScalar",
@@ -1737,7 +1744,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 1564,
+            "line": 1575,
             "description": "Transform the given vector with this matrix.",
             "itemtype": "method",
             "name": "transform",
@@ -1756,7 +1763,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 1588,
+            "line": 1599,
             "description": "Rotates and scales the given vector with this matrix.",
             "itemtype": "method",
             "name": "transformNormal",
@@ -1775,7 +1782,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 1607,
+            "line": 1618,
             "description": "Transforms the given buffer with `this` matrix.",
             "itemtype": "method",
             "name": "transformV2Buffer",
@@ -1811,7 +1818,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 1630,
+            "line": 1641,
             "description": "Transforms the given buffer with `this` matrix.",
             "itemtype": "method",
             "name": "transformV3Buffer",
@@ -1847,7 +1854,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 1655,
+            "line": 1666,
             "description": "Transforms the given buffer with `this` matrix.",
             "itemtype": "method",
             "name": "transformV4Buffer",
@@ -1883,7 +1890,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 1682,
+            "line": 1693,
             "description": "Transforms the given buffer with the rotation and scale part of `this` matrix.",
             "itemtype": "method",
             "name": "transformNormalBuffer",
@@ -1919,7 +1926,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 1708,
+            "line": 1719,
             "description": "Transpose the given matrix",
             "static": 1,
             "itemtype": "method",
@@ -1945,7 +1952,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 1726,
+            "line": 1737,
             "description": "Invert the given matrix",
             "static": 1,
             "itemtype": "method",
@@ -1971,7 +1978,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 1810,
+            "line": 1821,
             "description": "Negate the components of the given matrix",
             "static": 1,
             "itemtype": "method",
@@ -1997,7 +2004,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 1842,
+            "line": 1853,
             "description": "Adds a matrix to another",
             "static": 1,
             "itemtype": "method",
@@ -2028,7 +2035,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 1876,
+            "line": 1887,
             "description": "Adds a scalar to each component of a matrix",
             "static": 1,
             "itemtype": "method",
@@ -2059,7 +2066,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 1909,
+            "line": 1920,
             "description": "Subtracts the second matrix from the first",
             "static": 1,
             "itemtype": "method",
@@ -2090,7 +2097,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 1943,
+            "line": 1954,
             "description": "Subtracts a scalar from each somponent of a matrix",
             "static": 1,
             "itemtype": "method",
@@ -2121,7 +2128,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 1976,
+            "line": 1987,
             "description": "Multiplies a matrix by another matrix",
             "static": 1,
             "itemtype": "method",
@@ -2152,7 +2159,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 2045,
+            "line": 2056,
             "description": "Multiplies a matrix by another matrix",
             "static": 1,
             "itemtype": "method",
@@ -2183,7 +2190,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 2113,
+            "line": 2124,
             "description": "Multiplies a chain of matrices",
             "static": 1,
             "itemtype": "method",
@@ -2196,7 +2203,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 2127,
+            "line": 2138,
             "description": "Multiplies a chain of matrices",
             "static": 1,
             "itemtype": "method",
@@ -2209,7 +2216,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 2141,
+            "line": 2152,
             "description": "Multiplies a matrix with a scalar value",
             "static": 1,
             "itemtype": "method",
@@ -2240,7 +2247,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 2174,
+            "line": 2185,
             "description": "Divides the components of the first matrix by the components of the second matrix",
             "static": 1,
             "itemtype": "method",
@@ -2271,7 +2278,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 2207,
+            "line": 2218,
             "description": "Divides the components of a matrix by a scalar",
             "static": 1,
             "itemtype": "method",
@@ -2302,7 +2309,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 2240,
+            "line": 2251,
             "description": "Performs a linear interpolation between two matrices",
             "static": 1,
             "itemtype": "method",
@@ -2338,7 +2345,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 2274,
+            "line": 2285,
             "description": "Creates a new matrix with all components set to 0",
             "static": 1,
             "itemtype": "method",
@@ -2351,7 +2358,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 2284,
+            "line": 2295,
             "description": "Creates a new matrix that is initialized to identity",
             "static": 1,
             "itemtype": "method",
@@ -2364,7 +2371,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 2297,
+            "line": 2308,
             "description": "Creates a new matrix. This method should be called with 16 or 0 arguments. If less than 16 but more than 0 arguments\nare given some components are going to be undefined. The arguments are expected to be in column major order.",
             "static": 1,
             "itemtype": "method",
@@ -2459,7 +2466,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 2344,
+            "line": 2355,
             "description": "Creates a new matrix. The arguments are expected to be in row major order.",
             "static": 1,
             "itemtype": "method",
@@ -2538,7 +2545,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 2388,
+            "line": 2399,
             "static": 1,
             "itemtype": "method",
             "name": "createScale",
@@ -2564,7 +2571,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 2400,
+            "line": 2411,
             "static": 1,
             "itemtype": "method",
             "name": "createTranslation",
@@ -2590,7 +2597,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 2412,
+            "line": 2423,
             "static": 1,
             "itemtype": "method",
             "name": "createLookAt",
@@ -2616,7 +2623,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 2424,
+            "line": 2435,
             "static": 1,
             "itemtype": "method",
             "name": "createWorld",
@@ -2642,7 +2649,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 2436,
+            "line": 2447,
             "static": 1,
             "itemtype": "method",
             "name": "createPerspectiveFieldOfView",
@@ -2672,7 +2679,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 2449,
+            "line": 2460,
             "static": 1,
             "itemtype": "method",
             "name": "createPerspective",
@@ -2702,7 +2709,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 2462,
+            "line": 2473,
             "static": 1,
             "itemtype": "method",
             "name": "createPerspectiveOffCenter",
@@ -2740,7 +2747,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 2477,
+            "line": 2488,
             "static": 1,
             "itemtype": "method",
             "name": "createOrthographic",
@@ -2770,7 +2777,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 2490,
+            "line": 2501,
             "static": 1,
             "itemtype": "method",
             "name": "createOrthographicOffCenter",
@@ -2808,7 +2815,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 2505,
+            "line": 2516,
             "static": 1,
             "itemtype": "method",
             "name": "createRotationX",
@@ -2826,7 +2833,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 2515,
+            "line": 2526,
             "static": 1,
             "itemtype": "method",
             "name": "createRotationY",
@@ -2844,7 +2851,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 2525,
+            "line": 2536,
             "static": 1,
             "itemtype": "method",
             "name": "createRotationZ",
@@ -2862,7 +2869,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 2535,
+            "line": 2546,
             "static": 1,
             "itemtype": "method",
             "name": "createAxisAngle",
@@ -2884,7 +2891,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 2546,
+            "line": 2557,
             "static": 1,
             "itemtype": "method",
             "name": "createYawPitchRoll",
@@ -2910,7 +2917,7 @@
         },
         {
             "file": "src/mat4.js",
-            "line": 2558,
+            "line": 2569,
             "static": 1,
             "itemtype": "method",
             "name": "prettyString",
@@ -2928,7 +2935,39 @@
         },
         {
             "file": "src/quat.js",
-            "line": 23,
+            "line": 14,
+            "itemtype": "attribute",
+            "name": "x",
+            "type": "{Number}",
+            "class": "Quat"
+        },
+        {
+            "file": "src/quat.js",
+            "line": 19,
+            "itemtype": "attribute",
+            "name": "y",
+            "type": "{Number}",
+            "class": "Quat"
+        },
+        {
+            "file": "src/quat.js",
+            "line": 24,
+            "itemtype": "attribute",
+            "name": "z",
+            "type": "{Number}",
+            "class": "Quat"
+        },
+        {
+            "file": "src/quat.js",
+            "line": 29,
+            "itemtype": "attribute",
+            "name": "w",
+            "type": "{Number}",
+            "class": "Quat"
+        },
+        {
+            "file": "src/quat.js",
+            "line": 39,
             "description": "Initializes components of the quaternion with given values.",
             "itemtype": "method",
             "name": "init",
@@ -2962,7 +3001,7 @@
         },
         {
             "file": "src/quat.js",
-            "line": 40,
+            "line": 56,
             "description": "Initializes the quaternion with `x`, `y` and `z` components set to `0` and `w` component set to `1`.",
             "itemtype": "method",
             "name": "initIdentity",
@@ -2974,7 +3013,7 @@
         },
         {
             "file": "src/quat.js",
-            "line": 53,
+            "line": 69,
             "description": "Initializes the quaternion with all components set to `0`.",
             "itemtype": "method",
             "name": "initZero",
@@ -2986,7 +3025,7 @@
         },
         {
             "file": "src/quat.js",
-            "line": 66,
+            "line": 82,
             "description": "Initializes the components of this quaternion by taking the components from the given quaternion or vector.",
             "itemtype": "method",
             "name": "initFrom",
@@ -3005,7 +3044,7 @@
         },
         {
             "file": "src/quat.js",
-            "line": 80,
+            "line": 96,
             "description": "Initializes the components of this quaternion by taking values from the given array in successive order.",
             "chainable": 1,
             "itemtype": "method",
@@ -3032,7 +3071,7 @@
         },
         {
             "file": "src/quat.js",
-            "line": 97,
+            "line": 113,
             "description": "Initializes the quaternion from axis and an angle.",
             "itemtype": "method",
             "name": "initAxisAngle",
@@ -3056,7 +3095,7 @@
         },
         {
             "file": "src/quat.js",
-            "line": 114,
+            "line": 130,
             "description": "Initializes the quaternion from yaw pitch and roll angles.",
             "itemtype": "method",
             "name": "initYawPitchRoll",
@@ -3085,7 +3124,7 @@
         },
         {
             "file": "src/quat.js",
-            "line": 142,
+            "line": 158,
             "description": "Creates a copy of this quaternion",
             "itemtype": "method",
             "name": "clone",
@@ -3097,7 +3136,7 @@
         },
         {
             "file": "src/quat.js",
-            "line": 151,
+            "line": 167,
             "description": "Copies the components successively into the given array.",
             "chainable": 1,
             "itemtype": "method",
@@ -3124,7 +3163,7 @@
         },
         {
             "file": "src/quat.js",
-            "line": 167,
+            "line": 183,
             "description": "Returns an array filled with the values of the components of this quaternion",
             "itemtype": "method",
             "name": "dump",
@@ -3136,7 +3175,7 @@
         },
         {
             "file": "src/quat.js",
-            "line": 176,
+            "line": 192,
             "description": "Checks for component wise equality with given quaternion",
             "itemtype": "method",
             "name": "equals",
@@ -3155,7 +3194,7 @@
         },
         {
             "file": "src/quat.js",
-            "line": 186,
+            "line": 202,
             "description": "Calculates the length of this quaternion",
             "itemtype": "method",
             "name": "length",
@@ -3167,7 +3206,7 @@
         },
         {
             "file": "src/quat.js",
-            "line": 199,
+            "line": 215,
             "description": "Calculates the squared length of this quaternion",
             "itemtype": "method",
             "name": "lengthSquared",
@@ -3179,7 +3218,7 @@
         },
         {
             "file": "src/quat.js",
-            "line": 212,
+            "line": 228,
             "description": "Calculates the dot product with the given quaternion",
             "itemtype": "method",
             "name": "dot",
@@ -3198,7 +3237,7 @@
         },
         {
             "file": "src/quat.js",
-            "line": 222,
+            "line": 238,
             "description": "Negates the components of `this`",
             "itemtype": "method",
             "name": "selfNegate",
@@ -3210,7 +3249,7 @@
         },
         {
             "file": "src/quat.js",
-            "line": 235,
+            "line": 251,
             "description": "Negates the `x`, `y` and `z` components of `this`",
             "itemtype": "method",
             "name": "selfConjugate",
@@ -3222,7 +3261,7 @@
         },
         {
             "file": "src/quat.js",
-            "line": 247,
+            "line": 263,
             "description": "Normalizes `this` so that `length` should be `1`",
             "itemtype": "method",
             "name": "selfNormalize",
@@ -3234,7 +3273,7 @@
         },
         {
             "file": "src/quat.js",
-            "line": 265,
+            "line": 281,
             "description": "Inverts `this` so that multiplication with the original would return the identity quaternion.",
             "itemtype": "method",
             "name": "selfInvert",
@@ -3246,7 +3285,7 @@
         },
         {
             "file": "src/quat.js",
-            "line": 283,
+            "line": 299,
             "description": "Performs a component wise addition with `other`",
             "itemtype": "method",
             "name": "selfAdd",
@@ -3265,7 +3304,7 @@
         },
         {
             "file": "src/quat.js",
-            "line": 297,
+            "line": 313,
             "description": "Performs a component wise subtraction with `other`",
             "itemtype": "method",
             "name": "selfSubtract",
@@ -3284,7 +3323,7 @@
         },
         {
             "file": "src/quat.js",
-            "line": 311,
+            "line": 327,
             "description": "Performs a quaternion multiplication with `other`",
             "itemtype": "method",
             "name": "selfMultiply",
@@ -3303,7 +3342,7 @@
         },
         {
             "file": "src/quat.js",
-            "line": 335,
+            "line": 351,
             "description": "Performs a quaternion concatenation with `other`",
             "itemtype": "method",
             "name": "selfConcat",
@@ -3322,7 +3361,7 @@
         },
         {
             "file": "src/quat.js",
-            "line": 359,
+            "line": 375,
             "description": "Performs a division with `other`",
             "itemtype": "method",
             "name": "selfDivide",
@@ -3341,7 +3380,7 @@
         },
         {
             "file": "src/quat.js",
-            "line": 390,
+            "line": 406,
             "description": "Rotates the given point or vector with `this`",
             "itemtype": "method",
             "name": "transform",
@@ -3359,7 +3398,7 @@
         },
         {
             "file": "src/quat.js",
-            "line": 429,
+            "line": 445,
             "description": "Creates a new quaternion. The method should be called with four or no arguments. If less than four arguments are given\nthen some components of the resulting quaternion are going to be `undefined`.",
             "static": 1,
             "itemtype": "method",
@@ -3398,7 +3437,7 @@
         },
         {
             "file": "src/quat.js",
-            "line": 447,
+            "line": 463,
             "description": "Creates a new vector with all components set to 0.",
             "static": 1,
             "itemtype": "method",
@@ -3411,7 +3450,7 @@
         },
         {
             "file": "src/quat.js",
-            "line": 457,
+            "line": 473,
             "description": "Creates a new vector with `x`, `y` and `z` components set to `0` and `w` component set to `1`.",
             "static": 1,
             "itemtype": "method",
@@ -3424,7 +3463,7 @@
         },
         {
             "file": "src/quat.js",
-            "line": 467,
+            "line": 483,
             "description": "Creates a new quaternion from given axis vector and an angle",
             "static": 1,
             "itemtype": "method",
@@ -3449,7 +3488,7 @@
         },
         {
             "file": "src/quat.js",
-            "line": 479,
+            "line": 495,
             "description": "Creates a new quaternion from given `yaw` `pitch` and `roll` angles",
             "static": 1,
             "itemtype": "method",
@@ -3479,7 +3518,7 @@
         },
         {
             "file": "src/quat.js",
-            "line": 492,
+            "line": 508,
             "description": "Negates the given quaternion.",
             "static": 1,
             "itemtype": "method",
@@ -3505,7 +3544,7 @@
         },
         {
             "file": "src/quat.js",
-            "line": 509,
+            "line": 525,
             "description": "Conjugates the given quaternion.",
             "static": 1,
             "itemtype": "method",
@@ -3531,7 +3570,7 @@
         },
         {
             "file": "src/quat.js",
-            "line": 526,
+            "line": 542,
             "description": "Normalizes the given quaternion",
             "static": 1,
             "itemtype": "method",
@@ -3557,7 +3596,7 @@
         },
         {
             "file": "src/quat.js",
-            "line": 548,
+            "line": 564,
             "description": "Inverts the given quaternion",
             "static": 1,
             "itemtype": "method",
@@ -3583,7 +3622,7 @@
         },
         {
             "file": "src/quat.js",
-            "line": 570,
+            "line": 586,
             "description": "Adds two quaternions",
             "static": 1,
             "itemtype": "method",
@@ -3614,7 +3653,7 @@
         },
         {
             "file": "src/quat.js",
-            "line": 588,
+            "line": 604,
             "description": "Subtracts the second quaternion from the first.",
             "static": 1,
             "itemtype": "method",
@@ -3645,7 +3684,7 @@
         },
         {
             "file": "src/quat.js",
-            "line": 606,
+            "line": 622,
             "description": "Multiplies two quaternions",
             "static": 1,
             "itemtype": "method",
@@ -3676,7 +3715,7 @@
         },
         {
             "file": "src/quat.js",
-            "line": 635,
+            "line": 651,
             "description": "Concatenates two quaternions",
             "static": 1,
             "itemtype": "method",
@@ -3707,7 +3746,7 @@
         },
         {
             "file": "src/quat.js",
-            "line": 663,
+            "line": 679,
             "description": "Divides the first quaternion by the second",
             "static": 1,
             "itemtype": "method",
@@ -3738,7 +3777,7 @@
         },
         {
             "file": "src/quat.js",
-            "line": 699,
+            "line": 715,
             "description": "Tries to convert the given `data` into a quaternion",
             "static": 1,
             "itemtype": "method",
@@ -3758,7 +3797,7 @@
         },
         {
             "file": "src/quat.js",
-            "line": 726,
+            "line": 742,
             "description": "Rotates a point or vector with given quaternion",
             "static": 1,
             "itemtype": "method",
@@ -3814,7 +3853,23 @@
         },
         {
             "file": "src/vec2.js",
+            "line": 30,
+            "itemtype": "attribute",
+            "name": "x",
+            "type": "{Number}",
+            "class": "Vec2"
+        },
+        {
+            "file": "src/vec2.js",
             "line": 35,
+            "itemtype": "attribute",
+            "name": "y",
+            "type": "{Number}",
+            "class": "Vec2"
+        },
+        {
+            "file": "src/vec2.js",
+            "line": 43,
             "description": "Initializes the components of this vector by taking the components from the given vector.",
             "chainable": 1,
             "itemtype": "method",
@@ -3834,7 +3889,7 @@
         },
         {
             "file": "src/vec2.js",
-            "line": 48,
+            "line": 56,
             "description": "Initializes the components of this vector by taking values from the given array in successive order.",
             "chainable": 1,
             "itemtype": "method",
@@ -3861,7 +3916,7 @@
         },
         {
             "file": "src/vec2.js",
-            "line": 63,
+            "line": 71,
             "description": "Creates a copy of this vector",
             "itemtype": "method",
             "name": "clone",
@@ -3873,7 +3928,7 @@
         },
         {
             "file": "src/vec2.js",
-            "line": 72,
+            "line": 80,
             "description": "Copies the components successively into the given array.",
             "chainable": 1,
             "itemtype": "method",
@@ -3900,7 +3955,7 @@
         },
         {
             "file": "src/vec2.js",
-            "line": 87,
+            "line": 95,
             "description": "Returns an array filled with the values of the components of this vector",
             "itemtype": "method",
             "name": "dump",
@@ -3912,7 +3967,7 @@
         },
         {
             "file": "src/vec2.js",
-            "line": 96,
+            "line": 104,
             "description": "Checks for component wise equality with given vector",
             "itemtype": "method",
             "name": "equals",
@@ -3931,7 +3986,7 @@
         },
         {
             "file": "src/vec2.js",
-            "line": 106,
+            "line": 114,
             "description": "Calculates the length of this vector",
             "itemtype": "method",
             "name": "length",
@@ -3943,7 +3998,7 @@
         },
         {
             "file": "src/vec2.js",
-            "line": 117,
+            "line": 125,
             "description": "Calculates the squared length of this vector",
             "itemtype": "method",
             "name": "lengthSquared",
@@ -3955,7 +4010,7 @@
         },
         {
             "file": "src/vec2.js",
-            "line": 128,
+            "line": 136,
             "description": "Calculates the distance to the given vector",
             "itemtype": "method",
             "name": "distance",
@@ -3974,7 +4029,7 @@
         },
         {
             "file": "src/vec2.js",
-            "line": 140,
+            "line": 148,
             "description": "Calculates the squared distance to the given vector",
             "itemtype": "method",
             "name": "distanceSquared",
@@ -3993,7 +4048,7 @@
         },
         {
             "file": "src/vec2.js",
-            "line": 152,
+            "line": 160,
             "description": "Calculates the dot product with the given vector",
             "itemtype": "method",
             "name": "dot",
@@ -4012,7 +4067,7 @@
         },
         {
             "file": "src/vec2.js",
-            "line": 162,
+            "line": 170,
             "description": "Calculates the cross product with another vector.",
             "chainable": 1,
             "itemtype": "method",
@@ -4032,7 +4087,7 @@
         },
         {
             "file": "src/vec2.js",
-            "line": 177,
+            "line": 185,
             "description": "Normalizes this vector. Applies the result to this vector.",
             "chainable": 1,
             "itemtype": "method",
@@ -4045,7 +4100,7 @@
         },
         {
             "file": "src/vec2.js",
-            "line": 192,
+            "line": 200,
             "description": "Inverts this vector.",
             "chainable": 1,
             "itemtype": "method",
@@ -4058,7 +4113,7 @@
         },
         {
             "file": "src/vec2.js",
-            "line": 204,
+            "line": 212,
             "description": "Negates the components of this vector.",
             "chainable": 1,
             "itemtype": "method",
@@ -4071,7 +4126,7 @@
         },
         {
             "file": "src/vec2.js",
-            "line": 216,
+            "line": 224,
             "description": "Adds the given vector to `this`.",
             "chainable": 1,
             "itemtype": "method",
@@ -4091,7 +4146,7 @@
         },
         {
             "file": "src/vec2.js",
-            "line": 229,
+            "line": 237,
             "description": "Adds the given scalar to `this`",
             "chainable": 1,
             "itemtype": "method",
@@ -4111,7 +4166,7 @@
         },
         {
             "file": "src/vec2.js",
-            "line": 242,
+            "line": 250,
             "description": "Subtracts the given from this vector from `this`.",
             "chainable": 1,
             "itemtype": "method",
@@ -4131,7 +4186,7 @@
         },
         {
             "file": "src/vec2.js",
-            "line": 255,
+            "line": 263,
             "description": "Subtracts the given scalar from `this`.",
             "return": {
                 "description": "Reference to `this` for chaining.",
@@ -4150,7 +4205,7 @@
         },
         {
             "file": "src/vec2.js",
-            "line": 268,
+            "line": 276,
             "description": "Multiplies `this` with the given vector.",
             "chainable": 1,
             "itemtype": "method",
@@ -4170,7 +4225,7 @@
         },
         {
             "file": "src/vec2.js",
-            "line": 281,
+            "line": 289,
             "description": "Multiplies `this` with the given scalar.",
             "chainable": 1,
             "itemtype": "method",
@@ -4190,7 +4245,7 @@
         },
         {
             "file": "src/vec2.js",
-            "line": 294,
+            "line": 302,
             "description": "Divides `this` by the given vector.",
             "chainable": 1,
             "itemtype": "method",
@@ -4210,7 +4265,7 @@
         },
         {
             "file": "src/vec2.js",
-            "line": 307,
+            "line": 315,
             "description": "Divides `this` by the given scalar.",
             "itemtype": "method",
             "name": "selfDivideScalar",
@@ -4229,7 +4284,7 @@
         },
         {
             "file": "src/vec2.js",
-            "line": 320,
+            "line": 328,
             "description": "Multiplies `this` with the first vector and adds the second after.",
             "chainable": 1,
             "itemtype": "method",
@@ -4254,7 +4309,7 @@
         },
         {
             "file": "src/vec2.js",
-            "line": 334,
+            "line": 342,
             "description": "Multiplies `this` with the first vector and adds the second scalar after.",
             "chainable": 1,
             "itemtype": "method",
@@ -4279,7 +4334,7 @@
         },
         {
             "file": "src/vec2.js",
-            "line": 348,
+            "line": 356,
             "description": "Transforms `this` with the given matrix.",
             "chainable": 1,
             "itemtype": "method",
@@ -4299,7 +4354,7 @@
         },
         {
             "file": "src/vec2.js",
-            "line": 364,
+            "line": 372,
             "description": "Transforms `this` with the given matrix.",
             "chainable": 1,
             "itemtype": "method",
@@ -4319,7 +4374,7 @@
         },
         {
             "file": "src/vec2.js",
-            "line": 380,
+            "line": 388,
             "description": "Transforms `this` with the given matrix.",
             "chainable": 1,
             "itemtype": "method",
@@ -4339,7 +4394,7 @@
         },
         {
             "file": "src/vec2.js",
-            "line": 398,
+            "line": 406,
             "description": "Creates a new vector. The method should be called with three or no arguments. If less than three arguments are given\nthen some components of the resulting vector are going to be `undefined`.",
             "static": 1,
             "itemtype": "method",
@@ -4372,7 +4427,7 @@
         },
         {
             "file": "src/vec2.js",
-            "line": 415,
+            "line": 423,
             "description": "Creates a new vector with all components set to 0.",
             "static": 1,
             "itemtype": "method",
@@ -4385,7 +4440,7 @@
         },
         {
             "file": "src/vec2.js",
-            "line": 425,
+            "line": 433,
             "description": "Creates a new vector with all components set to 1.",
             "static": 1,
             "itemtype": "method",
@@ -4398,7 +4453,7 @@
         },
         {
             "file": "src/vec2.js",
-            "line": 435,
+            "line": 443,
             "description": "Normalizes the given vector.",
             "static": 1,
             "itemtype": "method",
@@ -4424,7 +4479,7 @@
         },
         {
             "file": "src/vec2.js",
-            "line": 453,
+            "line": 461,
             "description": "Inverts the given vector.",
             "static": 1,
             "itemtype": "method",
@@ -4450,7 +4505,7 @@
         },
         {
             "file": "src/vec2.js",
-            "line": 468,
+            "line": 476,
             "description": "Negates this vector.",
             "static": 1,
             "itemtype": "method",
@@ -4476,7 +4531,7 @@
         },
         {
             "file": "src/vec2.js",
-            "line": 483,
+            "line": 491,
             "description": "Adds two vectors.",
             "static": 1,
             "itemtype": "method",
@@ -4506,7 +4561,7 @@
         },
         {
             "file": "src/vec2.js",
-            "line": 499,
+            "line": 507,
             "description": "Adds a scalar to each component of a vector.",
             "static": 1,
             "itemtype": "method",
@@ -4537,7 +4592,7 @@
         },
         {
             "file": "src/vec2.js",
-            "line": 515,
+            "line": 523,
             "description": "Subtracts the second vector from the first.",
             "static": 1,
             "itemtype": "method",
@@ -4568,7 +4623,7 @@
         },
         {
             "file": "src/vec2.js",
-            "line": 531,
+            "line": 539,
             "description": "Subtracts a scalar from each component of a vector.",
             "static": 1,
             "itemtype": "method",
@@ -4599,7 +4654,7 @@
         },
         {
             "file": "src/vec2.js",
-            "line": 547,
+            "line": 555,
             "description": "Multiplies two vectors.",
             "static": 1,
             "itemtype": "method",
@@ -4630,7 +4685,7 @@
         },
         {
             "file": "src/vec2.js",
-            "line": 563,
+            "line": 571,
             "description": "Multiplies a scalar to each component of a vector.",
             "static": 1,
             "itemtype": "method",
@@ -4661,7 +4716,7 @@
         },
         {
             "file": "src/vec2.js",
-            "line": 579,
+            "line": 587,
             "description": "Divides the components of the first vector by the components of the second vector.",
             "static": 1,
             "itemtype": "method",
@@ -4692,7 +4747,7 @@
         },
         {
             "file": "src/vec2.js",
-            "line": 595,
+            "line": 603,
             "description": "Divides the components of the first vector by the scalar.",
             "static": 1,
             "itemtype": "method",
@@ -4722,7 +4777,7 @@
         },
         {
             "file": "src/vec2.js",
-            "line": 612,
+            "line": 620,
             "description": "Multiplies two vectors and adds the third vector.",
             "static": 1,
             "itemtype": "method",
@@ -4758,7 +4813,7 @@
         },
         {
             "file": "src/vec2.js",
-            "line": 629,
+            "line": 637,
             "description": "Multiplies a vector with a scalar and adds another vector.",
             "static": 1,
             "itemtype": "method",
@@ -4794,7 +4849,7 @@
         },
         {
             "file": "src/vec2.js",
-            "line": 646,
+            "line": 654,
             "description": "Performs a component wise clamp operation on the the given vector by using the given min and max vectors.",
             "static": 1,
             "itemtype": "method",
@@ -4830,7 +4885,7 @@
         },
         {
             "file": "src/vec2.js",
-            "line": 669,
+            "line": 677,
             "description": "Performs a component wise clamp operation on the the given vector by using the given min and max scalars.",
             "static": 1,
             "itemtype": "method",
@@ -4866,7 +4921,7 @@
         },
         {
             "file": "src/vec2.js",
-            "line": 688,
+            "line": 696,
             "description": "Performs a component wise min operation on the the given vectors.",
             "static": 1,
             "itemtype": "method",
@@ -4897,7 +4952,7 @@
         },
         {
             "file": "src/vec2.js",
-            "line": 708,
+            "line": 716,
             "description": "Performs a component wise min operation on the the given vector and a scalar value.",
             "static": 1,
             "itemtype": "method",
@@ -4928,7 +4983,7 @@
         },
         {
             "file": "src/vec2.js",
-            "line": 726,
+            "line": 734,
             "description": "Performs a component wise max operation on the the given vectors.",
             "static": 1,
             "itemtype": "method",
@@ -4959,7 +5014,7 @@
         },
         {
             "file": "src/vec2.js",
-            "line": 746,
+            "line": 754,
             "description": "Performs a component wise max operation on the the given vector and a scalar value.",
             "static": 1,
             "itemtype": "method",
@@ -4990,7 +5045,7 @@
         },
         {
             "file": "src/vec2.js",
-            "line": 764,
+            "line": 772,
             "description": "Performs a component wise linear interpolation between the given two vectors.",
             "static": 1,
             "itemtype": "method",
@@ -5026,7 +5081,7 @@
         },
         {
             "file": "src/vec2.js",
-            "line": 783,
+            "line": 791,
             "description": "Performs a component wise barycentric interpolation of the given vectors.",
             "static": 1,
             "itemtype": "method",
@@ -5072,7 +5127,7 @@
         },
         {
             "file": "src/vec2.js",
-            "line": 804,
+            "line": 812,
             "description": "Performs a component wise smooth interpolation between the given two vectors.",
             "static": 1,
             "itemtype": "method",
@@ -5108,7 +5163,7 @@
         },
         {
             "file": "src/vec2.js",
-            "line": 825,
+            "line": 833,
             "description": "Tries to converts the given data to a vector",
             "static": 1,
             "itemtype": "method",
@@ -5128,7 +5183,31 @@
         },
         {
             "file": "src/vec3.js",
-            "line": 23,
+            "line": 14,
+            "itemtype": "attribute",
+            "name": "x",
+            "type": "{Number}",
+            "class": "Vec3"
+        },
+        {
+            "file": "src/vec3.js",
+            "line": 19,
+            "itemtype": "attribute",
+            "name": "y",
+            "type": "{Number}",
+            "class": "Vec3"
+        },
+        {
+            "file": "src/vec3.js",
+            "line": 24,
+            "itemtype": "attribute",
+            "name": "z",
+            "type": "{Number}",
+            "class": "Vec3"
+        },
+        {
+            "file": "src/vec3.js",
+            "line": 35,
             "description": "Initializes the components of this vector with given values.",
             "chainable": 1,
             "itemtype": "method",
@@ -5158,7 +5237,7 @@
         },
         {
             "file": "src/vec3.js",
-            "line": 39,
+            "line": 51,
             "description": "Initializes the components of this vector by taking the components from the given vector.",
             "chainable": 1,
             "itemtype": "method",
@@ -5178,7 +5257,7 @@
         },
         {
             "file": "src/vec3.js",
-            "line": 53,
+            "line": 65,
             "description": "Initializes the components of this vector by taking values from the given array in successive order.",
             "chainable": 1,
             "itemtype": "method",
@@ -5205,7 +5284,7 @@
         },
         {
             "file": "src/vec3.js",
-            "line": 69,
+            "line": 81,
             "description": "Creates a copy of this vector",
             "itemtype": "method",
             "name": "clone",
@@ -5217,7 +5296,7 @@
         },
         {
             "file": "src/vec3.js",
-            "line": 78,
+            "line": 90,
             "description": "Copies the components successively into the given array.",
             "chainable": 1,
             "itemtype": "method",
@@ -5244,7 +5323,7 @@
         },
         {
             "file": "src/vec3.js",
-            "line": 94,
+            "line": 106,
             "description": "Returns an array filled with the values of the components of this vector",
             "itemtype": "method",
             "name": "dump",
@@ -5256,7 +5335,7 @@
         },
         {
             "file": "src/vec3.js",
-            "line": 103,
+            "line": 115,
             "description": "Checks for component wise equality with given vector",
             "itemtype": "method",
             "name": "equals",
@@ -5275,7 +5354,7 @@
         },
         {
             "file": "src/vec3.js",
-            "line": 113,
+            "line": 125,
             "description": "Calculates the length of this vector",
             "itemtype": "method",
             "name": "length",
@@ -5287,7 +5366,7 @@
         },
         {
             "file": "src/vec3.js",
-            "line": 125,
+            "line": 137,
             "description": "Calculates the squared length of this vector",
             "itemtype": "method",
             "name": "lengthSquared",
@@ -5299,7 +5378,7 @@
         },
         {
             "file": "src/vec3.js",
-            "line": 137,
+            "line": 149,
             "description": "Calculates the distance to the given vector",
             "itemtype": "method",
             "name": "distance",
@@ -5318,7 +5397,7 @@
         },
         {
             "file": "src/vec3.js",
-            "line": 150,
+            "line": 162,
             "description": "Calculates the squared distance to the given vector",
             "itemtype": "method",
             "name": "distanceSquared",
@@ -5337,7 +5416,7 @@
         },
         {
             "file": "src/vec3.js",
-            "line": 163,
+            "line": 175,
             "description": "Calculates the dot product with the given vector",
             "itemtype": "method",
             "name": "dot",
@@ -5356,7 +5435,7 @@
         },
         {
             "file": "src/vec3.js",
-            "line": 173,
+            "line": 185,
             "description": "Calculates the cross product with another vector.",
             "chainable": 1,
             "itemtype": "method",
@@ -5376,7 +5455,7 @@
         },
         {
             "file": "src/vec3.js",
-            "line": 190,
+            "line": 202,
             "description": "Normalizes this vector. Applies the result to this vector.",
             "chainable": 1,
             "itemtype": "method",
@@ -5389,7 +5468,7 @@
         },
         {
             "file": "src/vec3.js",
-            "line": 207,
+            "line": 219,
             "description": "Inverts this vector.",
             "chainable": 1,
             "itemtype": "method",
@@ -5402,7 +5481,7 @@
         },
         {
             "file": "src/vec3.js",
-            "line": 220,
+            "line": 232,
             "description": "Negates the components of this vector.",
             "chainable": 1,
             "itemtype": "method",
@@ -5415,7 +5494,7 @@
         },
         {
             "file": "src/vec3.js",
-            "line": 233,
+            "line": 245,
             "description": "Adds the given vector to `this`.",
             "chainable": 1,
             "itemtype": "method",
@@ -5435,7 +5514,7 @@
         },
         {
             "file": "src/vec3.js",
-            "line": 247,
+            "line": 259,
             "description": "Adds the given scalar to `this`",
             "chainable": 1,
             "itemtype": "method",
@@ -5455,7 +5534,7 @@
         },
         {
             "file": "src/vec3.js",
-            "line": 261,
+            "line": 273,
             "description": "Subtracts the given from this vector from `this`.",
             "chainable": 1,
             "itemtype": "method",
@@ -5475,7 +5554,7 @@
         },
         {
             "file": "src/vec3.js",
-            "line": 275,
+            "line": 287,
             "description": "Subtracts the given scalar from `this`.",
             "return": {
                 "description": "Reference to `this` for chaining.",
@@ -5494,7 +5573,7 @@
         },
         {
             "file": "src/vec3.js",
-            "line": 289,
+            "line": 301,
             "description": "Multiplies `this` with the given vector.",
             "chainable": 1,
             "itemtype": "method",
@@ -5514,7 +5593,7 @@
         },
         {
             "file": "src/vec3.js",
-            "line": 303,
+            "line": 315,
             "description": "Multiplies `this` with the given scalar.",
             "chainable": 1,
             "itemtype": "method",
@@ -5534,7 +5613,7 @@
         },
         {
             "file": "src/vec3.js",
-            "line": 317,
+            "line": 329,
             "description": "Divides `this` by the given vector.",
             "chainable": 1,
             "itemtype": "method",
@@ -5554,7 +5633,7 @@
         },
         {
             "file": "src/vec3.js",
-            "line": 331,
+            "line": 343,
             "description": "Divides `this` by the given scalar.",
             "itemtype": "method",
             "name": "selfDivideScalar",
@@ -5573,7 +5652,7 @@
         },
         {
             "file": "src/vec3.js",
-            "line": 345,
+            "line": 357,
             "description": "Multiplies `this` with the first vector and adds the second after.",
             "chainable": 1,
             "itemtype": "method",
@@ -5598,7 +5677,7 @@
         },
         {
             "file": "src/vec3.js",
-            "line": 360,
+            "line": 372,
             "description": "Multiplies `this` with the first vector and adds the second scalar after.",
             "chainable": 1,
             "itemtype": "method",
@@ -5623,7 +5702,7 @@
         },
         {
             "file": "src/vec3.js",
-            "line": 375,
+            "line": 387,
             "description": "Transforms `this` with the given quaternion.",
             "chainable": 1,
             "itemtype": "method",
@@ -5643,7 +5722,7 @@
         },
         {
             "file": "src/vec3.js",
-            "line": 414,
+            "line": 426,
             "description": "Transforms `this` with the given matrix.",
             "chainable": 1,
             "itemtype": "method",
@@ -5663,7 +5742,7 @@
         },
         {
             "file": "src/vec3.js",
-            "line": 433,
+            "line": 445,
             "description": "Transforms `this` with the given matrix.",
             "chainable": 1,
             "itemtype": "method",
@@ -5683,7 +5762,7 @@
         },
         {
             "file": "src/vec3.js",
-            "line": 451,
+            "line": 463,
             "description": "Transforms `this` with the given matrix. The `z` component of `this` keeps untouched.",
             "chainable": 1,
             "itemtype": "method",
@@ -5703,7 +5782,7 @@
         },
         {
             "file": "src/vec3.js",
-            "line": 469,
+            "line": 481,
             "description": "Creates a new vector. The method should be called with three or no arguments. If less than three arguments are given\nthen some components of the resulting vector are going to be `undefined`.",
             "static": 1,
             "itemtype": "method",
@@ -5736,7 +5815,7 @@
         },
         {
             "file": "src/vec3.js",
-            "line": 486,
+            "line": 498,
             "description": "Creates a new vector with all components set to 0.",
             "static": 1,
             "itemtype": "method",
@@ -5749,7 +5828,7 @@
         },
         {
             "file": "src/vec3.js",
-            "line": 496,
+            "line": 508,
             "description": "Creates a new vector with all components set to 1.",
             "static": 1,
             "itemtype": "method",
@@ -5762,7 +5841,7 @@
         },
         {
             "file": "src/vec3.js",
-            "line": 506,
+            "line": 518,
             "description": "Normalizes the given vector.",
             "static": 1,
             "itemtype": "method",
@@ -5788,7 +5867,7 @@
         },
         {
             "file": "src/vec3.js",
-            "line": 526,
+            "line": 538,
             "description": "Calculates the cross product between two vectors.",
             "static": 1,
             "itemtype": "method",
@@ -5819,7 +5898,7 @@
         },
         {
             "file": "src/vec3.js",
-            "line": 546,
+            "line": 558,
             "description": "Inverts the given vector.",
             "static": 1,
             "itemtype": "method",
@@ -5845,7 +5924,7 @@
         },
         {
             "file": "src/vec3.js",
-            "line": 562,
+            "line": 574,
             "description": "Negates this vector.",
             "static": 1,
             "itemtype": "method",
@@ -5871,7 +5950,7 @@
         },
         {
             "file": "src/vec3.js",
-            "line": 578,
+            "line": 590,
             "description": "Adds two vectors.",
             "static": 1,
             "itemtype": "method",
@@ -5901,7 +5980,7 @@
         },
         {
             "file": "src/vec3.js",
-            "line": 595,
+            "line": 607,
             "description": "Adds a scalar to each component of a vector.",
             "static": 1,
             "itemtype": "method",
@@ -5932,7 +6011,7 @@
         },
         {
             "file": "src/vec3.js",
-            "line": 612,
+            "line": 624,
             "description": "Subtracts the second vector from the first.",
             "static": 1,
             "itemtype": "method",
@@ -5963,7 +6042,7 @@
         },
         {
             "file": "src/vec3.js",
-            "line": 629,
+            "line": 641,
             "description": "Subtracts a scalar from each component of a vector.",
             "static": 1,
             "itemtype": "method",
@@ -5994,7 +6073,7 @@
         },
         {
             "file": "src/vec3.js",
-            "line": 646,
+            "line": 658,
             "description": "Multiplies two vectors.",
             "static": 1,
             "itemtype": "method",
@@ -6025,7 +6104,7 @@
         },
         {
             "file": "src/vec3.js",
-            "line": 663,
+            "line": 675,
             "description": "Multiplies a scalar to each component of a vector.",
             "static": 1,
             "itemtype": "method",
@@ -6056,7 +6135,7 @@
         },
         {
             "file": "src/vec3.js",
-            "line": 680,
+            "line": 692,
             "description": "Divides the components of the first vector by the components of the second vector.",
             "static": 1,
             "itemtype": "method",
@@ -6087,7 +6166,7 @@
         },
         {
             "file": "src/vec3.js",
-            "line": 697,
+            "line": 709,
             "description": "Divides the components of the first vector by the scalar.",
             "static": 1,
             "itemtype": "method",
@@ -6117,7 +6196,7 @@
         },
         {
             "file": "src/vec3.js",
-            "line": 715,
+            "line": 727,
             "description": "Multiplies two vectors and adds the third vector.",
             "static": 1,
             "itemtype": "method",
@@ -6153,7 +6232,7 @@
         },
         {
             "file": "src/vec3.js",
-            "line": 733,
+            "line": 745,
             "description": "Multiplies a vector with a scalar and adds another vector.",
             "static": 1,
             "itemtype": "method",
@@ -6189,7 +6268,7 @@
         },
         {
             "file": "src/vec3.js",
-            "line": 751,
+            "line": 763,
             "description": "Performs a component wise clamp operation on the the given vector by using the given min and max vectors.",
             "static": 1,
             "itemtype": "method",
@@ -6225,7 +6304,7 @@
         },
         {
             "file": "src/vec3.js",
-            "line": 778,
+            "line": 790,
             "description": "Performs a component wise clamp operation on the the given vector by using the given min and max scalars.",
             "static": 1,
             "itemtype": "method",
@@ -6261,7 +6340,7 @@
         },
         {
             "file": "src/vec3.js",
-            "line": 799,
+            "line": 811,
             "description": "Performs a component wise min operation on the the given vectors.",
             "static": 1,
             "itemtype": "method",
@@ -6292,7 +6371,7 @@
         },
         {
             "file": "src/vec3.js",
-            "line": 822,
+            "line": 834,
             "description": "Performs a component wise min operation on the the given vector and a scalar value.",
             "static": 1,
             "itemtype": "method",
@@ -6323,7 +6402,7 @@
         },
         {
             "file": "src/vec3.js",
-            "line": 842,
+            "line": 854,
             "description": "Performs a component wise max operation on the the given vectors.",
             "static": 1,
             "itemtype": "method",
@@ -6354,7 +6433,7 @@
         },
         {
             "file": "src/vec3.js",
-            "line": 865,
+            "line": 877,
             "description": "Performs a component wise max operation on the the given vector and a scalar value.",
             "static": 1,
             "itemtype": "method",
@@ -6385,7 +6464,7 @@
         },
         {
             "file": "src/vec3.js",
-            "line": 885,
+            "line": 897,
             "description": "Performs a component wise linear interpolation between the given two vectors.",
             "static": 1,
             "itemtype": "method",
@@ -6421,7 +6500,7 @@
         },
         {
             "file": "src/vec3.js",
-            "line": 906,
+            "line": 918,
             "description": "Performs a component wise barycentric interpolation of the given vectors.",
             "static": 1,
             "itemtype": "method",
@@ -6467,7 +6546,7 @@
         },
         {
             "file": "src/vec3.js",
-            "line": 929,
+            "line": 941,
             "description": "Performs a component wise smooth interpolation between the given two vectors.",
             "static": 1,
             "itemtype": "method",
@@ -6503,7 +6582,7 @@
         },
         {
             "file": "src/vec3.js",
-            "line": 952,
+            "line": 964,
             "description": "Tries to converts the given data to a vector",
             "static": 1,
             "itemtype": "method",
@@ -6523,7 +6602,39 @@
         },
         {
             "file": "src/vec4.js",
+            "line": 15,
+            "itemtype": "attribute",
+            "name": "x",
+            "type": "{Number}",
+            "class": "Vec4"
+        },
+        {
+            "file": "src/vec4.js",
+            "line": 20,
+            "itemtype": "attribute",
+            "name": "y",
+            "type": "{Number}",
+            "class": "Vec4"
+        },
+        {
+            "file": "src/vec4.js",
             "line": 25,
+            "itemtype": "attribute",
+            "name": "z",
+            "type": "{Number}",
+            "class": "Vec4"
+        },
+        {
+            "file": "src/vec4.js",
+            "line": 30,
+            "itemtype": "attribute",
+            "name": "w",
+            "type": "{Number}",
+            "class": "Vec4"
+        },
+        {
+            "file": "src/vec4.js",
+            "line": 41,
             "description": "Initializes the components of this vector with given values.",
             "chainable": 1,
             "itemtype": "method",
@@ -6558,7 +6669,7 @@
         },
         {
             "file": "src/vec4.js",
-            "line": 43,
+            "line": 59,
             "description": "Initializes the components of this vector by taking the components from the given vector.",
             "chainable": 1,
             "itemtype": "method",
@@ -6578,7 +6689,7 @@
         },
         {
             "file": "src/vec4.js",
-            "line": 58,
+            "line": 74,
             "description": "Initializes the components of this vector by taking values from the given array in successive order.",
             "chainable": 1,
             "itemtype": "method",
@@ -6605,7 +6716,7 @@
         },
         {
             "file": "src/vec4.js",
-            "line": 75,
+            "line": 91,
             "description": "Creates a copy of this vector",
             "itemtype": "method",
             "name": "clone",
@@ -6617,7 +6728,7 @@
         },
         {
             "file": "src/vec4.js",
-            "line": 84,
+            "line": 100,
             "description": "Copies the components successively into the given array.",
             "chainable": 1,
             "itemtype": "method",
@@ -6644,7 +6755,7 @@
         },
         {
             "file": "src/vec4.js",
-            "line": 101,
+            "line": 117,
             "description": "Returns an array filled with the values of the components of this vector",
             "itemtype": "method",
             "name": "dump",
@@ -6656,7 +6767,7 @@
         },
         {
             "file": "src/vec4.js",
-            "line": 110,
+            "line": 126,
             "description": "Checks for component wise equality with given vector",
             "itemtype": "method",
             "name": "equals",
@@ -6675,7 +6786,7 @@
         },
         {
             "file": "src/vec4.js",
-            "line": 120,
+            "line": 136,
             "description": "Calculates the length of this vector",
             "itemtype": "method",
             "name": "length",
@@ -6687,7 +6798,7 @@
         },
         {
             "file": "src/vec4.js",
-            "line": 133,
+            "line": 149,
             "description": "Calculates the squared length of this vector",
             "itemtype": "method",
             "name": "lengthSquared",
@@ -6699,7 +6810,7 @@
         },
         {
             "file": "src/vec4.js",
-            "line": 146,
+            "line": 162,
             "description": "Calculates the distance to the given vector",
             "itemtype": "method",
             "name": "distance",
@@ -6718,7 +6829,7 @@
         },
         {
             "file": "src/vec4.js",
-            "line": 160,
+            "line": 176,
             "description": "Calculates the squared distance to the given vector",
             "itemtype": "method",
             "name": "distanceSquared",
@@ -6737,7 +6848,7 @@
         },
         {
             "file": "src/vec4.js",
-            "line": 174,
+            "line": 190,
             "description": "Calculates the dot product with the given vector",
             "itemtype": "method",
             "name": "dot",
@@ -6756,7 +6867,7 @@
         },
         {
             "file": "src/vec4.js",
-            "line": 184,
+            "line": 200,
             "description": "Normalizes this vector. Applies the result to this vector.",
             "chainable": 1,
             "itemtype": "method",
@@ -6769,7 +6880,7 @@
         },
         {
             "file": "src/vec4.js",
-            "line": 203,
+            "line": 219,
             "description": "Inverts this vector.",
             "chainable": 1,
             "itemtype": "method",
@@ -6782,7 +6893,7 @@
         },
         {
             "file": "src/vec4.js",
-            "line": 217,
+            "line": 233,
             "description": "Negates the components of this vector.",
             "chainable": 1,
             "itemtype": "method",
@@ -6795,7 +6906,7 @@
         },
         {
             "file": "src/vec4.js",
-            "line": 231,
+            "line": 247,
             "description": "Adds the given vector to `this`.",
             "chainable": 1,
             "itemtype": "method",
@@ -6815,7 +6926,7 @@
         },
         {
             "file": "src/vec4.js",
-            "line": 246,
+            "line": 262,
             "description": "Adds the given scalar to `this`",
             "chainable": 1,
             "itemtype": "method",
@@ -6835,7 +6946,7 @@
         },
         {
             "file": "src/vec4.js",
-            "line": 261,
+            "line": 277,
             "description": "Subtracts the given from this vector from `this`.",
             "chainable": 1,
             "itemtype": "method",
@@ -6855,7 +6966,7 @@
         },
         {
             "file": "src/vec4.js",
-            "line": 276,
+            "line": 292,
             "description": "Subtracts the given scalar from `this`.",
             "return": {
                 "description": "Reference to `this` for chaining.",
@@ -6874,7 +6985,7 @@
         },
         {
             "file": "src/vec4.js",
-            "line": 291,
+            "line": 307,
             "description": "Multiplies `this` with the given vector.",
             "chainable": 1,
             "itemtype": "method",
@@ -6894,7 +7005,7 @@
         },
         {
             "file": "src/vec4.js",
-            "line": 306,
+            "line": 322,
             "description": "Multiplies `this` with the given scalar.",
             "chainable": 1,
             "itemtype": "method",
@@ -6914,7 +7025,7 @@
         },
         {
             "file": "src/vec4.js",
-            "line": 321,
+            "line": 337,
             "description": "Divides `this` by the given vector.",
             "chainable": 1,
             "itemtype": "method",
@@ -6934,7 +7045,7 @@
         },
         {
             "file": "src/vec4.js",
-            "line": 336,
+            "line": 352,
             "description": "Divides `this` by the given scalar.",
             "itemtype": "method",
             "name": "selfDivideScalar",
@@ -6953,7 +7064,7 @@
         },
         {
             "file": "src/vec4.js",
-            "line": 351,
+            "line": 367,
             "description": "Multiplies `this` with the first vector and adds the second after.",
             "chainable": 1,
             "itemtype": "method",
@@ -6978,7 +7089,7 @@
         },
         {
             "file": "src/vec4.js",
-            "line": 367,
+            "line": 383,
             "description": "Multiplies `this` with the first vector and adds the second scalar after.",
             "chainable": 1,
             "itemtype": "method",
@@ -7003,7 +7114,7 @@
         },
         {
             "file": "src/vec4.js",
-            "line": 383,
+            "line": 399,
             "description": "Transforms `this` with the given quaternion. The `w` component of `this` keeps untouched.",
             "chainable": 1,
             "itemtype": "method",
@@ -7023,7 +7134,7 @@
         },
         {
             "file": "src/vec4.js",
-            "line": 422,
+            "line": 438,
             "description": "Transforms `this` with the given matrix.",
             "chainable": 1,
             "itemtype": "method",
@@ -7043,7 +7154,7 @@
         },
         {
             "file": "src/vec4.js",
-            "line": 442,
+            "line": 458,
             "description": "Transforms `this` with the given matrix. The `w` component of `this` keeps untouched.",
             "chainable": 1,
             "itemtype": "method",
@@ -7063,7 +7174,7 @@
         },
         {
             "file": "src/vec4.js",
-            "line": 461,
+            "line": 477,
             "description": "Transforms `this` with the given matrix. The `z` and `w` components of `this` keep untouched.",
             "chainable": 1,
             "itemtype": "method",
@@ -7083,7 +7194,7 @@
         },
         {
             "file": "src/vec4.js",
-            "line": 479,
+            "line": 495,
             "description": "Creates a new vector. The method should be called with four or no arguments. If less than four arguments are given\nthen some components of the resulting vector are going to be `undefined`.",
             "static": 1,
             "itemtype": "method",
@@ -7122,7 +7233,7 @@
         },
         {
             "file": "src/vec4.js",
-            "line": 497,
+            "line": 513,
             "description": "Creates a new vector with all components set to 0.",
             "static": 1,
             "itemtype": "method",
@@ -7135,7 +7246,7 @@
         },
         {
             "file": "src/vec4.js",
-            "line": 507,
+            "line": 523,
             "description": "Creates a new vector with all components set to 1.",
             "static": 1,
             "itemtype": "method",
@@ -7148,7 +7259,7 @@
         },
         {
             "file": "src/vec4.js",
-            "line": 517,
+            "line": 533,
             "description": "Normalizes the given vector.",
             "static": 1,
             "itemtype": "method",
@@ -7174,7 +7285,7 @@
         },
         {
             "file": "src/vec4.js",
-            "line": 539,
+            "line": 555,
             "description": "Inverts the given vector.",
             "static": 1,
             "itemtype": "method",
@@ -7200,7 +7311,7 @@
         },
         {
             "file": "src/vec4.js",
-            "line": 556,
+            "line": 572,
             "description": "Negates this vector.",
             "static": 1,
             "itemtype": "method",
@@ -7226,7 +7337,7 @@
         },
         {
             "file": "src/vec4.js",
-            "line": 573,
+            "line": 589,
             "description": "Adds two vectors.",
             "static": 1,
             "itemtype": "method",
@@ -7256,7 +7367,7 @@
         },
         {
             "file": "src/vec4.js",
-            "line": 591,
+            "line": 607,
             "description": "Adds a scalar to each component of a vector.",
             "static": 1,
             "itemtype": "method",
@@ -7287,7 +7398,7 @@
         },
         {
             "file": "src/vec4.js",
-            "line": 609,
+            "line": 625,
             "description": "Subtracts the second vector from the first.",
             "static": 1,
             "itemtype": "method",
@@ -7318,7 +7429,7 @@
         },
         {
             "file": "src/vec4.js",
-            "line": 627,
+            "line": 643,
             "description": "Subtracts a scalar from each component of a vector.",
             "static": 1,
             "itemtype": "method",
@@ -7349,7 +7460,7 @@
         },
         {
             "file": "src/vec4.js",
-            "line": 645,
+            "line": 661,
             "description": "Multiplies two vectors.",
             "static": 1,
             "itemtype": "method",
@@ -7380,7 +7491,7 @@
         },
         {
             "file": "src/vec4.js",
-            "line": 663,
+            "line": 679,
             "description": "Multiplies a scalar to each component of a vector.",
             "static": 1,
             "itemtype": "method",
@@ -7411,7 +7522,7 @@
         },
         {
             "file": "src/vec4.js",
-            "line": 681,
+            "line": 697,
             "description": "Divides the components of the first vector by the components of the second vector.",
             "static": 1,
             "itemtype": "method",
@@ -7442,7 +7553,7 @@
         },
         {
             "file": "src/vec4.js",
-            "line": 699,
+            "line": 715,
             "description": "Divides the components of the first vector by the scalar.",
             "static": 1,
             "itemtype": "method",
@@ -7472,7 +7583,7 @@
         },
         {
             "file": "src/vec4.js",
-            "line": 718,
+            "line": 734,
             "description": "Multiplies two vectors and adds the third vector.",
             "static": 1,
             "itemtype": "method",
@@ -7508,7 +7619,7 @@
         },
         {
             "file": "src/vec4.js",
-            "line": 737,
+            "line": 753,
             "description": "Multiplies a vector with a scalar and adds another vector.",
             "static": 1,
             "itemtype": "method",
@@ -7544,7 +7655,7 @@
         },
         {
             "file": "src/vec4.js",
-            "line": 756,
+            "line": 772,
             "description": "Performs a component wise clamp operation on the the given vector by using the given min and max vectors.",
             "static": 1,
             "itemtype": "method",
@@ -7580,7 +7691,7 @@
         },
         {
             "file": "src/vec4.js",
-            "line": 787,
+            "line": 803,
             "description": "Performs a component wise clamp operation on the the given vector by using the given min and max scalars.",
             "static": 1,
             "itemtype": "method",
@@ -7616,7 +7727,7 @@
         },
         {
             "file": "src/vec4.js",
-            "line": 810,
+            "line": 826,
             "description": "Performs a component wise min operation on the the given vectors.",
             "static": 1,
             "itemtype": "method",
@@ -7647,7 +7758,7 @@
         },
         {
             "file": "src/vec4.js",
-            "line": 836,
+            "line": 852,
             "description": "Performs a component wise min operation on the the given vector and a scalar value.",
             "static": 1,
             "itemtype": "method",
@@ -7678,7 +7789,7 @@
         },
         {
             "file": "src/vec4.js",
-            "line": 858,
+            "line": 874,
             "description": "Performs a component wise max operation on the the given vectors.",
             "static": 1,
             "itemtype": "method",
@@ -7709,7 +7820,7 @@
         },
         {
             "file": "src/vec4.js",
-            "line": 884,
+            "line": 900,
             "description": "Performs a component wise max operation on the the given vector and a scalar value.",
             "static": 1,
             "itemtype": "method",
@@ -7740,7 +7851,7 @@
         },
         {
             "file": "src/vec4.js",
-            "line": 906,
+            "line": 922,
             "description": "Performs a component wise linear interpolation between the given two vectors.",
             "static": 1,
             "itemtype": "method",
@@ -7776,7 +7887,7 @@
         },
         {
             "file": "src/vec4.js",
-            "line": 929,
+            "line": 945,
             "description": "Performs a component wise barycentric interpolation of the given vectors.",
             "static": 1,
             "itemtype": "method",
@@ -7822,7 +7933,7 @@
         },
         {
             "file": "src/vec4.js",
-            "line": 954,
+            "line": 970,
             "description": "Performs a component wise smooth interpolation between the given two vectors.",
             "static": 1,
             "itemtype": "method",
@@ -7858,7 +7969,7 @@
         },
         {
             "file": "src/vec4.js",
-            "line": 979,
+            "line": 995,
             "description": "Tries to converts the given data to a vector",
             "static": 1,
             "itemtype": "method",
@@ -7880,7 +7991,7 @@
     "warnings": [
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src/mat4.js:2558"
+            "line": " src/mat4.js:2569"
         },
         {
             "message": "Missing item type\nSome content here",

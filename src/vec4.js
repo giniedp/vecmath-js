@@ -12,9 +12,25 @@
    * @param {Number} w
    */
   var Vec4 = function(x, y, z, w){
+    /**
+     * @attribute x
+     * @type {Number}
+     */
     this.x = x;
+    /**
+     * @attribute y
+     * @type {Number}
+     */
     this.y = y;
+    /**
+     * @attribute z
+     * @type {Number}
+     */
     this.z = z;
+    /**
+     * @attribute w
+     * @type {Number}
+     */
     this.w = w;
   };
 

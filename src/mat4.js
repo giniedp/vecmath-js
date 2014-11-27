@@ -34,7 +34,7 @@
    * @class Mat4
    * @constructor
    * @main Mat4
-   * @param {Float32Array} [data] The data array that holds all matrix values.
+   * @param {Float32Array} [data] The data array that holds all matrix values. Assumed to have a length of 16.
    */
   var Mat4 = function(data){
     /**
@@ -45,21 +45,25 @@
     /**
      * @attribute right
      * @type {Float32Array}
+     * @description This is a subarray of the `data` attribute
      */
     this.right = this.data.subarray(0, 3);
     /**
      * @attribute up
      * @type {Float32Array}
+     * @description This is a subarray of the `data` attribute
      */
     this.up = this.data.subarray(4, 7);
     /**
      * @attribute backward
      * @type {Float32Array}
+     * @description This is a subarray of the `data` attribute
      */
     this.backward = this.data.subarray(8, 11);
     /**
      * @attribute translation
      * @type {Float32Array}
+     * @description This is a subarray of the `data` attribute
      */
     this.translation = this.data.subarray(12, 15);
   };
@@ -69,7 +73,7 @@
   Mat4.prototype = {
 
     /**
-     * Initializes the matrix with the given values in given order.
+     * Initializes the matrix with the given values in given order. The values are applied in column major order
      * @method init
      * @chainable
      * @param {Number} m0
@@ -89,6 +93,13 @@
      * @param {Number} m14
      * @param {Number} m15
      * @return {Mat4} Reference to `this` for chaining.
+     * @example
+     *
+     *     mat.init(
+     *       0, 0, 0, 0,
+     *       0, 0, 0, 0,
+     *       0, 0, 0, 0,
+     *       x, y, z, 0)
      */
     init: function(m0, m1, m2, m3, m4, m5, m6, m7, m8, m9, m10, m11, m12, m13, m14, m15){
       var d = this.data;
@@ -2570,4 +2581,5 @@
       [m[3].toFixed(3), m[7].toFixed(3), m[11].toFixed(3), m[15].toFixed(3)].join(', ')
     ].join('\n');
   };
+
 }(window));

@@ -6,8 +6,6 @@
     "linkNatives": "true",
     "attributesEmit": false,
     "paths": "src",
-    "outdir": "doc",
-    "themedir" : "node_modules/yuidoc-bootstrap-theme",
-    "helpers" : [ "node_modules/yuidoc-bootstrap-theme/helpers/helpers.js" ]
+    "outdir": "doc"
   }
 }

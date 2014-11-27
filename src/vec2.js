@@ -27,7 +27,15 @@
      * @return {Vec2} this vector for chaining
      */
     init: function(x, y){
+      /**
+       * @attribute x
+       * @type {Number}
+       */
       this.x = x;
+      /**
+       * @attribute y
+       * @type {Number}
+       */
       this.y = y;
       return this;
     },

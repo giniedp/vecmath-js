@@ -11,8 +11,20 @@
    * @param {Number} z
    */
   var Vec3 = function(x, y, z){
+    /**
+     * @attribute x
+     * @type {Number}
+     */
     this.x = x;
+    /**
+     * @attribute y
+     * @type {Number}
+     */
     this.y = y;
+    /**
+     * @attribute z
+     * @type {Number}
+     */
     this.z = z;
   };
 

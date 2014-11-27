@@ -11,10 +11,26 @@
    * @param {number} w value for W component
    */
   var Quat = function(x, y, z, w){
-    this.x = 0;
-    this.y = 0;
-    this.z = 0;
-    this.w = 0;
+    /**
+     * @attribute x
+     * @type {Number}
+     */
+    this.x = x;
+    /**
+     * @attribute y
+     * @type {Number}
+     */
+    this.y = y;
+    /**
+     * @attribute z
+     * @type {Number}
+     */
+    this.z = z;
+    /**
+     * @attribute w
+     * @type {Number}
+     */
+    this.w = w;
   };
 
   window.Quat = Quat;

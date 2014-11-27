@@ -49,9 +49,9 @@
     assertComponents(this.vec.clone(), [1, 2, 3]);
   });
 
-  test('copy', function () {
+  test('copyTo', function () {
     var buffer = [6, 4, 3, 2, 1, 0];
-    this.vec.init(1, 2, 3).copy(buffer, 1);
+    this.vec.init(1, 2, 3).copyTo(buffer, 1);
     equal(buffer[0], 6);
     equal(buffer[1], 1);
     equal(buffer[2], 2);

@@ -26,7 +26,8 @@
     "karma-qunit": "^0.1.4",
     "qunit": "^0.7.5",
     "qunitjs": "^1.15.0",
-    "yuidoc-bootstrap-theme": "^1.0.4"
+    "yuidoc-bootstrap-theme": "^1.0.4",
+    "yuidocjs": "^0.4.0"
   },
   "scripts": {
     "test": "./node_modules/karma/bin/karma start karma.conf.js"

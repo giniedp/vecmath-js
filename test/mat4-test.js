@@ -169,19 +169,43 @@
   });
 
   test('initScale', function(){
-
+    assertComponents(
+      this.m1.initScale(1, 2, 3).data,
+      [
+        1, 0, 0, 0,
+        0, 2, 0, 0,
+        0, 0, 3, 0,
+        0, 0, 0, 1]);
   });
 
   test('initTranslation', function(){
-
+    assertComponents(
+      this.m1.initTranslation(1, 2, 3).data,
+      [
+        1, 0, 0, 0,
+        0, 1, 0, 0,
+        0, 0, 1, 0,
+        1, 2, 3, 1]);
   });
 
-  test('initLoolAt', function(){
-
+  test('initLookAt', function(){
+    assertComponents(
+      this.m1.initLookAt(Vec3.create(0, 0, 0), Vec3.create(0, 0, -10), Vec3.create(0, 1, 0)).data,
+      [
+        1, 0, 0, 0,
+        0, 1, 0, 0,
+        0, 0, 1, 0,
+        0, 0, 0, 1]);
   });
 
   test('initWorld', function(){
-
+    assertComponents(
+      this.m1.initWorld(Vec3.create(1, 2, 3), Vec3.create(0, 0, -10), Vec3.create(0, 1, 0)).data,
+      [
+        1, 0, 0, 0,
+        0, 1, 0, 0,
+        0, 0, 1, 0,
+        1, 2, 3, 1]);
   });
 
   test('initPerspectiveFieldOfView', function(){
@@ -213,14 +237,14 @@
     assertComponents(m2.data, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]);
   });
 
-  test('copy', function(){
+  test('copyTo', function(){
     var m1 = Mat4.create(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15);
-    var buffer = new window.Float32Array(18);
-    m1.copy(buffer);
+    var buffer = new Float32Array(18);
+    m1.copyTo(buffer);
 
     assertComponents(buffer, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0, 0]);
 
-    m1.copy(buffer, 2);
+    m1.copyTo(buffer, 2);
     assertComponents(buffer, [0, 1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]);
   });
 
